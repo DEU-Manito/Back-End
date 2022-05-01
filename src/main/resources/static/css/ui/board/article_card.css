@@ -1,0 +1,111 @@
+/*=====-------------------------- DRAG and DROP --------------------------=====*/
+/* .drop, .drop__container{
+    height: 90%;
+    display: block;
+} */
+
+/* .drop{
+    align-items: center;
+    justify-content: center;
+} */
+
+.article_container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.drop__card, .drop__data{
+    display: flex;
+    align-items: center;
+}
+
+.drop__card{
+    height: auto;
+    justify-content: space-between;
+    padding: 1em 0em 1em 0em;
+    margin: 0 auto 1rem;
+    border-bottom: 0.0625rem solid #f2f2f2;
+}
+
+.drop__card:hover{
+    cursor: pointer;
+    transform: scale(1.03);
+    background: rgba(255,255,255, 0.15);
+}
+
+.drop__data p{
+    display: block;
+}
+.drop__img{
+    width: 100px;
+    height: 100px;
+    border-radius: 0.5rem;
+    margin-left: 1rem;
+    margin-right: 2rem;
+}
+
+.drop__name{
+    font-family:'Dosis';
+    font-size: 1.2em;
+    color: black;
+}
+
+.drop__title{
+    margin-left: 2rem;
+    word-break: break-all;
+}
+
+.drop__title > h1{
+    font-size: 1.3em;
+    color: var(--text-color)
+}
+
+.drop__title > p{
+    font-size: 1.2em;
+}
+
+.drop_price{
+    font-size: 1.2em;
+}
+
+.drop_address{
+    width: 100%;
+}
+
+.drop_inform{
+    width: 15%;
+    word-break: break-all;
+}
+
+@media (min-width: 768px) {
+    .article_container {
+        width: 768px;
+    }
+
+    .drop__card{
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .drop__img{
+        width: 150px;
+        height: 150px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .article_container {
+      width: 970px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .article_container {
+      width: 1100px;
+    }
+  }
