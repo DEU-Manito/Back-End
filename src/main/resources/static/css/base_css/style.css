@@ -224,7 +224,9 @@ p {
 	color: #49b5e7;
 }
 
-
+.nav ul li a img{
+	border-radius: 10px;
+}
 
 
 /* Top_content

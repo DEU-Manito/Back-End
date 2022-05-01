@@ -1,3 +1,4 @@
+<%@ page import="deu.manito.web.dto.user.UserDto" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -88,18 +89,28 @@
                 <div class="logo"><a href="/"><img src="resources/img/manitoLogo.png" alt=""></a></div>
                 <nav class="nav" id="nav">
                     <ul class="toggle">
-                        <li><a href="/">Home</a></li>
                         <li><a href="chat">Chat</a></li>
                         <li><a href="board">Board</a></li>
                         <li><a href="/">Portfolio</a></li>
                         <li><a href="/">Logout</a></li>
                     </ul>
                     <ul class="">
-                        <li><a href="/">Home</a></li>
                         <li><a href="chat">Chat</a></li>
                         <li><a href="board">Board</a></li>
                         <li><a href="/">Portfolio</a></li>
-                        <li><a href="/">Logout</a></li>
+                        <%
+                            UserDto user = (UserDto)session.getAttribute("user");
+                            if(user == null){ %>
+                        <li><a href="javascript:void(0)" onclick="kakao_login();">Login</a></li>
+                        <% } else { %>
+                        <li><a href="javascript:void(0)" onclick="kakao_logout();">Logout</a></li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <img src="${user.profile_image}" width="32px" height="32px">
+                                ${user.nickname}
+                            </a>
+                        </li>
+                        <%}%>
                     </ul>
                 </nav>
                 <a class="res-nav_click animated wobble wow" href="javascript:void(0)"><i class="fa fa-bars"></i></a>

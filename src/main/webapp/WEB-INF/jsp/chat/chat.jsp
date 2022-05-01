@@ -121,7 +121,7 @@
     <div id="map" style="width:100%;height: 800px;"></div>
     
     <!-- 카카오 MAP API js -->
-    <script src="resources/js/kakaoMapApi/kakaoMap.js"></script>
+    <script src="resources/js/kakao_api/kakao_map.js"></script>
 
     위도(lat) 입력 <input type="text" id = "lat">
     경도 입력 <input type="text" id = "lng">

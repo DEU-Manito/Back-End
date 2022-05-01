@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 public class indexController {
-    //git upload
     @GetMapping("/")
     public String index() {
         log.info(this.getClass().getSimpleName() + " : index()");
