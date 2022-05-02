@@ -8,9 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,7 +23,7 @@ public class UserApiController {
         this.userService = userService;
     }
 
-    @PostMapping("/user/login")
+    @PostMapping("/api/user/login")
     public ResponseEntity<UserDto> userlogin(@RequestBody UserLoginDto userLoginDto, HttpServletRequest request){
         UserDto userDto = userService.login(userLoginDto);
 
@@ -33,5 +31,20 @@ public class UserApiController {
         session.setAttribute("user", userDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
+    }
+
+    @GetMapping("/api/user/logout")
+    public ResponseEntity<UserDto> userlogout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserDto userDto = (UserDto) session.getAttribute("user");
+
+        log.info(userDto.toString());
+
+        if(userDto != null) {
+            session.removeAttribute("user");
+            return ResponseEntity.status(HttpStatus.OK).body(userDto);
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
