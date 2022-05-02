@@ -41,3 +41,5 @@ out/
 .gradle
 .idea
 application-oauth.properties
+application.properties
+manito-keystore.p12
