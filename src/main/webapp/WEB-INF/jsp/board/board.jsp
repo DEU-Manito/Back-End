@@ -187,34 +187,9 @@
             </div>
           </div>
 
-
-          <!-- 모바일 메뉴 탭 js -->
-    <script src="resources/js/response/mobile.js"></script>
-
-    <!-- WOW JS 초기화 -->
-    <script>
-        wow = new WOW(
-            {
-                animateClass: 'animated',
-                offset: 100
-            }
-        );
-        wow.init();
-        document.getElementById('').onclick = function () {
-            var section = document.createElement('section');
-            section.className = 'wow fadeInDown';
-            section.className = 'wow shake';
-            section.className = 'wow zoomIn';
-            section.className = 'wow lightSpeedIn';
-            this.parentNode.insertBefore(section, this);
-        };
-    </script>
-
-    <!-- 부트스트랩 js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
+    <!-- board js -->
     <script src="resources/js/board/board.js"></script>
-</body>
 
-</html>
+    <!-- Footer -->
+    <%@ include file="../layout/footer.jsp" %>
+    <!-- Footer End -->

@@ -55,6 +55,9 @@
     <!-- WOW JS -->
     <script type="text/javascript" src="resources/js/base_js/wow.js"></script>
 
+    <!-- 카카오 js -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
     <!-- 모바일 메뉴 탭 js -->
     <script src="resources/js/response/header_declare_mobile.js"></script>
 
