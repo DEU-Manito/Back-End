@@ -49,7 +49,7 @@ function login(kakao_user){
     }).then(response => {
         if(response.ok){
             alert("로그인 성공");
-            window.location.href = "/";
+            window.location.reload();
         }
         else{
 
@@ -74,7 +74,7 @@ function kakao_logout(){
         }).then(response => {
             if(response.ok){
                 alert("로그아웃 완료");
-                window.location.href = "/";
+                window.location.reload();
             }
             else{
                 alert("로그아웃 실패");
