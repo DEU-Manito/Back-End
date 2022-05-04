@@ -422,3 +422,8 @@ button, a {
 .uppercase {
     text-transform: uppercase;
 }
+
+/* 카카오 맵 */
+#map {
+    border-radius: 10px;
+}
