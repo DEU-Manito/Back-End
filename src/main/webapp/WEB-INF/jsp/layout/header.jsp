@@ -9,8 +9,10 @@
     <title>Manito</title>
     <link rel="icon" href="resources/img/favicon.png" type="image/png">
 
-    <!-- CSS
-    --------------------------------------------------------------------------------------------------------------------->
+    <!---------------------------------->
+                <!-- CSS -->
+    <!---------------------------------->
+
     <!-- 부트스트랩 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -25,9 +27,9 @@
     <link href="resources/css/base_css/design.css" rel="stylesheet" type="text/css">
 
 
-
-    <!-- Font
-    --------------------------------------------------------------------------------------------------------------------->
+    <!---------------------------------->
+                <!-- FONT -->
+    <!---------------------------------->
 
     <!-- 구글 웹 폰트 -->
     <link href='http://fonts.googleapis.com/css?family=Lato:400,900,700,700italic,400italic,300italic,300,100italic,100,900italic'
@@ -40,8 +42,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 
-    <!-- Js (UI에 관여하는 Js는 Head에서 호출)
-    --------------------------------------------------------------------------------------------------------------------->
+
+    <!---------------------------------->
+    <!--JS (UI에 관련 Js는 Head에서 호출)-->
+    <!---------------------------------->
 
     <!-- fondAwesome (아이콘 라이브러리 CDN) -->
     <script src="https://kit.fontawesome.com/fad007cb32.js" crossorigin="anonymous"></script>
