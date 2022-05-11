@@ -1,97 +1,83 @@
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
-        center: new kakao.maps.LatLng(35.15446898327048, 129.06081978891038), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 4 // 지도의 확대 레벨
     };
 
+// 지도 생성
 var map = new kakao.maps.Map(mapContainer, mapOption);
+// 위도, 경도
+var lat, lon;
 
-var lat = 35.15446898327048;
-var lng = 129.06081978891038;
+// HTML5의 geolocation으로 사용할 수 있는지 확인
+if (navigator.geolocation) {
 
-// 지도에 표시할 원을 생성합니다
-var circle = new kakao.maps.Circle({
-    center: new kakao.maps.LatLng(lat, lng),  // 원의 중심좌표 입니다 
-    radius: 400, // 미터 단위의 원의 반지름입니다 
-    strokeWeight: 2, // 선의 두께입니다 
-    strokeColor: '#75B8FA', // 선의 색깔입니다
-    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-    strokeStyle: 'solid', // 선의 스타일 입니다
-    fillColor: '#CFE7FF', // 채우기 색깔입니다
-    fillOpacity: 0.2  // 채우기 불투명도 입니다   
-});
+    // GeoLocation을 이용해서 접속 위치를 얻어옴
+    navigator.geolocation.getCurrentPosition(function(position) {
 
-// 지도에 원을 표시합니다 
-circle.setMap(map);
+        lat = position.coords.latitude,
+        lon = position.coords.longitude;
 
-var imageSrc = 'https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1648636326/noticon/xmjz9sdto4weodpgu3f3.png', // 마커이미지의 주소입니다    
-    imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
-    imageOption = { offset: new kakao.maps.Point(15, 15) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+        alert(lat + " " + lon);
+        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
 
-// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-    markerPosition = new kakao.maps.LatLng(lat, lng); // 마커가 표시될 위치입니다
-
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition,
-    image: markerImage // 마커이미지 설정 
-});
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-
-// // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-// var content = '<div class="customoverlay">' +
-//     '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-//     '    <span class="title"></span>' +
-//     '  </a>' +
-//     '</div>';
-
-// // 커스텀 오버레이가 표시될 위치입니다 
-// var position = new kakao.maps.LatLng(lat - 0.00047, lng);
-
-// // 커스텀 오버레이를 생성합니다
-// var customOverlay = new kakao.maps.CustomOverlay({
-//     map: map,
-//     position: position,
-//     content: content,
-//     yAnchor: 1
-// });
-
-function makeOverlay(lat, lng, message) {
-    var imageSrc = 'https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1648729297/noticon/uvijhtdh1szvddnpa7lo.png', // 마커이미지의 주소입니다    
-        imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
-        imageOption = { offset: new kakao.maps.Point(15, 15) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-        markerPosition = new kakao.maps.LatLng(lat, lng); // 마커가 표시될 위치입니다
-
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        position: markerPosition,
-        image: markerImage // 마커이미지 설정 
+        // 마커와 인포윈도우를 표시합니다
+        displayMarker(locPosition, message);
+        displayCircle(lat, lon);
     });
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
+    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+        message = 'geolocation을 사용할수 없어요..'
 
-    // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-    var content = '<div class="customoverlay">' +
-        '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-        '    <span class="title">' + message + '</span>' +
-        '  </a>' +
+    displayMarker(locPosition, message);
+}
+
+// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+function displayMarker(locPosition, message) {
+
+// 커스텀 오버레이에 표시할 내용입니다
+// HTML 문자열 또는 Dom Element 입니다
+    var content =
+        '<div class="dot">' +
+        '<div class="centraldot"></div>' +
+        '<div class="wave"></div>' +
+        '<div class="wave2"></div>' +
         '</div>';
 
-    // 커스텀 오버레이가 표시될 위치입니다 
-    var position = new kakao.maps.LatLng(lat - 0.00047, lng);
+    // 커스텀 오버레이가 표시될 위치입니다
+    var position = new kakao.maps.LatLng(lat, lon);
 
     // 커스텀 오버레이를 생성합니다
     var customOverlay = new kakao.maps.CustomOverlay({
-        map: map,
         position: position,
         content: content,
-        yAnchor: 1
+        xAnchor: 0.3,
+        yAnchor: 0.91
     });
+
+    // 커스텀 오버레이를 지도에 표시합니다
+    customOverlay.setMap(map);
+
+    // 지도 중심좌표를 접속위치로 변경
+    map.setCenter(locPosition);
+}
+
+function displayCircle(lat, lon){
+    // 지도에 표시할 원을 생성합니다
+    var circle = new kakao.maps.Circle({
+        center: new kakao.maps.LatLng(lat, lon),  // 원의 중심좌표 입니다
+        radius: 400, // 미터 단위의 원의 반지름입니다
+        strokeWeight: 2, // 선의 두께입니다
+        strokeColor: '#75B8FA', // 선의 색깔입니다
+        strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+        strokeStyle: 'solid', // 선의 스타일 입니다
+        fillColor: '#CFE7FF', // 채우기 색깔입니다
+        fillOpacity: 0.2  // 채우기 불투명도 입니다
+    });
+
+    // 지도에 원을 표시합니다
+    circle.setMap(map);
 }
