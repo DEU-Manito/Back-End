@@ -7,7 +7,7 @@
 <!-- 사용할 라이브러리의 이름을 링크 뒤에 명시해줘야 함 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88a3b7ff3745fa1b7d0e7011ed06a10f&libraries=services"></script>
 
-<!-- chat css -->pin
+<!-- chat css -->
 <link href="resources/css/ui/chat/chat.css" rel="stylesheet" type="text/css">
 
 <!-- chat js -->
@@ -42,7 +42,7 @@
             <div class="app-header-right">
 
                 <button class="add-btn" title="Add New Project">
-                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>

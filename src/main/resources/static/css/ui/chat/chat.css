@@ -301,6 +301,7 @@ button, a {
 @media screen and (max-width: 880px) {
     .messages-section {
         transform: translateX(100%);
+        display: none;
         position: absolute;
         opacity: 0;
         top: 0;
