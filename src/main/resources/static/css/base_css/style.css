@@ -155,7 +155,7 @@ p {
 	/* background: #ffffff; */
 	background: var(--main-banner-white-blur);
 
-	padding: 15px 0px;
+	padding-top: 10px;
 }
 
 
@@ -183,7 +183,7 @@ p {
 
 .nav ul {
 	list-style: none;
-	padding: 0px;
+	padding: 5px 0px 0px;
 }
 
 .nav ul.toggle {
