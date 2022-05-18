@@ -160,7 +160,7 @@ function write(msg, tp, pre) {
                     cc = $('<div>', { class: 'opponent' });
                     cc.append(
                         $('<ul>')
-                        .append($('<li>', { class: 'profile_img' }).append($('<img src="img/profile/admin.png" alt="opponent" width="100%">')))
+                        .append($('<li>', { class: 'profile_img' }).append($('<img src="resources/img/vchat/profile/admin.png" alt="opponent" width="100%">')))
                     );
                     cc.append(
                         $('<ul>', { class: 'opponent_talk' })
@@ -171,7 +171,7 @@ function write(msg, tp, pre) {
                     cc = $('<div>', { class: 'user' });
                     cc.append($('<div>')
                         .append($('<ul>')
-                        .append($('<li>', { class: 'profile_img' }).append($('<img src="img/profile/admin.png" alt="user" width="100%">'))))
+                        .append($('<li>', { class: 'profile_img' }).append($('<img src="resources/img/vchat/profile/admin.png" alt="user" width="100%">'))))
                         .append( $('<ul>', { class: 'user_talk' })
                         .append($('<li>', { class: 'admin_kakao_name' }).html(msg.nickName))
                         .append($('<li class="admin_text_balloon">').text(msg.message)))                  

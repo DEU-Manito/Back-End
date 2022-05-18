@@ -2,11 +2,11 @@ const vChatCloud = new VChatCloud();
 
 let channel, userNick, userKey, profileJson = {}, channelKey="";
 let profileImgPath = {
-    "1": "img/profile/1.png"
-    ,"2": "img/profile/2.png"
-    ,"3": "img/profile/3.png"
-    ,"4": "img/profile/4.png"
-    ,"5": "img/profile/5.png"
+    "1": "resources/img/vchat/profile/1.png"
+    ,"2": "resources/img/vchat/profile/2.png"
+    ,"3": "resources/img/vchat/profile/3.png"
+    ,"4": "resources/img/vchat/profile/4.png"
+    ,"5": "resources/img/vchat/profile/5.png"
 };
 
 var getParameters = function (paramName) {
