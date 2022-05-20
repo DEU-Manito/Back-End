@@ -67,8 +67,11 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="service_block">
-                        <div class="service_icon delay-03s animated wow  zoomInLeft"><span><i
-                                class="fa fa-street-view"></i></span></div>
+                        <div class="service_icon delay-03s animated wow  zoomInLeft">
+                            <span>
+                                <i class="fa fa-street-view"></i>
+                            </span>
+                        </div>
                         <h3 class="animated fadeInUp wow">위치 기반 서비스</h3>
                         <p class="animated fadeInDown wow">마니또는 내 주변의 익명의 사람들과 소통합니다.</p>
                     </div>

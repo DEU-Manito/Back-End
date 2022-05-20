@@ -20,11 +20,15 @@
     <!-- WOW CSS -->
     <link href="resources/css/base_css/animate.css" rel="stylesheet" type="text/css">
 
+    <!-- Box Icon CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
     <!-- 기타 CSS -->
     <link href="resources/css/base_css/style.css" rel="stylesheet" type="text/css">
     <link href="resources/css/base_css/linecons.css" rel="stylesheet" type="text/css">
     <link href="resources/css/base_css/responsive.css" rel="stylesheet" type="text/css">
     <link href="resources/css/base_css/design.css" rel="stylesheet" type="text/css">
+
 
 
     <!---------------------------------->

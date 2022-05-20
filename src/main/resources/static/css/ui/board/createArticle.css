@@ -122,8 +122,8 @@ button, a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 480px;
+    width: 70%;
+    /*max-width: 480px;*/
     color: var(--light-font);
     box-shadow: 0 2px 6px 0 rgba(136, 148, 171, 0.2), 0 24px 20px -24px rgba(71, 82, 107, 0.1);
     overflow: hidden;
@@ -144,6 +144,42 @@ button, a {
     opacity: 0.6;
 }
 
+.content-input {
+    border: none;
+    flex: 1;
+    outline: none;
+    height: 100%;
+    padding: 0 20px;
+    font-size: 16px;
+    background-color: var(--search-area-bg);
+    color: var(--main-color);
+}
+.content-input::placeholder {
+    color: var(--main-color);
+    opacity: 0.6;
+}
+
+.content-wrapper {
+    border-radius: 20px;
+    background-color: var(--search-area-bg);
+    padding-right: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+
+    width: 99%;
+    height: 80%;
+
+    color: var(--light-font);
+    box-shadow: 2px 2px 6px 2px rgb(136 148 171 / 20%), 0px 24px 20px -24px rgb(71 82 107 / 10%);
+    /*box-shadow: 0 2px 6px 0 rgba(136, 148, 171, 0.2), 0 24px 20px -24px rgba(71, 82, 107, 0.1);*/
+    overflow: hidden;
+}
+
+.content-wrapper textarea{
+    resize: none;
+}
 .add-btn {
     color: #fff;
     background-color: var(--button-bg);
@@ -178,7 +214,7 @@ button, a {
     background-color: var(--projects-section);
     border-radius: 32px;
     padding: 32px 32px 0 32px;
-    overflow: hidden;
+    overflow-y: auto;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -192,7 +228,7 @@ button, a {
     padding-bottom: 32px;
 }
 .projects-section-header {
-    display: flex;
+    display: block;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
@@ -203,11 +239,16 @@ button, a {
     line-height: 32px;
     font-weight: 700;
     opacity: 0.9;
-    margin: 0;
+    margin: 0 0 1rem;
     color: var(--main-color);
 }
 .projects-section-header .time {
     font-size: 20px;
+}
+
+
+.messages{
+    height: 100%;
 }
 
 
@@ -218,6 +259,7 @@ button, a {
     margin-left: 24px;
     flex: 1;
     width: 100%;
+    height: 100%;
     border-radius: 30px;
     position: relative;
     overflow: hidden;
@@ -248,9 +290,20 @@ button, a {
 }
 
 .project-boxes {
-    margin: 0 -8px;
-    overflow-y: auto;
+    /*margin: 0 -8px;*/
+    /*overflow-y: auto;*/
+    height: 100%;
 }
+
+.project-boxes p {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    opacity: 0.9;
+    margin: 0 0 1rem;
+    color: var(--main-color);
+}
+
 .project-boxes.kakao_map_container {
     display: flex;
     flex-wrap: wrap;
@@ -506,3 +559,56 @@ button, a {
         background: rgba(32,150,243,0.0);
     }
 }
+
+/* 이미지 삽입 css */
+.imagePreview {
+    width: 120px;
+    height: 120px;
+    background-position : center center;
+    background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+    background-color : #fff;
+    background-size : cover;
+    background-repeat : no-repeat;
+    display: inline-block;
+    box-shadow:0px -3px 6px 2px rgba(0,0,0,0.2);
+}
+
+.btn-primary
+{
+    display:block;
+    border-radius:0px;
+    box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
+    margin-top:-5px;
+}
+.img_section
+{
+    margin-bottom:15px;
+}
+
+.img_add_section{
+    display: flex;
+}
+
+/*.del*/
+/*{*/
+/*    position:absolute;*/
+/*    top:0px;*/
+/*    right:15px;*/
+/*    width:30px;*/
+/*    height:30px;*/
+/*    text-align:center;*/
+/*    line-height:30px;*/
+/*    background-color:rgba(255,255,255,0.6);*/
+/*    cursor:pointer;*/
+/*}*/
+.imgAdd
+{
+    color: #b2b2b2;
+    line-height: 120px;
+    font-size: 80px;
+}
+.imgAdd:hover{
+    cursor: pointer;
+    color: #000000;
+}
+/* 이미지 삽입 css 끝 */

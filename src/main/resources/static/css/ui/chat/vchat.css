@@ -531,7 +531,8 @@ div.kakao{
 	width: 95%;
 	height: 90%;
 	margin: 0 auto;
-	background: #e8f0f3;
+	/*background: #e8f0f3;*/
+	background: #FFFFFF;
 	border-radius: 8px;
 	overflow: hidden;
 
@@ -542,7 +543,7 @@ div.kakao{
 }
 .kakao .login{ margin: 178px auto 0; }
 .talk_field{ position: relative; height: 100% }
-.opponent_profile { width: 100%; background: #d5e3e8;}
+.opponent_profile { width: 100%; background: rgba(255,255,255,0);}
 .opponent_profile ul{padding: 10px;}
 .opponent_profile ul li{
 	display: inline-block;
@@ -575,7 +576,7 @@ div.kakao{
 .opponent_text_balloon{
 	max-width: 200px;
 	padding: 10px;
-	background: #fff;
+	background: #e7e7e7;
 	font-size: 12px;
 	color: #333;
 	border-radius: 5px;
@@ -592,7 +593,7 @@ div.kakao{
 .user_text_balloon{
 	max-width: 200px;
 	padding: 10px;
-	background: #a8e8d1;
+	background: #bcf0ff;
 	font-size: 12px;
 	color: #333;
 	border-radius: 5px;

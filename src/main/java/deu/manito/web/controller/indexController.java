@@ -19,4 +19,11 @@ public class indexController {
 
     @GetMapping("/board")
     public String board(){ return "board/board";}
+
+    @GetMapping("/createArticle")
+    public String createArticle(){ return "board/createArticle"; }
+
+    // 게시판 구현 후 /article/{index} 로 수정해야함
+    @GetMapping("/article")
+    public String article(){ return "board/viewArticle"; }
 }

@@ -5,7 +5,6 @@
 
 <!-- CSS -->
 <link href="resources/css/ui/board/article_card.css" rel="stylesheet" type="text/css">
-<link href="resources/css/ui/board/search_box.css" rel="stylesheet" type="text/css">
 <link href="resources/css/ui/board/board.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -21,8 +20,9 @@
         <div class="app-header-left">
             <span class="app-icon"></span>
             <p class="app-name">Manito Board</p>
-            <div class="search-wrapper">
-                <input class="search-input" type="text" placeholder="Search">
+
+            <div class="title-wrapper">
+                <input class="title-input" type="text" placeholder="Search">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
                      stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search"
                      viewBox="0 0 24 24">
@@ -105,7 +105,7 @@
                         <rect x="3" y="14" width="7" height="7"/>
                     </svg>
                 </button>
-                <button class="write_btn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button class="write_btn" onclick="window.location = '/createArticle'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             </div>
         </div>
 
@@ -363,6 +363,14 @@
 </div>
 <!-- board js -->
 <script src="resources/js/board/board.js"></script>
+
+<script>
+    var articles = document.querySelectorAll('.products-row');
+    // 나중엔 aritcle의 번호로 요청을 보내도록 수정해야함
+    articles.forEach(article => {
+        article.addEventListener("click", (event) => window.location = "/article");
+    })
+</script>
 
 <!-- Footer -->
 <%@ include file="../layout/footer.jsp" %>

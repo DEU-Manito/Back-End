@@ -1,10 +1,12 @@
 <%@ page import="deu.manito.web.dto.user.UserDto" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
 
 
-<!-- 사용할 라이브러리의 이름을 링크 뒤에 명시해줘야 함 -->
+<!-- 카카오 Map API 사용할 라이브러리의 이름을 링크 뒤에 명시해줘야 함 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88a3b7ff3745fa1b7d0e7011ed06a10f&libraries=services"></script>
 
 <!-- chat css -->
@@ -17,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-<script src="https://kit.fontawesome.com/c13f14f04a.js" crossorigin="anonymous"></script>
+<%--<script src="https://kit.fontawesome.com/c13f14f04a.js" crossorigin="anonymous"></script>--%>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
 
@@ -36,9 +38,9 @@
         <div class="app-header">
             <div class="app-header-left">
                 <span class="app-icon"></span>
-                <p class="app-name">Kakao Map</p>
-                <div class="search-wrapper">
-                    <input class="search-input" type="text" placeholder="Search">
+                <p class="app-name">Manito Map</p>
+                <div class="title-wrapper">
+                    <input class="title-input" type="text" placeholder="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
                         <defs></defs>
                         <circle cx="11" cy="11" r="8"></circle>
@@ -74,8 +76,17 @@
 
             <div class="projects-section">
                 <div class="projects-section-header">
-                    <p>Kakao Map</p>
-                    <p class="time">December, 12</p>
+                    <p>Manito Map</p>
+                    <p class="time">
+                        <%
+                            String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+                            Calendar cal = Calendar.getInstance();
+
+                            int month = Integer.parseInt(new SimpleDateFormat("M").format(cal.getTime()));
+                            int date = Integer.parseInt(new SimpleDateFormat("dd").format(cal.getTime()));
+                        %>
+                        <%= monthNames[month-1] %>, <%= date %>
+                    </p>
                 </div>
 
                 <div class="project-boxes kakao_map_container">
@@ -195,7 +206,7 @@
         </div>
     </div>
 
-    <!-- vchar js -->
+    <!-- vchat js -->
     <script src="resources/js/chat/vchatcloud-1.2.0.min.js"></script>
     <script src="resources/js/chat/login.js"></script>
     <script src="resources/js/chat/draw.js"></script>
