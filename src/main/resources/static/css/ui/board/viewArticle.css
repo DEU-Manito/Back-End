@@ -589,18 +589,6 @@ button, a {
     display: flex;
 }
 
-/*.del*/
-/*{*/
-/*    position:absolute;*/
-/*    top:0px;*/
-/*    right:15px;*/
-/*    width:30px;*/
-/*    height:30px;*/
-/*    text-align:center;*/
-/*    line-height:30px;*/
-/*    background-color:rgba(255,255,255,0.6);*/
-/*    cursor:pointer;*/
-/*}*/
 .imgAdd
 {
     color: #b2b2b2;
@@ -611,4 +599,5 @@ button, a {
     cursor: pointer;
     color: #000000;
 }
+
 /* 이미지 삽입 css 끝 */

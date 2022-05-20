@@ -101,7 +101,7 @@
 
             <div class="messages">
                 <!-- KakaoMap 넣을 곳 -->
-                <div id="map" style="width:100%;height: 50%;"></div>
+                <div id="map" style="width:90%;height: 50%; margin: 0 auto"></div>
                 <div class="hAddr">
                     <span class="title">나의 위치 설정</span>
                     <span id="centerAddr"></span>

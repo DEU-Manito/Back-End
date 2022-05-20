@@ -8,7 +8,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88a3b7ff3745fa1b7d0e7011ed06a10f&libraries=services"></script>
 
 <!-- chat css -->
-<link href="resources/css/ui/board/createArticle.css" rel="stylesheet" type="text/css">
+<link href="resources/css/ui/board/viewArticle.css" rel="stylesheet" type="text/css">
 
 <style>
     .map_wrap {position:relative;width:100%;height:350px;}
@@ -69,7 +69,7 @@
                 <div class="container">
                     <div class="row">
                         <div class = 'img_add_section'>
-                            <i class='bx bx-image-add imgAdd'></i>
+<%--                            <i class='bx bx-image-add imgAdd'></i>--%>
                         </div>
 
                         <!-- col-2 -->
@@ -101,7 +101,7 @@
 
             <div class="messages">
                 <!-- KakaoMap 넣을 곳 -->
-                <div id="map" style="width:100%;height: 50%;"></div>
+                <div id="staticMap" style="width:90%;height: 50%; margin: 0 auto"></div>
                 <div class="hAddr">
                     <span class="title">나의 위치 설정</span>
                     <span id="centerAddr"></span>
@@ -112,7 +112,7 @@
 </div>
 
 <!-- 카카오 맵 js -->
-<script src="resources/js/kakao_api/kakao_map.js"></script>
+<script src="resources/js/kakao_api/kakao_img_map.js"></script>
 
 <!-- 이미지 추가 js -->
 <script src="resources/js/board/addImage.js"></script>
