@@ -1,6 +1,7 @@
 <%@ page import="deu.manito.web.dto.user.UserDto" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="deu.manito.web.entity.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
@@ -16,6 +17,13 @@
 <!-- chat js -->
 <script src="resources/js/chat/chat.js"></script>
 
+<script src="resources/js/chat/vchatcloud-1.2.0.min.js"></script>
+<script src="resources/js/chat/login.js"></script>
+<script src="resources/js/chat/draw.js"></script>
+<script src="resources/js/chat/count.js"></script>
+<script src="resources/js/chat/errMsg.js"></script>
+
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
@@ -28,11 +36,12 @@
 </style>
 </head>
 
-<body>
+
+
+<body onload="checkChatAccess()">
     <!-- Navbar -->
         <%@ include file="../layout/navbar.jsp"%>
     <!-- Navbar End -->
-
 
     <div class="chat_container">
         <div class="app-header">
@@ -91,7 +100,13 @@
 
                 <div class="project-boxes kakao_map_container">
                     <!-- 지도를 표시할 div 영역 -->
-                    <div id="map" style="width:100%;height: 90%;"></div>
+                    <div id="map" style="width:100%;height: 90%; position: relative;">
+                        <div class = "button-section">
+                            <i class='bx bxs-message-square-add chat_btn'></i>
+                            <i class='bx bxs-megaphone help_btn'></i>
+                        </div>
+
+                    </div>
                     <p id = "user_location">현재 나의 위치는 ?</p>
                 </div>
 
@@ -108,7 +123,7 @@
                     <p>Chatting</p>
                 </div>
 
-                <div class="messages">
+                <div class="messages hidden">
                     <!-- vcloudchat 넣을 곳 -->
                     <div id="wrap">
                         <!-- 샘플 메뉴 끝 -->
@@ -207,23 +222,22 @@
     </div>
 
     <!-- vchat js -->
-    <script src="resources/js/chat/vchatcloud-1.2.0.min.js"></script>
-    <script src="resources/js/chat/login.js"></script>
-    <script src="resources/js/chat/draw.js"></script>
-    <script src="resources/js/chat/count.js"></script>
-    <script src="resources/js/chat/errMsg.js"></script>
     <script>
-        {
-            // var client = {
-            //     clientKey: '6c7d66d1',
-            //     nickName: 'ㅇㅁㄴㅇ'
-            // };
+        function checkChatAccess(){
+            // 로그인 한 경우(세션이 있는 경우)
+            var chat = document.querySelector(".messages");
 
-            var client = {
-                clientKey: '',
-                nickName: ''
-            };
-            window.onload = loginFunc(client);
+            <% if(user != null) { %>
+                chat.classList.toggle('hidden');
+
+                const cl={
+                    clientKey: '<%= user.getClientKey() %>',
+                    nickname:  '<%= user.getNickname() %>',
+                    profile:   '<%= user.getProfile_image() %>'
+                };
+
+                alert("chat.jsp ck = " + cl.clientKey + " " + cl.nickname + " " + cl.profile);
+            <% } %>
         }
     </script>
 

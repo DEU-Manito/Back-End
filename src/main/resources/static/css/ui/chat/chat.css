@@ -506,3 +506,26 @@ button, a {
         background: rgba(32,150,243,0.0);
     }
 }
+
+.button-section{
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    font-size: 48px;
+    z-index: 10000;
+    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.help_btn{
+    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.chat_btn{
+    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+}

@@ -14,6 +14,7 @@ public class UserDto {
     private String nickname;
     private String email;
     private String profile_image;
+    private String clientKey;
     private String gender;
     private Long reportCnt;
     private Long point;
@@ -24,6 +25,7 @@ public class UserDto {
                 .nickname(user.getNickname())
                 .email(user.getEmail())
                 .profile_image(user.getProfile_image())
+                .clientKey(user.getClientKey())
                 .gender(user.getGender())
                 .reportCnt(user.getReportCnt())
                 .point(user.getPoint())

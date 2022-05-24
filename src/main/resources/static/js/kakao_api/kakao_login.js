@@ -13,14 +13,15 @@ function kakao_login() {
                     var account = JSON.parse(JSON.stringify(response.kakao_account));
                     var profile = JSON.parse(JSON.stringify(response.kakao_account.profile));
 
+
                     const kakao_user = {
                         nickname: account.email.split('@')[0],
                         email: account.has_email == true ? account.email : "",
                         profile_image: profile.thumbnail_image_url,
-                        gender: account.gender == null ? null : account.gender
+                        gender: account.gender == null ? null : account.gender,
                     }
 
-                    alert(kakao_user.nickname + " " + kakao_user.email + " " + kakao_user.profile_image + " " + kakao_user.gender);
+                    alert(kakao_user.nickname + " " + kakao_user.email + " " + kakao_user.profile_image + " " + kakao_user.gender + " " + kakao_user.clientKey);
                     console.log(kakao_user);
                     login(kakao_user);
                 },

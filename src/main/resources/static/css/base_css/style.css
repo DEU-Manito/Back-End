@@ -1795,3 +1795,7 @@ div.mc-image {
 	text-transform: none;
 	font-weight: 100;
 }
+
+.hidden{
+	display: none;
+}
