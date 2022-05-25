@@ -36,7 +36,24 @@
 </style>
 </head>
 
+<script>
+    var filter = "win16|win32|win64|mac|macintel";
 
+    if ( navigator.platform ) {
+        if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
+            //mobile
+            // 로그인 체크 후 로그인 수행
+            // 로그인 후 위치 정보 받기 -> DB
+            // 위치 정보 저장 후 window.close();
+            alert('mobile 접속');
+        } else {
+            // pc
+            // 모달 창으로 QR 코드 띄우기 -> 모바일로 접속 후 인증
+            // 모바일에서 인증 완료 후 직접 버튼 누르기 or pc에서 계속 위치 값 요청
+            alert('pc 접속');
+        }
+    }
+</script>
 
 <body onload="checkChatAccess()">
     <!-- Navbar -->
@@ -112,7 +129,7 @@
 
             </div>
 
-            <div class="messages-section">
+            <div class="messages-section hidden">
                 <button class="messages-close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
                         <circle cx="12" cy="12" r="10" />
@@ -123,7 +140,7 @@
                     <p>Chatting</p>
                 </div>
 
-                <div class="messages hidden">
+                <div class="messages">
                     <!-- vcloudchat 넣을 곳 -->
                     <div id="wrap">
                         <!-- 샘플 메뉴 끝 -->
@@ -225,18 +242,19 @@
     <script>
         function checkChatAccess(){
             // 로그인 한 경우(세션이 있는 경우)
-            var chat = document.querySelector(".messages");
+            var chat = document.querySelector(".messages-section");
 
             <% if(user != null) { %>
                 chat.classList.toggle('hidden');
 
-                const cl={
+                const client ={
                     clientKey: '<%= user.getClientKey() %>',
                     nickname:  '<%= user.getNickname() %>',
                     profile:   '<%= user.getProfile_image() %>'
                 };
 
-                alert("chat.jsp ck = " + cl.clientKey + " " + cl.nickname + " " + cl.profile);
+                alert("chat.jsp ck = " + client.clientKey + " " + client.nickname + " " + client.profile);
+                loginFunc(client);
             <% } %>
         }
     </script>
