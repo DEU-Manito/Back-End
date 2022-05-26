@@ -2,6 +2,7 @@ package deu.manito.web.apiController;
 
 
 import deu.manito.web.dto.user.UserDto;
+import deu.manito.web.dto.user.UserLocationDto;
 import deu.manito.web.dto.user.UserLoginDto;
 import deu.manito.web.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -47,5 +48,13 @@ public class UserApiController {
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @PostMapping("/api/user/location")
+    public ResponseEntity<UserLocationDto> addUserLocation(@RequestBody UserLocationDto userLocationDto, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.setAttribute("userLocation", userLocationDto);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
