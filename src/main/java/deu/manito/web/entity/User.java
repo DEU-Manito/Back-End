@@ -4,9 +4,8 @@ package deu.manito.web.entity;
 import deu.manito.web.dto.user.UserLoginDto;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 
 
 /* 엔티티 클래스에는 세터 생성 x */
@@ -21,7 +20,7 @@ public class User {
     @Id
     private String nickname;
 
-    @Column
+    @Column // Email은 UNIQUE
     private String email;
 
     @Column
@@ -38,8 +37,6 @@ public class User {
 
     @Column
     private Long point;
-
-
 
     public static User toEntity(UserLoginDto userLoginDto){
         return User.builder()
