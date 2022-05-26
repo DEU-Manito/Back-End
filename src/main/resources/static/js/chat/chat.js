@@ -34,5 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 var chatApi = {
+    createChatroom :
+        function (lat, lan, title){
 
+        }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -52,6 +53,9 @@ public class UserApiController {
 
     @PostMapping("/api/user/location")
     public ResponseEntity<UserLocationDto> addUserLocation(@RequestBody UserLocationDto userLocationDto, HttpServletRequest request){
+        // 사용자의 위치 정보가 제대로 들어오지 않았을 경우
+        if(Objects.isNull(userLocationDto)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
         HttpSession session = request.getSession();
         session.setAttribute("userLocation", userLocationDto);
 

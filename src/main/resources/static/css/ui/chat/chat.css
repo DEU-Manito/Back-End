@@ -129,6 +129,10 @@ button, a {
     overflow: hidden;
 }
 
+.title-wrapper svg{
+    color: #989898;
+}
+
 .title-input {
     border: none;
     flex: 1;
@@ -617,3 +621,4 @@ button, a {
 }
 
 /* 지도 채팅 아이콘 CSS 끝 */
+

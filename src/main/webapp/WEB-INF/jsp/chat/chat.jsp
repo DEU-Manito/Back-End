@@ -12,7 +12,9 @@
 
 <!-- chat css -->
 <link href="resources/css/ui/chat/chat.css" rel="stylesheet" type="text/css">
-<link href="resources/css/ui/chat/vchat.css" rel="stylesheet" type="text/css" />
+<link href="resources/css/ui/chat/vchat.css" rel="stylesheet" type="text/css">
+<link href="resources/css/ui/chat/chatModal.css" rel="stylesheet" type="text/css">
+
 
 <!-- chat js -->
 <script src="resources/js/chat/chat.js"></script>
@@ -120,7 +122,7 @@
                                 <i class='bx bxs-error' ></i>
                             </div>
                             <div class = "chat_btn">
-                                <i class='bx bxs-comment-add'></i>
+                                <i class='bx bxs-comment-add trigger'></i>
                             </div>
                         </div>
                     </div>
@@ -235,6 +237,30 @@
                     <!-- vchat 끝 -->
                 </div>
             </div>
+
+
+
+            <!-- 채팅방 생성 모달 -->
+            <div class="modal-wrapper">
+                <div class="modal">
+                    <div class="head">
+                        <a class="modal_close trigger" href="javascript:void(0)"><span></span></a>
+                    </div>
+                    <div class="content">
+                        <p class="chat_title">Chatting Title</p>
+                        <h3>채팅방 제목을 입력해주세요.</h3>
+                        <div class="chat_title-wrapper">
+                            <input class="chat_title-input" type="text" placeholder="Search">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
+                                <defs></defs>
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="M21 21l-4.35-4.35"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 채팅방 생성 모달 끝 -->
         </div>
     </div>
 
@@ -261,6 +287,9 @@
     </script>
     <!-- 카카오 맵 js -->
     <script src="resources/js/kakao_api/kakao_map.js"></script>
+
+    <!-- 채팅 모달 js -->
+    <script src="resources/js/chat/chatModal.js"></script>
 
     <script>
         kakaoMap.displayChatIcon(35.08947077141478,129.0425450184452);

@@ -29,6 +29,10 @@ if (navigator.geolocation) {
             lng = position.coords.longitude;
 
             alert('kakao_map.js : ' + lat + " " + lng);
+
+            // 세션에 위치 정보 등록
+            kakaoLocation.setUserLocation(lat, lng);
+            
             var locPosition = new kakao.maps.LatLng(lat, lng), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
                 message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용
 
@@ -46,6 +50,32 @@ if (navigator.geolocation) {
 
         kakaoMap.displayMarker(locPosition, message);
     }
+
+var kakaoLocation = {
+    setUserLocation :
+        function (lat, lng){
+            const userLocation = {
+                lat: lat,
+                lng: lng
+            };
+
+            const url = "/api/user/location";
+            fetch(url, {
+                method: "POST",
+                body: JSON.stringify(userLocation),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then((response => {
+                if(response.ok){
+                    alert("kakaoLocation.setUserLocation() : 위치 세션 등록 완료");
+                }
+                else{
+                    alert("kakaoLocation.setUserLocation() : 위치 세션 등록 실패");
+                }
+            }))
+        },
+}
 
 var kakaoMap = {
     // 지도에 마커와 인포윈도우를 표시하는 함수

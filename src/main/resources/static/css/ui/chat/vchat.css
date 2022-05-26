@@ -601,7 +601,7 @@ div.kakao{
 	word-break: break-all; /* seoeun 추가 210628 */
 }
 .user_text_balloon::after{
-	content: url("./static/img/vchat/user_text_balloon.svg");
+	/*content: url("./static/img/vchat/user_text_balloon.svg");*/
 	/*content: url("resources/img/vchat/user_text_balloon.svg");*/
 	position: absolute;
 	top: 20px ;
@@ -856,7 +856,7 @@ div.livecommerce{
 }
 .admin_text_balloon::before{
 
-	content: url("./static/img/vchat/admin_text_balloon.svg");
+	/*content: url("./static/img/vchat/admin_text_balloon.svg");*/
 	/*content: url("resources/img/vchat/admin_text_balloon.svg");*/
 	position: absolute;
 	top: 20px ;
