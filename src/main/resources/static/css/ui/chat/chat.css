@@ -507,25 +507,113 @@ button, a {
     }
 }
 
-.button-section{
-    position: absolute;
-    right: 10px;
-    bottom: 0px;
-    font-size: 48px;
-    z-index: 10000;
-    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
-    -webkit-background-clip: text;
-    color: transparent;
+
+.btn_container{
+    display: flex;
 }
 
-.help_btn{
-    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
-    -webkit-background-clip: text;
-    color: transparent;
+.help_btn, .chat_btn{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #eafdff;
+
+    border: 3px solid white;
+    box-shadow: 2px 2px gray;
+
+    font-size: 30px;
+    color: #00b8ff;
+    z-index: 10000;
+
+    /*background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);*/
+    /*-webkit-background-clip: text;*/
+    /*color: transparent;*/
+}
+
+.help_btn {
+    display: flex;
+    position: absolute;
+    right: 70px;
+    bottom: 20px;
+    margin: 0 auto;
 }
 
 .chat_btn{
-    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
-    -webkit-background-clip: text;
-    color: transparent;
+    display: flex;
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
 }
+
+
+.help_btn:hover{
+    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
+    color: white;
+    cursor: pointer;
+}
+
+
+.chat_btn:hover{
+    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
+    color: white;
+    cursor: pointer;
+}
+
+.help_btn i{
+    margin: 0 auto;
+    line-height: 42px;
+}
+
+.chat_btn i{
+    margin: 0 auto;
+    line-height: 47px;
+}
+
+/* 지도 채팅 아이콘 CSS */
+.speech-bubble {
+    background: #eafdff;
+    color: #2ca9fc;
+    display: inline-block;
+    font-size: 10px;
+
+    /* line-height: 3.5em; */
+    padding: 0 0.5em;
+    margin-bottom: 1em;
+    position: relative;
+
+    /* text-align: center;
+    vertical-align: top; */
+
+    /*min-width: 2em;*/
+    border-radius: .9em;
+    border : 3px solid #ffffff ;
+
+    box-shadow: 0 2.1px 1.3px rgba(0, 0, 0, 0.044),
+    0 5.9px 4.2px rgba(0, 0, 0, 0.054), 0 12.6px 9.5px rgba(0, 0, 0, 0.061),
+    0 25px 20px rgba(0, 0, 0, 0.1);
+    /* margin: 30px 10px; */
+}
+
+.speech-bubble:after {
+    border: 0.7em solid transparent;
+    border-top-color: #eafdff;
+    content: '';
+    margin-left: -1em;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+}
+
+.speech-bubble:hover{
+    color: #FFFFFF;
+    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
+    cursor: pointer;
+}
+.chat_marker{
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+/* 지도 채팅 아이콘 CSS 끝 */

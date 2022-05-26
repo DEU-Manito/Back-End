@@ -10,7 +10,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
 // 위도, 경도
-var lat, lon;
+var lat, lng;
 
 // 주소-좌표 변환 객체를 생성
 var geocoder = new kakao.maps.services.Geocoder();
@@ -26,16 +26,16 @@ if (navigator.geolocation) {
     // GeoLocation을 이용해서 접속 위치를 얻어옴
     navigator.geolocation.getCurrentPosition(function(position) {
             lat = position.coords.latitude,
-            lon = position.coords.longitude;
+            lng = position.coords.longitude;
 
-            alert('kakao_map.js : ' + lat + " " + lon);
-            var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
+            alert('kakao_map.js : ' + lat + " " + lng);
+            var locPosition = new kakao.maps.LatLng(lat, lng), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
                 message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용
 
             // 마커와 인포윈도우를 표시
             kakaoMap.displayMarker(locPosition, message);
             // 원 표시
-            kakaoMap.displayCircle(lat, lon);
+            kakaoMap.displayCircle(lat, lng);
 
             kakaoCoords.searchAddrFromCoords(map.getCenter(), kakaoCoords.displayCenterInfo);
         });
@@ -61,7 +61,7 @@ var kakaoMap = {
             '</div>';
 
         // 커스텀 오버레이가 표시될 위치입니다
-        var position = new kakao.maps.LatLng(lat, lon);
+        var position = new kakao.maps.LatLng(lat, lng);
 
         // 커스텀 오버레이를 생성합니다
         var customOverlay = new kakao.maps.CustomOverlay({
@@ -80,10 +80,10 @@ var kakaoMap = {
 
     // 지도에 원을 표시하는 함수
     displayCircle :
-        function(lat, lon){
+        function(lat, lng){
         // 지도에 표시할 원을 생성합니다
         var circle = new kakao.maps.Circle({
-            center: new kakao.maps.LatLng(lat, lon),  // 원의 중심좌표 입니다
+            center: new kakao.maps.LatLng(lat, lng),  // 원의 중심좌표 입니다
             radius: 400, // 미터 단위의 원의 반지름입니다
             strokeWeight: 2, // 선의 두께입니다
             strokeColor: '#75B8FA', // 선의 색깔입니다
@@ -99,9 +99,9 @@ var kakaoMap = {
 
     // 지도에 채팅 아이콘을 표시하는 함수
     displayChatIcon :
-        function (lat, lon){
+        function (lat, lng){
             var customOverlay = new kakao.maps.CustomOverlay({
-                position: new kakao.maps.LatLng(lat, lon),
+                position: new kakao.maps.LatLng(lat, lng),
                 content: '<div class="speech-bubble"><i class=\'bx bxs-chat chat_marker\'></i></div>',
                 xAnchor: 0.3,
                 yAnchor: 0.91

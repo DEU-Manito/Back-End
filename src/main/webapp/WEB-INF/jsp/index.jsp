@@ -39,14 +39,14 @@
                                     <span class="word midnight">A Wonderful World</span>
                                 </p>
                             </div>
-
+                            <!--
                             <p>
                                 "마니또"는 주변의 사람들과 소통하고 도움을 받을 수 있는 서비스입니다.
                                 <br>
                                 주변에서 나의 마니또를 찾아보세요.
                             </p>
-
-                            <a href="#service" class="learn_more2" style="text-decoration: none;">FIND MANITO</a>
+                            -->
+                            <a href="#service" class="learn_more2" onclick="kakao_login();" style="text-decoration: none;">FIND MANITO</a>
 
                         </div>
                     </div>
@@ -97,7 +97,6 @@
                             주변 사람에게 도움을 요청할 수 있습니다.
                             <br>
                             부담 갖지 말고 도와줄 마니또를 찾아보세요.
-
                         </p>
                     </div>
                 </div>
@@ -123,7 +122,7 @@
                             </div>
                         </div>
                         <div class="service-list">
-                            <div class="service-list-col1"><i class="icon-comment"></i></div>
+                            <div class="service-list-col1"><i class='bx bxl-spring-boot' ></i></div>
                             <div class="service-list-col2">
                                 <h3>24/7 support</h3>
                                 <p>Proin iaculis purus consequat sem digni ssim. Digni ssim porttitora .</p>
