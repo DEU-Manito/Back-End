@@ -32,7 +32,50 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
 
 <style>
+    .speech-bubble {
+        background: #eafdff;
+        color: #2ca9fc;
+        display: inline-block;
+        font-size: 10px;
 
+        /* line-height: 3.5em; */
+        padding: 0 0.5em;
+        margin-bottom: 1em;
+        position: relative;
+
+        /* text-align: center;
+        vertical-align: top; */
+
+        /*min-width: 2em;*/
+        border-radius: .9em;
+        border : 3px solid #ffffff ;
+
+        box-shadow: 0 2.1px 1.3px rgba(0, 0, 0, 0.044),
+        0 5.9px 4.2px rgba(0, 0, 0, 0.054), 0 12.6px 9.5px rgba(0, 0, 0, 0.061),
+        0 25px 20px rgba(0, 0, 0, 0.1);
+        /* margin: 30px 10px; */
+    }
+
+    .speech-bubble:after {
+        border: 0.7em solid transparent;
+        border-top-color: #eafdff;
+        content: '';
+        margin-left: -1em;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 0;
+        height: 0;
+    }
+
+    .speech-bubble:hover{
+        color: #FFFFFF;
+        background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
+    }
+    .chat_marker{
+        font-size: 15px;
+        margin-top: 5px;
+    }
 </style>
 </head>
 
@@ -258,10 +301,15 @@
             <% } %>
         }
     </script>
-
     <!-- 카카오 맵 js -->
     <script src="resources/js/kakao_api/kakao_map.js"></script>
 
+    <script>
+        kakaoMap.displayChatIcon(35.08947077141478,129.0425450184452);
+        kakaoMap.displayChatIcon(35.090339120761094,129.04128388924426);
+        kakaoMap.displayChatIcon(35.08959658484294,129.03828319495616);
+        kakaoMap.displayChatIcon(35.09275891363016,129.03886627437655 );
+    </script>
     <!-- Footer -->
     <%@ include file="../layout/footer.jsp" %>
     <!-- Footer End -->
