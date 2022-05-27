@@ -8,6 +8,7 @@ import deu.manito.web.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public UserDto login(UserLoginDto userLoginDto){
         log.info(userLoginDto.toString());
         // 유저 정보 조회

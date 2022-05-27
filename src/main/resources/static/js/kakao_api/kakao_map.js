@@ -78,6 +78,30 @@ var kakaoLocation = {
 }
 
 var kakaoMap = {
+
+    // 지도에 채팅 아이콘을 표시하는 함수
+    displayChatIcon :
+        function (/* ChatDto 타입*/ chat){
+
+            alert(chat.title);
+            var customOverlay = new kakao.maps.CustomOverlay({
+                position: new kakao.maps.LatLng(chat.lat, chat.lng),
+                content:
+                        '<div class="speech-bubble chat_room_marker">' +
+                        '   <input type="text" id="chat_title" value = "' + chat.title + '" hidden>' +
+                        '   <input type="text" id="chat_roomId" value = ' + chat.roomId + ' hidden>' +
+                        '   <div class="tool-tip" data-tooltip-title="' + chat.title + '" data-tooltip-position="top">' +
+                        '       <i class="bx bxs-chat chat_marker style = "z-index: 10000"></i>' +
+                        '   </div>' +
+                        '</div>',
+                xAnchor: 0.3,
+                yAnchor: 0.91
+            });
+
+            // 커스텀 오버레이를 지도에 표시합니다
+            customOverlay.setMap(map);
+        },
+
     // 지도에 마커와 인포윈도우를 표시하는 함수
     displayMarker :
         function (locPosition, message) {
@@ -126,20 +150,6 @@ var kakaoMap = {
         // 지도에 원을 표시합니다
         circle.setMap(map);
     },
-
-    // 지도에 채팅 아이콘을 표시하는 함수
-    displayChatIcon :
-        function (lat, lng){
-            var customOverlay = new kakao.maps.CustomOverlay({
-                position: new kakao.maps.LatLng(lat, lng),
-                content: '<div class="speech-bubble"><i class=\'bx bxs-chat chat_marker\'></i></div>',
-                xAnchor: 0.3,
-                yAnchor: 0.91
-            });
-
-            // 커스텀 오버레이를 지도에 표시합니다
-            customOverlay.setMap(map);
-        },
 }
 
 //------------------------------------------//

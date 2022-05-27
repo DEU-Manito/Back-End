@@ -4,8 +4,8 @@
 <%@ include file="../layout/header.jsp" %>
 
 <!-- CSS -->
-<link href="resources/css/ui/board/article_card.css" rel="stylesheet" type="text/css">
-<link href="resources/css/ui/board/board.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/ui/board/article_card.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/ui/board/board.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -105,7 +105,7 @@
                         <rect x="3" y="14" width="7" height="7"/>
                     </svg>
                 </button>
-                <button class="write_btn" onclick="window.location = '/createArticle'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button class="write_btn" onclick="window.location = '/articles/create'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             </div>
         </div>
 

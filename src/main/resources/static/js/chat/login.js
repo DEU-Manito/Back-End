@@ -1,6 +1,6 @@
 const vChatCloud = new VChatCloud();
 
-let channel, userNick, userKey, profileJson = {}, channelKey="";
+let channel, userNick, userKey, profileJson = {};
 let profileImgPath = {
     "1": "resources/img/vchat/profile/1.png"
     ,"2": "resources/img/vchat/profile/2.png"
@@ -29,8 +29,6 @@ var getParameters = function (paramName) {
     }
 };
 
-channelKey = 'zGYVQGNMyC-hPHbqnEOBh-20220524132003';
-
 function getClientInfo(clientKey, nickname, profileImage){
     alert("getClientInfo : [clientKey : " + clientKey + ", nickname : " + nickname + ", profileImage : " + profileImage + "]");
     var client = {
@@ -50,7 +48,7 @@ function getClientInfo(clientKey, nickname, profileImage){
 * */
 
 /* client : 사용자의 프로필 loginFlag : 로그인 플래그 */
-function enterChatting(client) {
+function enterChatting(client, roomId /* = channelKey */) {
     alert('loginFunc : ' + client.clientKey);
 
     // clientKey가 없는 경우 비로그인 유저
@@ -73,14 +71,14 @@ function enterChatting(client) {
         $('button.popupbtn', login_popup).click(function () {
             // 입력 된 닉네임을 가져옴
             client.nickName = $('input#name', login_popup).val();
-            startChat(login_popup, talk_field, client);
+            startChat(login_popup, talk_field, client, loginFlag, roomId);
         });
     }
-    else startChat(login_popup, talk_field, client, loginFlag);
+    else startChat(login_popup, talk_field, client, loginFlag, roomId);
 }
 
 
-function startChat(login_popup, talk_field, client, loginFlag){
+function startChat(login_popup, talk_field, client, loginFlag, roomId){
 
     /*
     * 카카오로 로그인 시에 DB에 랜덤으로 생성(clientKey를 UNIQUE로 해서 중복 없도록 생성)
@@ -94,7 +92,7 @@ function startChat(login_popup, talk_field, client, loginFlag){
     });
 
     // 채널키를 받아서 입력하기
-    joinRoom(channelKey, client, function (err, history) {
+    joinRoom(roomId, client, function (err, history) {
 
         if (err) {
             openError(err.code, function () {

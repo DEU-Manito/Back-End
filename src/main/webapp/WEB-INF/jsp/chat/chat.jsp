@@ -3,6 +3,8 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="deu.manito.web.entity.User" %>
 <%@ page import="deu.manito.web.dto.user.UserLocationDto" %>
+<%@ page import="deu.manito.web.dto.chat.ChatDto" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
@@ -12,20 +14,20 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88a3b7ff3745fa1b7d0e7011ed06a10f&libraries=services"></script>
 
 <!-- chat css -->
-<link href="resources/css/ui/chat/chat.css" rel="stylesheet" type="text/css">
-<link href="resources/css/ui/chat/vchat.css" rel="stylesheet" type="text/css">
-<link href="resources/css/ui/chat/chatModal.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/ui/chat/chat.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/ui/chat/vchat.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/ui/chat/chatModal.css" rel="stylesheet" type="text/css">
 
 
 <!-- chat js -->
-<script src="resources/js/chat/chat.js"></script>
+<script src="/resources/js/chat/chat.js"></script>
 
 <!-- vchat js -->
-<script src="resources/js/chat/vchatcloud-1.2.0.min.js"></script>
-<script src="resources/js/chat/login.js"></script>
-<script src="resources/js/chat/draw.js"></script>
-<script src="resources/js/chat/count.js"></script>
-<script src="resources/js/chat/errMsg.js"></script>
+<script src="/resources/js/chat/vchatcloud-1.2.0.min.js"></script>
+<script src="/resources/js/chat/login.js"></script>
+<script src="/resources/js/chat/draw.js"></script>
+<script src="/resources/js/chat/count.js"></script>
+<script src="/resources/js/chat/errMsg.js"></script>
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -53,9 +55,10 @@
             alert('pc 접속');
         }
     }
+
 </script>
 
-<body onload="checkChatAccess()">
+<body onload="displayChatList()">
     <!-- Navbar -->
         <%@ include file="../layout/navbar.jsp"%>
     <!-- Navbar End -->
@@ -208,7 +211,7 @@
                                         <div class="opponent_profile">
                                             <ul>
                                                 <li class="room_img"><img src="resources/img/vchat/chat.svg" alt="man" width="100%"></li>
-                                                <li>서면 2번가 채팅방</li>
+                                                <li id = "chat_room_title"></li>
                                             </ul>
                                         </div>
 
@@ -269,47 +272,81 @@
 
 
     <script>
+        // 채팅방 리스트를 지도에 표시하는 함수
+        function displayChatList(){
+            <% List<ChatDto> chatlist = (List<ChatDto>) request.getAttribute("chatlist"); %>
+
+            const chat = { title: '', roomId: '', lat: 0, lng: 0, }
+
+            <% for (ChatDto chatDto : chatlist) { %>
+                chat.title = '<%= chatDto.getTitle() %>';
+                chat.roomId = '<%= chatDto.getRoomId() %>';
+                chat.lat = <%= chatDto.getLat() %>;
+                chat.lng = <%= chatDto.getLng() %>;
+
+                kakaoMap.displayChatIcon(chat);
+            <% } %>
+
+            // 마커에 이벤트 등록
+            const chatMarkers = document.querySelectorAll('.chat_room_marker');
+
+            chatMarkers.forEach(marker => {
+                marker.addEventListener("click", (event) => joinChatting(event));
+            })
+        }
+
+        function joinChatting(event){
+            // 로그인 한 경우(세션이 있는 경우)
+            var chat = document.querySelector(".messages-section");
+
+            <% if(user != null) { %>
+            const client ={
+                clientKey: '<%= user.getClientKey() %>',
+                nickname:  '<%= user.getNickname() %>',
+                profile:   '<%= user.getProfile_image() %>'
+            };
+
+            const target = event.currentTarget;                                 // 이벤트 발생 객체
+            const roomId = target.querySelector('#chat_roomId').value;          // 채팅방 Key
+            const title = target.querySelector('#chat_title').value;            // 채팅방 제목
+            const chatRoomTitle = document.querySelector('#chat_room_title');   // 채팅방 제목을 출력할 태그
+
+            alert(title);
+            enterChatting(client, roomId);      // 채팅방 입장
+
+            chat.classList.remove('hidden');    // 채팅방 화면 보이게
+            chatRoomTitle.innerHTML = title;
+            <% } %>
+        }
+
+        // 채팅방 생성 메소드
         function createChatting(){
             <% UserLocationDto userLocation = (UserLocationDto) session.getAttribute("userLocation"); %>
             <% if(userLocation != null) { %>
                 var title = document.querySelector('#input_chat_title').value;
+                var roomId = chatApi.createChatroom(<%= userLocation.getLat()%>, <%= userLocation.getLng()%>, title);
 
-                chatApi.createChatroom(<%= userLocation.getLat()%>, <%= userLocation.getLng()%>, title);
+                const chat = {
+                    title: title,
+                    roomId: roomId,
+                    lat: <%=userLocation.getLat()%>,
+                    lng: <%=userLocation.getLng()%>
+                };
+
+                // 채팅방 생성하면 바로 지도에 표시
+                kakaoMap.displayChatIcon(chat);
             <% } else {%>
                 alert('위치 세션 정보가 존재하지 않습니다.');
             <% } %>
         }
 
-        function checkChatAccess(){
-            // 로그인 한 경우(세션이 있는 경우)
-            var chat = document.querySelector(".messages-section");
 
-            <% if(user != null) { %>
-                chat.classList.toggle('hidden');
-
-                const client ={
-                    clientKey: '<%= user.getClientKey() %>',
-                    nickname:  '<%= user.getNickname() %>',
-                    profile:   '<%= user.getProfile_image() %>'
-                };
-
-                alert("chat.jsp ck = " + client.clientKey + " " + client.nickname + " " + client.profile);
-                enterChatting(client);
-            <% } %>
-        }
     </script>
     <!-- 카카오 맵 js -->
-    <script src="resources/js/kakao_api/kakao_map.js"></script>
+    <script src="/resources/js/kakao_api/kakao_map.js"></script>
 
     <!-- 채팅 모달 js -->
-    <script src="resources/js/chat/chatModal.js"></script>
-
-    <script>
-        kakaoMap.displayChatIcon(35.08947077141478,129.0425450184452);
-        kakaoMap.displayChatIcon(35.090339120761094,129.04128388924426);
-        kakaoMap.displayChatIcon(35.08959658484294,129.03828319495616);
-        kakaoMap.displayChatIcon(35.09275891363016,129.03886627437655 );
-    </script>
+    <script src="/resources/js/chat/chatModal.js"></script>
 
     <!-- Footer -->
     <%@ include file="../layout/footer.jsp" %>

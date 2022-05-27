@@ -2,7 +2,7 @@
 <header id="header_outer">
     <div class="container">
         <div class="header_section">
-            <div class="logo"><a href="/"><img src="resources/img/manitoLogo.png" alt=""></a></div>
+            <div class="logo"><a href="/"><img src="/resources/img/manitoLogo.png" alt=""></a></div>
             <nav class="nav" id="nav">
                 <!-- 유저 로그인 정보를 세션에서 가져옴 -->
                 <% UserDto user = (UserDto)session.getAttribute("user"); %>

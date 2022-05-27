@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 public class ArticleController {
-    @GetMapping("/createArticle")
+    @GetMapping("/articles/create")
     public String createArticle(){ return "board/createArticle"; }
 
     // 게시판 구현 후 /article/{index} 로 수정해야함
-    @GetMapping("/article")
+    @GetMapping("/articles")
     public String article(){ return "board/viewArticle"; }
 }

@@ -7,6 +7,7 @@ import deu.manito.web.repository.ChatRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +24,7 @@ public class ChatService {
     
     
     // 채팅방 생성 메소드
+    @Transactional
     public ChatDto createChat(ChatDto chatDto){
         Chat chat = Chat.toEntity(chatDto);
 
@@ -35,6 +37,7 @@ public class ChatService {
 
     // DB에 저장되어 있는 채팅방을 가져오는 메소드
     public List<ChatDto> getChatList(){
+
         return chatRepository.findAll()
                 .stream().map(chat -> ChatDto.createChatDto(chat))
                 .collect(Collectors.toList());

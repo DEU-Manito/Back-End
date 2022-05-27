@@ -1,5 +1,5 @@
 var API_KEY = 'oTtkIO-lx1t9b-Me6Qw5-Z8OfSB-20220323224155';
-var X_AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJxdzk5MDkxNUBuYXZlci5jb20iLCJleHAiOjE2NTM2NDUwOTAsImlhdCI6MTY1MzYyNzA5MCwiYXV0aG9yaXRpZXMiOiJbUk9MRV9VU0VSXSJ9.7N5IvsbPyoiJJah606-LzdVmWzq2j97PaKEmwPre5IU';
+var X_AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJxdzk5MDkxNUBuYXZlci5jb20iLCJleHAiOjE2NTM2ODE4MzQsImlhdCI6MTY1MzY2MzgzNCwiYXV0aG9yaXRpZXMiOiJbUk9MRV9VU0VSXSJ9.s36ZVWQ5_wM_123D_vqoZ8H9YKNY2gjISCDFOVeXbo8';
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -67,6 +67,7 @@ var chatApi = {
 
                     alert(chatData.roomId);
                     chatApi.saveChatInfo(chatData);
+                    return chatData.roomId;
                 }
             });
         },
