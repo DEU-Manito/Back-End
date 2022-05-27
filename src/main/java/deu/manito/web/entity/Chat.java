@@ -1,7 +1,7 @@
 package deu.manito.web.entity;
 
 
-import deu.manito.web.dto.chat.ChatCreateDto;
+import deu.manito.web.dto.chat.ChatDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,13 +34,13 @@ public class Chat {
     @Column
     private Date createTime;
 
-    public static Chat toEntity(ChatCreateDto dto){
+    public static Chat toEntity(ChatDto dto){
         return Chat.builder()
                 .title(dto.getTitle())
                 .roomId(dto.getRoomId())
                 .lat(dto.getLat())
                 .lng(dto.getLng())
-                .createTime(new Date(new java.util.Date().getTime()))
+                .createTime(dto.getCreateTime())
                 .build();
     }
 }

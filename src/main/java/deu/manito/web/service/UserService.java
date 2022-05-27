@@ -28,7 +28,7 @@ public class UserService {
         // 신규 유저면 DB에 등록
         if(Objects.isNull(user)) {
             // 최초 회원가입 시 clientKey 생성
-            log.info("UserService : User Null");
+            log.info("UserService : New User");
             userLoginDto.setClientKey(UUID.randomUUID().toString().substring(0, 8));
             user = userRepository.save(User.toEntity(userLoginDto));
         }

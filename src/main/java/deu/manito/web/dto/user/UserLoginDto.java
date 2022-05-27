@@ -1,6 +1,7 @@
 package deu.manito.web.dto.user;
 
 
+import deu.manito.web.entity.User;
 import lombok.*;
 
 
