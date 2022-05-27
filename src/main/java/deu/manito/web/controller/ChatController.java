@@ -18,13 +18,4 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    @GetMapping("/chat")
-    public String chat(Model model){
-        // 생성 되어있는 채팅방을 가져옴
-        List<ChatDto> chatlist = chatService.getChatList();
-
-        model.addAttribute("chatlist", chatlist);
-        
-        return "chat/chat";
-    }
 }

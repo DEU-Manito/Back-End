@@ -1,17 +1,22 @@
 package deu.manito.web.controller;
 
 
-import deu.manito.web.apiController.ChatApiController;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
-@Controller
-public class indexController {
+@Controller // 기본 페이지 이동은 IndexController 에서 처리
+public class IndexController {
 
     @GetMapping("/")
     public String index() { return "index"; }
+
+
+    @GetMapping("/chat")
+    public String chat(Model model){ return "chat/chat"; }
+
+    @GetMapping("/board")
+    public String board(){ return "board/board";}
 }
