@@ -72,17 +72,54 @@ var chatApi = {
             });
         },
 
-    saveChatInfo: function (chatData){
-        const url = '/api/chat/create';
-        fetch(url,{
-            method: "POST",
-            body: JSON.stringify(chatData),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(response => {
-            if(response.ok) alert('채팅방 개설이 완료 되었습니다.');
-            else alert('채팅방 개설에 실패했습니다.');
-        });
-    }
+    saveChatInfo:
+        function (chatData){
+            const url = '/api/chat/create';
+            fetch(url,{
+                method: "POST",
+                body: JSON.stringify(chatData),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if(response.ok) alert('채팅방 개설이 완료 되었습니다.');
+                else alert('채팅방 개설에 실패했습니다.');
+            });
+        },
+    
+    // 주변 반경 500m 내의 채팅 리스트를 받아옴
+    displayChatlist:
+        function (lat, lng){
+            const chatLocation = {
+                lat: lat,
+                lng: lng
+            };
+
+            const url = '/api/chat/markers';
+            fetch(url, {
+                method: "POST",
+                body: JSON.stringify(chatLocation),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if(response.ok) return response.json();
+                else return null;
+            }).then(chatlist => {
+                if(chatlist == null) alert('Chat.js : getChatList() [ 채팅 리스트 조회에 실패했습니다.]');
+                else {
+                    for (idx in chatlist){
+                        const chatDto = {
+                            title: chatlist[idx].title,
+                            roomId: chatlist[idx].roomId,
+                            lat: chatlist[idx].lat,
+                            lng: chatlist[idx].lng
+                        }
+
+                        kakaoMap.displayChatIcon(chatDto);
+                    }
+                }
+            });
+        }
+
 }

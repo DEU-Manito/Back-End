@@ -2,6 +2,7 @@ package deu.manito.web.service;
 
 
 import deu.manito.web.dto.chat.ChatDto;
+import deu.manito.web.dto.chat.ChatLocationDto;
 import deu.manito.web.entity.Chat;
 import deu.manito.web.repository.ChatRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -36,9 +37,8 @@ public class ChatService {
     }
 
     // DB에 저장되어 있는 채팅방을 가져오는 메소드
-    public List<ChatDto> getChatList(){
-
-        return chatRepository.findAll()
+    public List<ChatDto> getChatList(ChatLocationDto locationDto){
+        return chatRepository.findAllNearByChat(locationDto.getLat(), locationDto.getLng())
                 .stream().map(chat -> ChatDto.createChatDto(chat))
                 .collect(Collectors.toList());
     }

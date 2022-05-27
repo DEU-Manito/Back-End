@@ -41,6 +41,9 @@ if (navigator.geolocation) {
             // 원 표시
             kakaoMap.displayCircle(lat, lng);
 
+            // 사용자 주변 500m 이내의 채팅방을 지도에 표시함
+            chatApi.displayChatlist(lat, lng);
+
             kakaoCoords.searchAddrFromCoords(map.getCenter(), kakaoCoords.displayCenterInfo);
         });
     } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
@@ -83,7 +86,6 @@ var kakaoMap = {
     displayChatIcon :
         function (/* ChatDto 타입*/ chat){
 
-            alert(chat.title);
             var customOverlay = new kakao.maps.CustomOverlay({
                 position: new kakao.maps.LatLng(chat.lat, chat.lng),
                 content:
@@ -100,6 +102,7 @@ var kakaoMap = {
 
             // 커스텀 오버레이를 지도에 표시합니다
             customOverlay.setMap(map);
+            $('.chat_room_marker').last().click(event => joinChatting(event));
         },
 
     // 지도에 마커와 인포윈도우를 표시하는 함수

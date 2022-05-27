@@ -58,7 +58,7 @@
 
 </script>
 
-<body onload="displayChatList()">
+<body>
     <!-- Navbar -->
         <%@ include file="../layout/navbar.jsp"%>
     <!-- Navbar End -->
@@ -272,29 +272,6 @@
 
 
     <script>
-        // 채팅방 리스트를 지도에 표시하는 함수
-        function displayChatList(){
-            <% List<ChatDto> chatlist = (List<ChatDto>) request.getAttribute("chatlist"); %>
-
-            const chat = { title: '', roomId: '', lat: 0, lng: 0, }
-
-            <% for (ChatDto chatDto : chatlist) { %>
-                chat.title = '<%= chatDto.getTitle() %>';
-                chat.roomId = '<%= chatDto.getRoomId() %>';
-                chat.lat = <%= chatDto.getLat() %>;
-                chat.lng = <%= chatDto.getLng() %>;
-
-                kakaoMap.displayChatIcon(chat);
-            <% } %>
-
-            // 마커에 이벤트 등록
-            const chatMarkers = document.querySelectorAll('.chat_room_marker');
-
-            chatMarkers.forEach(marker => {
-                marker.addEventListener("click", (event) => joinChatting(event));
-            })
-        }
-
         function joinChatting(event){
             // 로그인 한 경우(세션이 있는 경우)
             var chat = document.querySelector(".messages-section");
@@ -312,6 +289,8 @@
             const chatRoomTitle = document.querySelector('#chat_room_title');   // 채팅방 제목을 출력할 태그
 
             alert(title);
+
+            vChatCloud.disconnect();            // 여러 채팅방을 이동해야 하므로 접속시 먼저 연결을 한 번 끊고 접속
             enterChatting(client, roomId);      // 채팅방 입장
 
             chat.classList.remove('hidden');    // 채팅방 화면 보이게
@@ -335,6 +314,8 @@
 
                 // 채팅방 생성하면 바로 지도에 표시
                 kakaoMap.displayChatIcon(chat);
+
+                // 추가하고 이벤트 등록까지
             <% } else {%>
                 alert('위치 세션 정보가 존재하지 않습니다.');
             <% } %>
