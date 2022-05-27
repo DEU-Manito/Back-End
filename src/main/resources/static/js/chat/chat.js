@@ -1,3 +1,7 @@
+var API_KEY = 'oTtkIO-lx1t9b-Me6Qw5-Z8OfSB-20220323224155';
+var X_AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJxdzk5MDkxNUBuYXZlci5jb20iLCJleHAiOjE2NTM2NDUwOTAsImlhdCI6MTY1MzYyNzA5MCwiYXV0aG9yaXRpZXMiOiJbUk9MRV9VU0VSXSJ9.7N5IvsbPyoiJJah606-LzdVmWzq2j97PaKEmwPre5IU';
+
+
 document.addEventListener('DOMContentLoaded', function () {
     var modeSwitch = document.querySelector('.mode-switch');
 
@@ -35,7 +39,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var chatApi = {
     createChatroom :
-        function (lat, lan, title){
+        function (lat, lng, title){
 
-        }
+            const url = 'https://vchatcloud.com/openapi/v1/rooms';
+            const data = 'maxUser=10&roomName=' + title;
+
+            fetch(url, {
+                method: "POST",
+                body: data,
+                headers:{
+                    "Content-Type" : "application/x-www-form-urlencoded",
+                    "API_KEY": API_KEY,
+                    "X-AUTH-TOKEN": X_AUTH_TOKEN
+                }
+            }).then(response => {
+                if(response.ok) return response.json();
+                else return null;
+            }).then(json =>{
+                if(json == null) alert('채팅방 개설에 실패했습니다.');
+                else {
+                    const chatData = {
+                        title: title,
+                        roomId: json.data.roomId.toString(),
+                        lat: lat,
+                        lng: lng,
+                    };
+
+                    alert(chatData.roomId);
+                    chatApi.saveChatInfo(chatData);
+                }
+            });
+        },
+
+    saveChatInfo: function (chatData){
+        const url = '/api/chat/create';
+        fetch(url,{
+            method: "POST",
+            body: JSON.stringify(chatData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            if(response.ok) alert('채팅방 개설이 완료 되었습니다.');
+            else alert('채팅방 개설에 실패했습니다.');
+        });
+    }
 }

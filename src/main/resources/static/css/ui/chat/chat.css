@@ -520,18 +520,35 @@ button, a {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #eafdff;
+    /*background: #eafdff;*/
+    background: #363D4E;
+    color: white;
+    font-size: 25px;
 
     border: 3px solid white;
-    box-shadow: 2px 2px gray;
-
-    font-size: 30px;
-    color: #00b8ff;
     z-index: 10000;
 
     /*background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);*/
     /*-webkit-background-clip: text;*/
     /*color: transparent;*/
+}
+
+
+.help_btn:before, .chat_btn:before{
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.help_btn:after, .chat_btn:after{
+    -webkit-transform: translateY(-2px) rotate(-45deg);
+    -moz-transform: translateY(-2px) rotate(-45deg);
+    -ms-transform: translateY(-2px) rotate(-45deg);
+    -o-transform: translateY(-2px) rotate(-45deg);
+    transform: translateY(-2px) rotate(-45deg);
+    top: 2px;
 }
 
 .help_btn {
@@ -550,18 +567,29 @@ button, a {
 }
 
 
-.help_btn:hover{
+.help_btn:hover, .chat_btn:hover {
     background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
     color: white;
     cursor: pointer;
+
+    -webkit-transform: rotate(360deg) scale(1.10);
+    -moz-transform: rotate(360deg) scale(1.10);
+    -ms-transform: rotate(360deg) scale(1.10);
+    -o-transform: rotate(360deg) scale(1.10);
+    transform: rotate(360deg) scale(1.10);
+    -webkit-transition: -webkit-transform 600ms;
+    -moz-transition: -moz-transform 600ms;
+    -ms-transition: -ms-transform 600ms;
+    -o-transition: -o-transform 600ms;
+    transition: transform 600ms;
 }
 
 
-.chat_btn:hover{
-    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
-    color: white;
-    cursor: pointer;
-}
+/*.chat_btn:hover{*/
+/*    background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);*/
+/*    color: white;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .help_btn i{
     margin: 0 auto;
@@ -622,3 +650,14 @@ button, a {
 
 /* 지도 채팅 아이콘 CSS 끝 */
 
+.chat_title_submit_btn{
+    font-size: 40px;
+    left: 88.5%;
+    bottom: 40px;
+    position: relative;
+}
+
+.chat_title_submit_btn:hover{
+    color: black;
+    cursor: pointer;
+}

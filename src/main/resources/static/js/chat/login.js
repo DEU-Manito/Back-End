@@ -39,18 +39,18 @@ function getClientInfo(clientKey, nickname, profileImage){
         profile: profileImage
     };
 
-    loginFunc(client);
+    enterChatting(client);
 }
 
 /* 
 * 
 * 채팅 API 동작 과정
-* 프론트에서 loginFunc(client(유저 정보), chanelKey(채팅방 키)) 호출
+* 프론트에서 enterChatting(client(유저 정보), chanelKey(채팅방 키)) 호출
 * 로그인 인증 후 startChat(login_popup, talk_field, client, chanelKey) 호출
 * */
 
 /* client : 사용자의 프로필 loginFlag : 로그인 플래그 */
-function loginFunc(client) {
+function enterChatting(client) {
     alert('loginFunc : ' + client.clientKey);
 
     // clientKey가 없는 경우 비로그인 유저
@@ -83,7 +83,7 @@ function loginFunc(client) {
 function startChat(login_popup, talk_field, client, loginFlag){
 
     /*
-    * 카카오로 로그인 시에 DB에 랜덤으로 생성해주기(clientKey를 UNIQUE로 해서 중복 없도록 생성)
+    * 카카오로 로그인 시에 DB에 랜덤으로 생성(clientKey를 UNIQUE로 해서 중복 없도록 생성)
     * 최초 로그인인 경우에 clientKey를 랜덤으로 생성
     * 'xxxxxxxx'.replace(/[xy]/g, function (a, b) { return (b = Math.random() * 16, (a == 'y' ? b & 3 | 8 : b | 0).toString(16)) })
     *

@@ -2,6 +2,7 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="deu.manito.web.entity.User" %>
+<%@ page import="deu.manito.web.dto.user.UserLocationDto" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
@@ -250,13 +251,14 @@
                         <p class="chat_title">Chatting Title</p>
                         <h3>채팅방 제목을 입력해주세요.</h3>
                         <div class="chat_title-wrapper">
-                            <input class="chat_title-input" type="text" placeholder="Search">
+                            <input class="chat_title-input" id="input_chat_title" type="text" placeholder="Search">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
                                 <defs></defs>
                                 <circle cx="11" cy="11" r="8"></circle>
                                 <path d="M21 21l-4.35-4.35"></path>
                             </svg>
                         </div>
+                        <i class='bx bx-check chat_title_submit_btn' onclick="createChatting()"></i>
                     </div>
                 </div>
             </div>
@@ -267,6 +269,17 @@
 
 
     <script>
+        function createChatting(){
+            <% UserLocationDto userLocation = (UserLocationDto) session.getAttribute("userLocation"); %>
+            <% if(userLocation != null) { %>
+                var title = document.querySelector('#input_chat_title').value;
+
+                chatApi.createChatroom(<%= userLocation.getLat()%>, <%= userLocation.getLng()%>, title);
+            <% } else {%>
+                alert('위치 세션 정보가 존재하지 않습니다.');
+            <% } %>
+        }
+
         function checkChatAccess(){
             // 로그인 한 경우(세션이 있는 경우)
             var chat = document.querySelector(".messages-section");
@@ -281,7 +294,7 @@
                 };
 
                 alert("chat.jsp ck = " + client.clientKey + " " + client.nickname + " " + client.profile);
-                loginFunc(client);
+                enterChatting(client);
             <% } %>
         }
     </script>
