@@ -8,8 +8,8 @@
                 <% UserDto user = (UserDto)session.getAttribute("user"); %>
 
                 <ul class="toggle">
-                    <li><a href="chat">Chat</a></li>
-                    <li><a href="board">Board</a></li>
+                    <li><a href="/chat">Chat</a></li>
+                    <li><a href="/board">Board</a></li>
                     <li><a href="/">Portfolio</a></li>
                     <% if(user == null){ %>
                     <li><a href="javascript:void(0)" onclick="kakao_login();">Login</a></li>
@@ -25,8 +25,8 @@
                     <%}%>
                 </ul>
                 <ul class="">
-                    <li><a href="chat">Chat</a></li>
-                    <li><a href="board">Board</a></li>
+                    <li><a href="/chat">Chat</a></li>
+                    <li><a href="/board">Board</a></li>
                     <li><a href="/">Portfolio</a></li>
 
                     <% if(user == null){ %>
