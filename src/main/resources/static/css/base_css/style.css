@@ -1800,3 +1800,11 @@ div.mc-image {
 .hidden{
 	display: none;
 }
+
+.qrcode_section{
+	display: flex;
+}
+
+.qrcode_section img{
+	margin: 10px auto;
+}

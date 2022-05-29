@@ -1,3 +1,6 @@
+<%@ page import="deu.manito.web.dto.user.UserLoginDto" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!doctype html>
 <html>
 
@@ -41,11 +44,9 @@
     <link href='http://fonts.googleapis.com/css?family=Dosis:400,500,700,800,600,300,200' rel='stylesheet'
           type='text/css'>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<%--    <link rel="preconnect" href="https://fonts.googleapis.com">--%>
+<%--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>--%>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
-
 
     <!---------------------------------->
     <!--JS (UI에 관련 Js는 Head에서 호출)-->
@@ -55,6 +56,9 @@
     <script src="https://kit.fontawesome.com/fad007cb32.js" crossorigin="anonymous"></script>
 
     <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
+
     <script type="text/javascript" src="/resources/js/base_js/jquery.1.8.3.min.js"></script>
     <script type="text/javascript" src="/resources/js/base_js/jquery-scrolltofixed.js"></script>
     <script type="text/javascript" src="/resources/js/base_js/jquery.easing.1.3.js"></script>
@@ -78,4 +82,12 @@
             var newFontSizeTitle = Math.floor(fontsizetitle * percentage);
             $(".divclass").css("font-size", newFontSizeTitle)
         }
+    </script>
+
+    <script>
+        <%!
+            UserDto user;
+            UserLoginDto userLogin;
+            UserLocationDto userLocation;
+        %>
     </script>

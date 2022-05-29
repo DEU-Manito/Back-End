@@ -14,6 +14,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+* @package : deu.manito.web.service
+* @name : ChatService.java
+* @date : 2022-05-27 오후 9:05
+* @author : Dong
+**/
 @Slf4j
 @Service
 public class ChatService {

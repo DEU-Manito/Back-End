@@ -14,13 +14,9 @@ import java.sql.Date;
 public class ChatDto {
 
     private String title;
-
     private String roomId;
-    // 위도
-    private Double lat;
-    // 경도
-    private Double lng;
-
+    private Double lat; // 위도
+    private Double lng; // 경도
     private Date createTime;
 
     public static ChatDto createChatDto(Chat chat){

@@ -5,10 +5,10 @@
 <%@ page import="deu.manito.web.dto.user.UserLocationDto" %>
 <%@ page import="deu.manito.web.dto.chat.ChatDto" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Objects" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
-
 
 <!-- 카카오 Map API 사용할 라이브러리의 이름을 링크 뒤에 명시해줘야 함 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88a3b7ff3745fa1b7d0e7011ed06a10f&libraries=services"></script>
@@ -22,43 +22,26 @@
 <!-- chat js -->
 <script src="/resources/js/chat/chat.js"></script>
 
-<!-- vchat js -->
-<script src="/resources/js/chat/vchatcloud-1.2.0.min.js"></script>
-<script src="/resources/js/chat/login.js"></script>
-<script src="/resources/js/chat/draw.js"></script>
-<script src="/resources/js/chat/count.js"></script>
-<script src="/resources/js/chat/errMsg.js"></script>
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
-<%--<script src="https://kit.fontawesome.com/c13f14f04a.js" crossorigin="anonymous"></script>--%>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
 
 </head>
 
 <script>
-    var filter = "win16|win32|win64|mac|macintel";
+    function displayUserLocation(){
+        // 위치 세션 정보가 있는지 체크
+        <%  userLocation = (UserLocationDto) session.getAttribute("userLocation"); %>
+        // 세션이 있는 경우에만 카카오 맵 표시 (세션이 없는 경우엔 위치 설정 버튼을 눌러서 추후에 인증 가능)
+        <% if(userLocation != null) { %>
+            lat = <%= userLocation.getLat()%>;
+            lng = <%= userLocation.getLng()%>;
 
-    if ( navigator.platform ) {
-        if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
-            //mobile
-            // 로그인 체크 후 로그인 수행
-            // 로그인 후 위치 정보 받기 -> DB
-            // 위치 정보 저장 후 window.close();
-            alert('mobile 접속');
-        } else {
-            // pc
-            // 모달 창으로 QR 코드 띄우기 -> 모바일로 접속 후 인증
-            // 모바일에서 인증 완료 후 직접 버튼 누르기 or pc에서 계속 위치 값 요청
-            alert('pc 접속');
-        }
+            kakaoLocation.displayKakaoMap(lat, lng);
+        <% } %>
     }
-
 </script>
 
-<body>
+<body onload="displayUserLocation()" >
     <!-- Navbar -->
         <%@ include file="../layout/navbar.jsp"%>
     <!-- Navbar End -->
@@ -122,11 +105,17 @@
                     <!-- 지도를 표시할 div 영역 -->
                     <div id="map" style="width:100%;height: 90%; position: relative;">
                         <div class = "btn_container">
+                            <!-- 도움 요청 게시글 버튼 -->
                             <div class = "help_btn">
                                 <i class='bx bxs-error' ></i>
                             </div>
+                            <!-- 채팅 생성 버튼 -->
                             <div class = "chat_btn">
                                 <i class='bx bxs-comment-add trigger'></i>
+                            </div>
+                            <!-- 위치 갱신 버튼 -->
+                            <div class = "location_btn" onclick="locationApi.resetLocation()">
+                                <i class='bx bx-target-lock'></i>
                             </div>
                         </div>
                     </div>
@@ -246,7 +235,7 @@
 
             <!-- 채팅방 생성 모달 -->
             <div class="modal-wrapper">
-                <div class="modal">
+                <div class="chat_modal">
                     <div class="head">
                         <a class="modal_close trigger" href="javascript:void(0)"><span></span></a>
                     </div>
@@ -254,7 +243,7 @@
                         <p class="chat_title">Chatting Title</p>
                         <h3>채팅방 제목을 입력해주세요.</h3>
                         <div class="chat_title-wrapper">
-                            <input class="chat_title-input" id="input_chat_title" type="text" placeholder="Search">
+                            <input class="chat_title-input" id="input_chat_title" type="text" placeholder="Title...">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
                                 <defs></defs>
                                 <circle cx="11" cy="11" r="8"></circle>
@@ -271,11 +260,13 @@
 
 
 
+
     <script>
+        // 채팅방 접속 메소드
         function joinChatting(event){
-            // 로그인 한 경우(세션이 있는 경우)
             var chat = document.querySelector(".messages-section");
 
+            // 로그인 한 경우(세션이 있는 경우)
             <% if(user != null) { %>
             const client ={
                 clientKey: '<%= user.getClientKey() %>',
@@ -288,9 +279,7 @@
             const title = target.querySelector('#chat_title').value;            // 채팅방 제목
             const chatRoomTitle = document.querySelector('#chat_room_title');   // 채팅방 제목을 출력할 태그
 
-            alert(title);
-
-            vChatCloud.disconnect();            // 여러 채팅방을 이동해야 하므로 접속시 먼저 연결을 한 번 끊고 접속
+            vChatCloud.disconnect();            // 여러 채팅방을 이동해야 하므로 접속시 먼저 이전 연결을 한 번 끊고 접속
             enterChatting(client, roomId);      // 채팅방 입장
 
             chat.classList.remove('hidden');    // 채팅방 화면 보이게
@@ -300,34 +289,39 @@
 
         // 채팅방 생성 메소드
         function createChatting(){
-            <% UserLocationDto userLocation = (UserLocationDto) session.getAttribute("userLocation"); %>
+            <% userLocation = (UserLocationDto) session.getAttribute("userLocation"); %>
             <% if(userLocation != null) { %>
                 var title = document.querySelector('#input_chat_title').value;
-                var roomId = chatApi.createChatroom(<%= userLocation.getLat()%>, <%= userLocation.getLng()%>, title);
 
-                const chat = {
-                    title: title,
-                    roomId: roomId,
-                    lat: <%=userLocation.getLat()%>,
-                    lng: <%=userLocation.getLng()%>
-                };
+                // 채팅방 생성 함수 호출
+                chatApi.createChatroom(<%= userLocation.getLat()%>, <%= userLocation.getLng()%>, title);
 
-                // 채팅방 생성하면 바로 지도에 표시
-                kakaoMap.displayChatIcon(chat);
-
-                // 추가하고 이벤트 등록까지
             <% } else {%>
                 alert('위치 세션 정보가 존재하지 않습니다.');
             <% } %>
         }
-
-
     </script>
-    <!-- 카카오 맵 js -->
-    <script src="/resources/js/kakao_api/kakao_map.js"></script>
+
+
 
     <!-- 채팅 모달 js -->
     <script src="/resources/js/chat/chatModal.js"></script>
+
+    <!-- 카카오 맵 js -->
+    <script src="/resources/js/kakao_api/kakao_map.js"></script>
+
+    <!-- location js -->
+    <script type="text/javascript" src="/resources/js/location/location.js"></script>
+
+    <!-- vchat js -->
+    <script src="/resources/js/chat/vchat/vchatcloud-1.2.0.min.js"></script>
+    <script src="/resources/js/chat/vchat/login.js"></script>
+    <script src="/resources/js/chat/vchat/draw.js"></script>
+    <script src="/resources/js/chat/vchat/count.js"></script>
+    <script src="/resources/js/chat/vchat/errMsg.js"></script>
+
+
+
 
     <!-- Footer -->
     <%@ include file="../layout/footer.jsp" %>

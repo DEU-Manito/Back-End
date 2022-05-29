@@ -1,6 +1,4 @@
 var API_KEY = 'oTtkIO-lx1t9b-Me6Qw5-Z8OfSB-20220323224155';
-var X_AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJxdzk5MDkxNUBuYXZlci5jb20iLCJleHAiOjE2NTM2ODE4MzQsImlhdCI6MTY1MzY2MzgzNCwiYXV0aG9yaXRpZXMiOiJbUk9MRV9VU0VSXSJ9.s36ZVWQ5_wM_123D_vqoZ8H9YKNY2gjISCDFOVeXbo8';
-
 
 document.addEventListener('DOMContentLoaded', function () {
     var modeSwitch = document.querySelector('.mode-switch');
@@ -38,38 +36,58 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 var chatApi = {
+    test: function (){
+      alert('테스트');
+    },
+    getX_AUTH_TOKEN:
+         async function () {
+            const url = 'https://vchatcloud.com/openapi/token';
+
+            return await fetch(url, {
+                method: "GET",
+                headers: {"API_KEY": API_KEY,}
+            });
+        },
+
     createChatroom :
-        function (lat, lng, title){
+        async function (lat, lng, title) {
 
             const url = 'https://vchatcloud.com/openapi/v1/rooms';
             const data = 'maxUser=10&roomName=' + title;
+            const response = await chatApi.getX_AUTH_TOKEN();
 
-            fetch(url, {
-                method: "POST",
-                body: data,
-                headers:{
-                    "Content-Type" : "application/x-www-form-urlencoded",
-                    "API_KEY": API_KEY,
-                    "X-AUTH-TOKEN": X_AUTH_TOKEN
-                }
-            }).then(response => {
-                if(response.ok) return response.json();
-                else return null;
-            }).then(json =>{
-                if(json == null) alert('채팅방 개설에 실패했습니다.');
-                else {
-                    const chatData = {
-                        title: title,
-                        roomId: json.data.roomId.toString(),
-                        lat: lat,
-                        lng: lng,
-                    };
+            response.json().then(response =>{
+                // alert(response.data["X-AUTH-TOKEN"]);
+                fetch(url, {
+                    method: "POST",
+                    body: data,
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "API_KEY": API_KEY,
+                        "X-AUTH-TOKEN": response.data["X-AUTH-TOKEN"],
+                    }
+                }).then(response => {
+                    if (response.ok) return response.json();
+                    else return null;
+                }).then(json => {
+                    if (json == null) {
+                        alert('채팅방 개설에 실패했습니다.');
+                        return null;
+                    } else {
+                        const chatData = {
+                            title: title,
+                            roomId: json.data.roomId.toString(),
+                            lat: lat,
+                            lng: lng,
+                        };
 
-                    alert(chatData.roomId);
-                    chatApi.saveChatInfo(chatData);
-                    return chatData.roomId;
-                }
-            });
+                        chatApi.saveChatInfo(chatData);     // DB에 채팅방 정보 저장
+                        kakaoMap.displayChatIcon(chatData); // 지도에 채팅방 표시
+
+                        return chatData.roomId;
+                    }
+                });
+            })
         },
 
     saveChatInfo:
@@ -83,7 +101,7 @@ var chatApi = {
                 }
             }).then(response => {
                 if(response.ok) alert('채팅방 개설이 완료 되었습니다.');
-                else alert('채팅방 개설에 실패했습니다.');
+                else alert('chatApi.saveChatInfo() : 채팅방 개설에 실패했습니다.');
             });
         },
     
@@ -121,5 +139,4 @@ var chatApi = {
                 }
             });
         }
-
 }

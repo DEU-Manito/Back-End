@@ -1,9 +1,9 @@
 
-
+// 카카오 맵 기본 세팅
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 4 // 지도의 확대 레벨
+        level: 3 // 지도의 확대 레벨
     };
 
 // 지도 생성
@@ -21,40 +21,45 @@ var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커
 // 기본 커서로 변경
 map.setCursor('default');
 
-// HTML5의 geolocation으로 사용할 수 있는지 확인
-if (navigator.geolocation) {
-    // GeoLocation을 이용해서 접속 위치를 얻어옴
-    navigator.geolocation.getCurrentPosition(function(position) {
-            lat = position.coords.latitude,
-            lng = position.coords.longitude;
-
-            alert('kakao_map.js : ' + lat + " " + lng);
-
-            // 세션에 위치 정보 등록
-            kakaoLocation.setUserLocation(lat, lng);
-            
-            var locPosition = new kakao.maps.LatLng(lat, lng), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
+var kakaoLocation = {
+    // 유저의 위치를 받아와서 세션에 등록
+    displayKakaoMap :
+        function (lat, lng){
+            let locPosition = new kakao.maps.LatLng(lat, lng), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
                 message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용
 
             // 마커와 인포윈도우를 표시
             kakaoMap.displayMarker(locPosition, message);
+
             // 원 표시
             kakaoMap.displayCircle(lat, lng);
 
             // 사용자 주변 500m 이내의 채팅방을 지도에 표시함
             chatApi.displayChatlist(lat, lng);
+        },
 
-            kakaoCoords.searchAddrFromCoords(map.getCenter(), kakaoCoords.displayCenterInfo);
-        });
-    } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+    getUserLocation :
+        function(lat, lng){
+            // HTML5의 geolocation으로 사용할 수 있는지 확인
+            if (navigator.geolocation) {
+                // GeoLocation을 이용해서 접속 위치를 얻어옴
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    lat = position.coords.latitude;
+                    lng = position.coords.longitude;
 
-        var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
-            message = 'geolocation을 사용할수 없어요..'
+                    alert('kakao_map.js : ' + lat + " " + lng);
 
-        kakaoMap.displayMarker(locPosition, message);
-    }
+                    // 세션에 위치 정보 등록
+                    locationApi.setLocationSession(lat, lng);
+                    this.lat = lat;
+                    this.lng = lng;
+                    // 카카오 맵에 사용자 위치 + 주변 채팅방 표시
+                    kakaoLocation.displayKakaoMap(this.lat, this.lng);
+                });
+            } else return null;
+        },
 
-var kakaoLocation = {
+    // 유저 위치 정보를 세션에 등록하는 함수
     setUserLocation :
         function (lat, lng){
             const userLocation = {
@@ -81,18 +86,19 @@ var kakaoLocation = {
 }
 
 var kakaoMap = {
-
+    
+    // chatApi.displayChatlist() 함수에서 호출하여 사용
     // 지도에 채팅 아이콘을 표시하는 함수
     displayChatIcon :
-        function (/* ChatDto 타입*/ chat){
+        function (/* ChatDto 타입*/ chatData){
 
             var customOverlay = new kakao.maps.CustomOverlay({
-                position: new kakao.maps.LatLng(chat.lat, chat.lng),
+                position: new kakao.maps.LatLng(chatData.lat, chatData.lng),
                 content:
                         '<div class="speech-bubble chat_room_marker">' +
-                        '   <input type="text" id="chat_title" value = "' + chat.title + '" hidden>' +
-                        '   <input type="text" id="chat_roomId" value = ' + chat.roomId + ' hidden>' +
-                        '   <div class="tool-tip" data-tooltip-title="' + chat.title + '" data-tooltip-position="top">' +
+                        '   <input type="text" id="chat_title" value = "' + chatData.title + '" hidden>' +
+                        '   <input type="text" id="chat_roomId" value = ' + chatData.roomId + ' hidden>' +
+                        '   <div class="tool-tip" data-tooltip-title="' + chatData.title + '" data-tooltip-position="top">' +
                         '       <i class="bx bxs-chat chat_marker style = "z-index: 10000"></i>' +
                         '   </div>' +
                         '</div>',
@@ -140,14 +146,14 @@ var kakaoMap = {
         function(lat, lng){
         // 지도에 표시할 원을 생성합니다
         var circle = new kakao.maps.Circle({
-            center: new kakao.maps.LatLng(lat, lng),  // 원의 중심좌표 입니다
-            radius: 400, // 미터 단위의 원의 반지름입니다
+            center: new kakao.maps.LatLng(lat, lng),  // 원의 중심좌표
+            radius: 500, // 미터 단위의 원의 반지름
             strokeWeight: 2, // 선의 두께입니다
-            strokeColor: '#75B8FA', // 선의 색깔입니다
-            strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid', // 선의 스타일 입니다
-            fillColor: '#CFE7FF', // 채우기 색깔입니다
-            fillOpacity: 0.2  // 채우기 불투명도 입니다
+            strokeColor: '#75B8FA', // 선의 색깔
+            strokeOpacity: 1, // 선의 불투명 1에서 0 사이의 값이며 0에 가까울수록 투명
+            strokeStyle: 'solid', // 선의 스타일
+            fillColor: '#CFE7FF', // 채우기 색깔
+            fillOpacity: 0.2  // 채우기 불투명도
         });
 
         // 지도에 원을 표시합니다

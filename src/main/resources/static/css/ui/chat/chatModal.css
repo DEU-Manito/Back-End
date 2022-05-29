@@ -50,7 +50,7 @@ a.btn{
     z-index: 10000;
 }
 
-.modal{
+.chat_modal{
     width:600px;
     height:200px;
     display:block;
@@ -69,7 +69,7 @@ a.btn{
     transition: all 0.5s ease-in-out;
 }
 
-.modal-wrapper.open .modal{
+.modal-wrapper.open .chat_modal{
     margin-top:-200px;
     opacity:1;
 }

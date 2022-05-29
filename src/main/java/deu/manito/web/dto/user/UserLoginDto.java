@@ -11,9 +11,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 public class UserLoginDto {
-    private String nickname;
     private String email;
+    private String nickname;
     private String profile_image;
     private String clientKey;
-    private String gender;
 }

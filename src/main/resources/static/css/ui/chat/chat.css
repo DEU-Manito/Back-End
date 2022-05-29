@@ -516,12 +516,12 @@ button, a {
     display: flex;
 }
 
-.help_btn, .chat_btn{
+.help_btn, .chat_btn, .location_btn{
     width: 50px;
     height: 50px;
     border-radius: 50%;
     /*background: #eafdff;*/
-    background: #363D4E;
+    background: rgb(109 109 109 / 46%);
     color: white;
     font-size: 25px;
 
@@ -534,7 +534,7 @@ button, a {
 }
 
 
-.help_btn:before, .chat_btn:before{
+.help_btn:before, .chat_btn:before, .location_btn:before{
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -542,7 +542,7 @@ button, a {
     transform: rotate(45deg);
 }
 
-.help_btn:after, .chat_btn:after{
+.help_btn:after, .chat_btn:after, .location_btn:after{
     -webkit-transform: translateY(-2px) rotate(-45deg);
     -moz-transform: translateY(-2px) rotate(-45deg);
     -ms-transform: translateY(-2px) rotate(-45deg);
@@ -566,8 +566,14 @@ button, a {
     bottom: 20px;
 }
 
+.location_btn{
+    display: flex;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
 
-.help_btn:hover, .chat_btn:hover {
+.help_btn:hover, .chat_btn:hover,.location_btn:hover {
     background: linear-gradient(120deg, #8fd3f4 0%, #df77ff 100%);
     color: white;
     cursor: pointer;
@@ -597,6 +603,11 @@ button, a {
 }
 
 .chat_btn i{
+    margin: 0 auto;
+    line-height: 47px;
+}
+
+.location_btn i{
     margin: 0 auto;
     line-height: 47px;
 }

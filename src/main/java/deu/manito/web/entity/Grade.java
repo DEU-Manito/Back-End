@@ -17,24 +17,7 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String nickname;
-
-    @Column
-    private Long veryGood;
-
-    @Column
-    private Long good;
-
-    @Column
-    private Long soso;
-
-    @Column
-    private Long bad;
-
-    @Column
-    private Long veryBad;
-
-    @Column
-    private Double average;
+    @Column private String nickname;
+    @Column private int    score;
+    @Column private int    helpCnt;
 }

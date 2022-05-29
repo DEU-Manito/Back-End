@@ -4,6 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+* @package : deu.manito.web.controller
+* @name : ArticleController.java
+* @date : 2022-04-02 오후 4:16
+* @author : Dong
+**/
 @Slf4j
 @Controller
 public class ArticleController {

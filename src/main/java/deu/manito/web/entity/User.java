@@ -18,19 +18,16 @@ import java.util.ArrayList;
 public class User {
 
     @Id
-    private String nickname;
+    private String email;
 
     @Column // Email은 UNIQUE
-    private String email;
+    private String nickname;
 
     @Column
     private String profile_image;
 
     @Column
     private String clientKey;
-
-    @Column
-    private String gender;
 
     @Column
     private Long reportCnt;
@@ -40,11 +37,10 @@ public class User {
 
     public static User toEntity(UserLoginDto userLoginDto){
         return User.builder()
-                .nickname(userLoginDto.getNickname())
                 .email(userLoginDto.getEmail())
+                .nickname(userLoginDto.getNickname())
                 .profile_image(userLoginDto.getProfile_image())
                 .clientKey(userLoginDto.getClientKey())
-                .gender(userLoginDto.getGender())
                 .reportCnt(0L)
                 .point(0L)
                 .build();

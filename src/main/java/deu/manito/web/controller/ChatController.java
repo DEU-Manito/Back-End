@@ -1,13 +1,15 @@
 package deu.manito.web.controller;
 
 
-import deu.manito.web.dto.chat.ChatDto;
 import deu.manito.web.service.ChatService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
+/**
+* @package : deu.manito.web.controller
+* @name : ChatController.java
+* @date : 2022-04-02 오후 4:15
+* @author : Dong
+**/
 
 @Controller
 public class ChatController {
