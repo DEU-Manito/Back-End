@@ -37,6 +37,7 @@
             lng = <%= userLocation.getLng()%>;
 
             kakaoLocation.displayKakaoMap(lat, lng);
+            chatApi.displayChatlist(lat, lng);
         <% } %>
     }
 </script>

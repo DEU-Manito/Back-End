@@ -33,13 +33,10 @@ var kakaoLocation = {
 
             // 원 표시
             kakaoMap.displayCircle(lat, lng);
-
-            // 사용자 주변 500m 이내의 채팅방을 지도에 표시함
-            chatApi.displayChatlist(lat, lng);
         },
 
     getUserLocation :
-        function(lat, lng){
+        function(){
             // HTML5의 geolocation으로 사용할 수 있는지 확인
             if (navigator.geolocation) {
                 // GeoLocation을 이용해서 접속 위치를 얻어옴
@@ -49,8 +46,6 @@ var kakaoLocation = {
 
                     alert('kakao_map.js : ' + lat + " " + lng);
 
-                    // 세션에 위치 정보 등록
-                    locationApi.setLocationSession(lat, lng);
                     this.lat = lat;
                     this.lng = lng;
                     // 카카오 맵에 사용자 위치 + 주변 채팅방 표시

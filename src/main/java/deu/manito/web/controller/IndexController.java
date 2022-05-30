@@ -21,7 +21,6 @@ public class IndexController {
     @GetMapping("/")
     public String index() { return "index"; }
 
-
     @GetMapping("/chat")
     public String chat(Model model){ return "chat/chat"; }
 

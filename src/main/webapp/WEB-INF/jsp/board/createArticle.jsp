@@ -19,7 +19,18 @@
 </style>
 </head>
 
-<body>
+<script>
+    function displayKakaoMap(){
+        <% userLocation = (UserLocationDto) session.getAttribute("userLocation"); %>
+        <% if(userLocation != null) { %>
+            lat = <%= userLocation.getLat() %>;
+            lng = <%= userLocation.getLng() %>;
+
+            kakaoLocation.displayKakaoMap(lat, lng);
+        <% } %>
+    }
+</script>
+<body onload="displayKakaoMap()">
 <!-- Navbar -->
 <%@ include file="../layout/navbar.jsp"%>
 <!-- Navbar End -->
