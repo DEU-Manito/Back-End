@@ -4,6 +4,7 @@ import deu.manito.web.dto.user.UserLocationAuthDto;
 import deu.manito.web.entity.UserLocation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -16,5 +17,5 @@ import java.util.Optional;
 **/
 public interface UserLocationRepository extends JpaRepository<UserLocation, Long> {
     @Query(value = "SELECT * FROM user_location WHERE nickname = :nickname", nativeQuery = true)
-    Optional<UserLocation> findByNickname(String nickname);
+    Optional<UserLocation> findByNickname(@Param("nickname") String nickname);
 }
