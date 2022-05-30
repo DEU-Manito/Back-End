@@ -10,6 +10,7 @@ import lombok.*;
 @ToString
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserLoginDto {
     private String email;
     private String nickname;

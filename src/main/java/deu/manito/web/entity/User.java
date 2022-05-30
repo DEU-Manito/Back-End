@@ -1,7 +1,9 @@
 package deu.manito.web.entity;
 
 
+import deu.manito.web.dto.user.UserDto;
 import deu.manito.web.dto.user.UserLoginDto;
+import deu.manito.web.dto.user.UserRenameDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -45,4 +47,19 @@ public class User {
                 .point(0L)
                 .build();
     }
+
+
+
+    public void patch(UserRenameDto userRenameDto){
+        if(userRenameDto.getAfterNickname() != null)
+            this.nickname = userRenameDto.getAfterNickname();
+
+    }
+
+    public void patch(UserDto userDto){
+        if(userDto.getPoint() != null)
+            this.point = userDto.getPoint();
+
+    }
+
 }

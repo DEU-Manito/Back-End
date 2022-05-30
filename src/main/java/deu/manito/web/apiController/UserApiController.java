@@ -5,6 +5,7 @@ import deu.manito.web.dto.user.UserLocationAuthDto;
 import deu.manito.web.dto.user.UserDto;
 import deu.manito.web.dto.user.UserLocationDto;
 import deu.manito.web.dto.user.UserLoginDto;
+import deu.manito.web.dto.user.UserRenameDto;
 import deu.manito.web.entity.UserLocation;
 import deu.manito.web.service.UserLocationService;
 import deu.manito.web.service.UserService;
@@ -99,4 +100,50 @@ public class UserApiController {
                 ? ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
                 : ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    @PatchMapping("/api/user/rename")
+    public ResponseEntity<UserDto> renameProfile(@RequestBody UserRenameDto userRenameDto){
+
+
+        UserDto userDto = userService.renameProfile(userRenameDto);
+
+        // 이름이 중복되면
+        if(Objects.isNull(userDto))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        //정상 등록
+        // 세션 등록?????
+//        HttpSession session = request.getSession();
+//        session.setAttribute("user", userDto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
+    }
+
+    @PatchMapping("/api/user/deposit") // 포인트 입금
+    public ResponseEntity<UserDto> depositPoint(@RequestBody UserDto userDto, HttpServletRequest request){
+
+        userDto = userService.depositPoint(userDto);
+
+        if(Objects.isNull(userDto))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
+    }
+
+    @PatchMapping("/api/user/withdraw") // 포인트 출금
+    public ResponseEntity<UserDto> withdrawPoint(@RequestBody UserDto userDto, HttpServletRequest request){
+
+        userDto = userService.withdrawPoint(userDto);
+
+        if(Objects.isNull(userDto))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
+    }
+
+
+
+
 }
