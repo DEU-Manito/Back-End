@@ -2,16 +2,26 @@ package deu.manito.web.service;
 
 
 import deu.manito.web.dto.user.UserDto;
+import deu.manito.web.dto.user.UserLocationAuthDto;
 import deu.manito.web.dto.user.UserLoginDto;
 import deu.manito.web.dto.user.UserRenameDto;
 import deu.manito.web.entity.User;
+import deu.manito.web.entity.UserLocation;
 import deu.manito.web.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.Objects;
 import java.util.UUID;
+
+/**
+* @package : deu.manito.web.service
+* @name : UserService.java
+* @date : 2022-05-22 오후 1:05
+* @author : Dong
+**/
 
 @Slf4j
 @Service
@@ -22,10 +32,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public UserDto login(UserLoginDto userLoginDto){
         log.info(userLoginDto.toString());
         // 유저 정보 조회
-        User user = userRepository.findById(userLoginDto.getNickname()).orElse(null);
+        User user = userRepository.findById(userLoginDto.getEmail()).orElse(null);
 
         // 신규 유저면 DB에 등록
         if(Objects.isNull(user)) {
@@ -39,6 +50,7 @@ public class UserService {
         return UserDto.createUserDto(user);
     }
 
+<<<<<<< HEAD
 
     // 프로필(내 정보) 가져오기
     public UserDto getProfile(UserDto userDto) {
@@ -108,4 +120,6 @@ public class UserService {
 
 
 
+=======
+>>>>>>> 50b2e7e6ee3a07ebdb15e73fba42d86b9941a4bf
 }

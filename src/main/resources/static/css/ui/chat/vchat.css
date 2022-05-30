@@ -510,8 +510,17 @@ div.moblie .chat{ width: 100%; height: 435px; }
 	display: none;
 }
 .send li{ vertical-align: middle; }
-.btn_send{ background: #2bc48a; padding:13px; margin-left: 10px; }
-.btn_send a{ color: #fff; font-size: 12px;}
+.btn_send{
+	background: #d7efff;
+	border-radius: 1rem;
+	padding:13px;
+	margin-left: 10px;
+}
+.btn_send a{
+	color: #000;
+	font-size: 12px;
+	text-decoration: none;
+}
 .mobile .btn_send{ float: right; padding: 12px; line-height: 14px; margin: 0;}
 /* 채팅 숨기기 및 보이기 버튼 스타일 */
 .btn_hide, .btn_show{

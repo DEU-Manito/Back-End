@@ -19,20 +19,11 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String title;
-
-    @Column
-    private String roomId;
-
-    @Column //위도
-    private Double lat;
-    
-    @Column //경도
-    private Double lng;
-
-    @Column
-    private Date createTime;
+    @Column private String  title;
+    @Column private String  roomId;
+    @Column private Double  lat; //위도
+    @Column private Double  lng; //경도
+    @Column private Date    createTime;
 
     public static Chat toEntity(ChatDto dto){
         return Chat.builder()

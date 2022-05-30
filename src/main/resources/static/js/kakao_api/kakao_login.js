@@ -3,6 +3,7 @@
 function kakao_login() {
     Kakao.Auth.login({
         // scope: 'account_email,gender',
+        // throughTalk: false,
 
         success: function (response) {
             console.log(response)
@@ -18,11 +19,11 @@ function kakao_login() {
                         nickname: account.email.split('@')[0],
                         email: account.has_email == true ? account.email : "",
                         profile_image: profile.thumbnail_image_url,
-                        gender: account.gender == null ? null : account.gender,
+                        //gender: account.gender == null ? null : account.gender,
                     }
 
-                    alert(kakao_user.nickname + " " + kakao_user.email + " " + kakao_user.profile_image + " " + kakao_user.gender + " " + kakao_user.clientKey);
-                    console.log(kakao_user);
+                    alert(kakao_user.nickname + " " + kakao_user.email + " " + kakao_user.profile_image + " " + kakao_user.clientKey);
+
                     login(kakao_user);
                 },
                 fail: function (error) {
@@ -51,9 +52,6 @@ function login(kakao_user){
         if(response.ok){
             alert("로그인 성공");
             window.location.reload();
-        }
-        else{
-
         }
     });
 }

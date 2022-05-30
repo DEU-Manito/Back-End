@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+* @package : deu.manito.web.controller
+* @name : UserController.java
+* @date : 2022-04-02 오후 4:03
+* @author : Dong
+**/
 @Controller
 @Slf4j
 public class UserController {

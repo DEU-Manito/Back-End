@@ -1,11 +1,10 @@
 <%@ page import="deu.manito.web.dto.user.UserDto" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
 <%@ include file="../layout/header.jsp" %>
 
 <!-- CSS -->
-<link href="resources/css/ui/board/article_card.css" rel="stylesheet" type="text/css">
-<link href="resources/css/ui/board/board.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/ui/board/article_card.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/ui/board/board.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -105,7 +104,7 @@
                         <rect x="3" y="14" width="7" height="7"/>
                     </svg>
                 </button>
-                <button class="write_btn" onclick="window.location = '/createArticle'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button class="write_btn" onclick="window.location = '/articles/create'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             </div>
         </div>
 
@@ -368,7 +367,7 @@
     var articles = document.querySelectorAll('.products-row');
     // 나중엔 aritcle의 번호로 요청을 보내도록 수정해야함
     articles.forEach(article => {
-        article.addEventListener("click", (event) => window.location = "/article");
+        article.addEventListener("click", (event) => window.location = "/articles");
     })
 </script>
 

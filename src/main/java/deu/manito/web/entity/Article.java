@@ -17,24 +17,16 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String nickname;
-
-    @Column
-    private String content;
-
-    @Column(columnDefinition = "TEXT")
-    private String image;
-
-    @Column
-    private Date createTime;
-
-    @Column //위도
-    private Double lat;
-
-    @Column //경도
-    private Double lng;
-
-    @Column
-    private String status;
+    @Column private String nickname;
+    @Column private String title;
+    @Column private String content;
+    @Column private Date   createTime;
+    @Column private Double lat; //위도
+    @Column private Double lng; //경도
+    @Column private String status;
+    @Column private String roomId;
+    @Column private String roomTitle;
+    @Column private int    point;
+    @Column(columnDefinition = "TEXT") private String image1;
+    @Column(columnDefinition = "TEXT") private String image2;
 }

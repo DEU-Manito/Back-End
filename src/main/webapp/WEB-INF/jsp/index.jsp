@@ -4,7 +4,8 @@
 <%@ include file="layout/header.jsp"%>
 
 <!-- 기타 js -->
-<script type="text/javascript" src="resources/js/base_js/classie.js"></script>
+<script type="text/javascript" src="/resources/js/base_js/classie.js"></script>
+<script type="text/javascript" src="/resources/js/location/location.js"></script>
 
 </head>
 
@@ -657,7 +658,7 @@
 
 
 <!-- rotating text js -->
-<script type="text/javascript" src='resources/js/design/rotating_text.js'></script>
+<script type="text/javascript" src='/resources/js/design/rotating_text.js'></script>
 
 <!-- Portfolio 반응형 js -->
 <script type="text/javascript">
@@ -740,4 +741,4 @@
 
 <!-- Footer -->
 <%@ include file="layout/footer.jsp"%>
-<!-- Footer End -->
+<!-- Footer End -->k
