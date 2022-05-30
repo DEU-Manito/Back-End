@@ -1,10 +1,7 @@
 package deu.manito.web.service;
 
 
-import deu.manito.web.dto.user.UserDto;
-import deu.manito.web.dto.user.UserLocationAuthDto;
-import deu.manito.web.dto.user.UserLoginDto;
-import deu.manito.web.dto.user.UserRenameDto;
+import deu.manito.web.dto.user.*;
 import deu.manito.web.entity.User;
 import deu.manito.web.entity.UserLocation;
 import deu.manito.web.repository.UserRepository;
@@ -69,7 +66,7 @@ public class UserService {
         if(check==false) {  // 중복된 닉네임이 없다면
 
             // 수정할 유저 정보 가져오기
-            User target = userRepository.findById(userRenameDto.getBeforeNickname()).orElse(null);
+            User target = userRepository.findByNickname(userRenameDto.getBeforeNickname()).orElse(null);
 
             target.patch(userRenameDto);
 
@@ -82,39 +79,35 @@ public class UserService {
 
 
     @Transactional  // 포인트 충전
-    public UserDto depositPoint(UserDto userDto) {
+    public UserDto depositPoint(UserPointDto userPointDto) {
 
         //충전할 유저 정보 가져오기
-        User target = userRepository.findById(userDto.getNickname()).orElse(null);
+        User target = userRepository.findByNickname(userPointDto.getNickname()).orElse(null);
 
         if(Objects.isNull(target))
             return null;
 
-
         //충전할 금액
-        userDto.setPoint(userDto.getPoint()+target.getPoint()); // 충전 후 금액
-        target.patch(userDto);
+        userPointDto.setPoint(target.getPoint() + userPointDto.getPoint()); // 충전  금액
+        target.patch(userPointDto);
 
         return UserDto.createUserDto(target);
-
     }
 
     @Transactional  // 포인트 출금
-    public UserDto withdrawPoint(UserDto userDto) {
+    public UserDto withdrawPoint(UserPointDto userPointDto) {
+
 
         //출금할 유저 정보 가져오기
-        User target = userRepository.findById(userDto.getNickname()).orElse(null);
+        User target = userRepository.findByNickname(userPointDto.getNickname()).orElse(null);
 
         if(Objects.isNull(target))
             return null;
 
-
         //출금할 금액
-        userDto.setPoint(target.getPoint() - userDto.getPoint()); // 충전 후 금액
-        target.patch(userDto);
+        userPointDto.setPoint(target.getPoint() - userPointDto.getPoint());
+        target.patch(userPointDto);
 
         return UserDto.createUserDto(target);
     }
-
-
 }

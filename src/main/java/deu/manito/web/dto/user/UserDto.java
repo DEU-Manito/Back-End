@@ -15,8 +15,8 @@ public class UserDto {
     private String email;
     private String profile_image;
     private String clientKey;
-    private Long reportCnt;
-    private Long point;
+    private int reportCnt;
+    private int point;
     
     // User 엔티티 클래스를 UserDto 클래스로 변환
     public static UserDto createUserDto(User user){
