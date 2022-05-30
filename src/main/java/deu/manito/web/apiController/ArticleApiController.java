@@ -30,9 +30,6 @@ public class ArticleApiController {
         // 생성 날짜를 현재 시각으로 지정
         articleDto.setCreateTime(new Date(new java.util.Date().getTime()));
 
-        // 세션 아이디 받아오기
-        //articleDto.setNickname();
-
         ArticleDto result = articleService.createBoard(articleDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
