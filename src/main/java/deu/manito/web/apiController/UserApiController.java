@@ -57,6 +57,7 @@ public class UserApiController {
         if(userDto != null) {
             session.removeAttribute("user");
             session.removeAttribute("userLocation");
+
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
         }
 

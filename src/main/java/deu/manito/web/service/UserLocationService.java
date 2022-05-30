@@ -2,6 +2,7 @@ package deu.manito.web.service;
 
 
 import deu.manito.web.dto.user.UserLocationAuthDto;
+import deu.manito.web.dto.user.UserLocationDto;
 import deu.manito.web.entity.UserLocation;
 import deu.manito.web.repository.UserLocationRepository;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class UserLocationService {
 
         UserLocation result = userLocationRepository.save(userLocation);
 
-        if(result == null) throw new IllegalArgumentException("유저 위치 인증 오류");
+        if(Objects.isNull(result)) throw new IllegalArgumentException("유저 위치 인증 오류");
 
         return UserLocationAuthDto.createUserLocationAuthDto(result);
     }
@@ -37,7 +38,7 @@ public class UserLocationService {
     public UserLocationAuthDto authPcLocation(String nickname){
         UserLocation userLocation = userLocationRepository.findByNickname(nickname).orElse(null);
             
-        // PC에서 값이 들어올 때까지 요청 할 것이므로 null이어도 그냥 리턴
+        // PC에서 값이 들어올 때까지 요청 할 것이므로 예외를 던지지 않고 null 리턴
         return !Objects.isNull(userLocation)
                 ? UserLocationAuthDto.createUserLocationAuthDto(userLocation)
                 : null;

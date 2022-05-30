@@ -15,8 +15,6 @@ import java.util.Optional;
 * @author : Dong
 **/
 public interface UserLocationRepository extends JpaRepository<UserLocation, Long> {
-
     @Query(value = "SELECT * FROM user_location WHERE nickname = :nickname", nativeQuery = true)
     Optional<UserLocation> findByNickname(String nickname);
-
 }
