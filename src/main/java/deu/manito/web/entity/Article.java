@@ -65,6 +65,7 @@ public class Article {
 >>>>>>> 495a103 ( MODIFY : 게시글 point 칼럼 추가작업)
     public static Article toEntity(ArticleDto articleDto){
         return Article.builder()
+                .id(articleDto.getId())
                 .title(articleDto.getTitle())
                 .nickname(articleDto.getNickname())
                 .content(articleDto.getContent())
@@ -86,10 +87,8 @@ public class Article {
             this.title = article.title;
         if(article.content != null)
             this.content = article.content;
-        if(article.image != null)
-            this.image = article.image;
-        if(article.createTime != null)
-            this.createTime = article.createTime;
+//        if(article.createTime != null)
+//            this.createTime = article.createTime;
         if(article.lat != null)
             this.lat = article.lat;
         if(article.lng != null)

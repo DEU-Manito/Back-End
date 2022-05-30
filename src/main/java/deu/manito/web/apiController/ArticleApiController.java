@@ -38,6 +38,19 @@ public class ArticleApiController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
+<<<<<<< HEAD
+=======
+    @PatchMapping("/api/article/{id}")
+    public ResponseEntity<Article> update(@PathVariable Long id, @RequestBody ArticleDto articleDto){
+
+        Article update = articleService.update(id, articleDto);
+        log.info(articleDto.toString());
+
+        return (update != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(update) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+>>>>>>> 698f9ca ( MODIFY : 게시글 Update() 수정)
 
 }
 

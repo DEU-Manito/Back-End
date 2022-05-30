@@ -15,6 +15,7 @@ import java.sql.Date;
 @NoArgsConstructor
 public class ArticleDto {
 
+    private Long id;
     private String title;
     private String nickname;
     private String content;
