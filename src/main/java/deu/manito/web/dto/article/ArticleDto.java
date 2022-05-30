@@ -23,6 +23,7 @@ public class ArticleDto {
     private Double lat;
     private Double lng;
     private String status;
+    private int point;
 
 
     // article 엔티티 클래스를 ArticleDto 클래스로 변환
@@ -36,6 +37,7 @@ public class ArticleDto {
                 .lat(article.getLat())
                 .lng(article.getLng())
                 .status(article.getStatus())
+                .point(article.getPoint())
                 .build();
     }
 
