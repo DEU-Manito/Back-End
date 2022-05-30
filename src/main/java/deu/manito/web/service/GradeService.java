@@ -17,11 +17,10 @@ public class GradeService {
     public GradeService(GradeRepository gradeRepository){ this.gradeRepository = gradeRepository; }
 
     @Transactional
-    public GradeDto rate(GradeDto gradeDto){
+    public GradeDto rateGrade(GradeDto gradeDto){
 
        Grade target = gradeRepository.findByNickname(gradeDto.getNickname()).orElse(null);
 
-       //
         if(Objects.isNull(target))
             return null;
 

@@ -98,10 +98,10 @@ public class UserApiController {
     }
 
     @PatchMapping("/api/user/rename")
-    public ResponseEntity<UserDto> renameProfile(@RequestBody UserRenameDto userRenameDto){
+    public ResponseEntity<UserDto> renameProfile(@RequestBody UserDto dto,  HttpServletRequest request){
 
 
-        UserDto userDto = userService.renameProfile(userRenameDto);
+        UserDto userDto = userService.renameProfile(dto);
 
         // 이름이 중복되면
         if(Objects.isNull(userDto))
@@ -109,8 +109,8 @@ public class UserApiController {
 
         //정상 등록
         // 세션 등록?????
-//        HttpSession session = request.getSession();
-//        session.setAttribute("user", userDto);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", userDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }

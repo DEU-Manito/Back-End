@@ -46,7 +46,6 @@ public class UserService {
         return UserDto.createUserDto(user);
     }
 
-
     // 프로필(내 정보) 가져오기
     public UserDto getProfile(UserDto userDto) {
         User user = userRepository.findById(userDto.getNickname()).orElse(null);
@@ -55,20 +54,18 @@ public class UserService {
     }
 
 
-
-
     @Transactional  //이름 변경
-    public UserDto renameProfile(UserRenameDto userRenameDto) {
+    public UserDto renameProfile(UserDto userDto) {
 
         // 변경할 닉네임 중복 체크
-        Boolean check = userRepository.existsById(userRenameDto.getAfterNickname());
+        Boolean check = userRepository.existsById(userDto.getNickname());
 
         if(check==false) {  // 중복된 닉네임이 없다면
 
             // 수정할 유저 정보 가져오기
-            User target = userRepository.findByNickname(userRenameDto.getBeforeNickname()).orElse(null);
+            User target = userRepository.findByNickname(userDto.getEmail()).orElse(null);
 
-            target.patch(userRenameDto);
+            target.patch(userDto);
 
             return UserDto.createUserDto(target);
         }

@@ -14,15 +14,12 @@ public class GradeDto {
     private long   id;
     private String nickname;
     private int    score;
-    private int    helpCnt;
-
 
     public static GradeDto createGradeDto(Grade grade) {
         return GradeDto.builder()
                 .id(grade.getId())
                 .nickname(grade.getNickname())
                 .score(grade.getScore())
-                .helpCnt(grade.getHelpCnt())
                 .build();
     }
 }
