@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -50,7 +49,6 @@ public class UserService {
         return UserDto.createUserDto(user);
     }
 
-<<<<<<< HEAD
 
     // 프로필(내 정보) 가져오기
     public UserDto getProfile(UserDto userDto) {
@@ -119,7 +117,4 @@ public class UserService {
     }
 
 
-
-=======
->>>>>>> 50b2e7e6ee3a07ebdb15e73fba42d86b9941a4bf
 }
