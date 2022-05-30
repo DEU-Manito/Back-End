@@ -1,11 +1,8 @@
 package deu.manito.web.apiController;
 
 import deu.manito.web.dto.article.ArticleDto;
-import deu.manito.web.dto.chat.ChatDto;
 import deu.manito.web.entity.Article;
-import deu.manito.web.entity.Chat;
 import deu.manito.web.service.ArticleService;
-import deu.manito.web.service.ChatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,16 +31,16 @@ public class ArticleApiController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-//    @PatchMapping("/api/articles/{id}")
-//    public ResponseEntity<Article> update(@PathVariable Long id, @RequestBody ArticleDto articleDto){
-//
-//        Article update = articleService.(id, articleDto);
-//        log.info(articleDto.toString());
-//
-//        return (update != null) ?
-//                ResponseEntupdateity.status(HttpStatus.OK).body(update) :
-//                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-//    }
+    @PatchMapping("/api/articles/{id}")
+    public ResponseEntity<Article> update(@PathVariable Long id, @RequestBody ArticleDto articleDto){
+
+        Article update = articleService.update(id, articleDto);
+        log.info(articleDto.toString());
+
+        return (update != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(update) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 
 }
 
