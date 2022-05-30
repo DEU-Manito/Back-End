@@ -3,6 +3,8 @@ package deu.manito.web.repository;
 import deu.manito.web.entity.Chat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 
 
@@ -20,5 +22,5 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
                     "AS distance " +
                     "FROM chat " +
             "HAVING distance <= 0.5", nativeQuery = true)
-    List<Chat> findAllNearByChat(Double lat, Double lng);
+    List<Chat> findAllNearByChat(@Param("lat") Double lat, @Param("lng") Double lng);
 }
