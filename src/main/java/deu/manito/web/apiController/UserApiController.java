@@ -1,11 +1,7 @@
 package deu.manito.web.apiController;
 
 
-import deu.manito.web.dto.user.UserLocationAuthDto;
-import deu.manito.web.dto.user.UserDto;
-import deu.manito.web.dto.user.UserLocationDto;
-import deu.manito.web.dto.user.UserLoginDto;
-import deu.manito.web.dto.user.UserRenameDto;
+import deu.manito.web.dto.user.*;
 import deu.manito.web.entity.UserLocation;
 import deu.manito.web.service.UserLocationService;
 import deu.manito.web.service.UserService;
@@ -105,10 +101,10 @@ public class UserApiController {
     }
 
     @PatchMapping("/api/user/rename")
-    public ResponseEntity<UserDto> renameProfile(@RequestBody UserRenameDto userRenameDto){
+    public ResponseEntity<UserDto> renameProfile(@RequestBody UserDto dto,  HttpServletRequest request){
 
 
-        UserDto userDto = userService.renameProfile(userRenameDto);
+        UserDto userDto = userService.renameProfile(dto);
 
         // 이름이 중복되면
         if(Objects.isNull(userDto))
@@ -116,16 +112,16 @@ public class UserApiController {
 
         //정상 등록
         // 세션 등록?????
-//        HttpSession session = request.getSession();
-//        session.setAttribute("user", userDto);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", userDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
     @PatchMapping("/api/user/deposit") // 포인트 입금
-    public ResponseEntity<UserDto> depositPoint(@RequestBody UserDto userDto, HttpServletRequest request){
+    public ResponseEntity<UserDto> depositPoint(@RequestBody UserPointDto userPointDto){
 
-        userDto = userService.depositPoint(userDto);
+        UserDto userDto = userService.depositPoint(userPointDto);
 
         if(Objects.isNull(userDto))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -136,17 +132,14 @@ public class UserApiController {
     }
 
     @PatchMapping("/api/user/withdraw") // 포인트 출금
-    public ResponseEntity<UserDto> withdrawPoint(@RequestBody UserDto userDto, HttpServletRequest request){
+    public ResponseEntity<UserDto> withdrawPoint(@RequestBody UserPointDto userPointDto){
 
-        userDto = userService.withdrawPoint(userDto);
+        UserDto userDto = userService.withdrawPoint(userPointDto);
 
         if(Objects.isNull(userDto))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
-
-
-
 
 }

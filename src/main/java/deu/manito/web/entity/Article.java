@@ -62,18 +62,12 @@ public class Article {
     }
 
     // 게시글 수정
-    public void patch(Article article) {
-        if (article.title != null)
-            this.title = article.title;
-        if (article.content != null)
-            this.content = article.content;
-//        if(article.createTime != null)
-//            this.createTime = article.createTime;
-        if (article.lat != null)
-            this.lat = article.lat;
-        if (article.lng != null)
-            this.lng = article.lng;
-        if (article.point != 0)
-            this.point = article.point;
+    public void patch(ArticleDto articleDto) {
+        if (articleDto.getTitle() != null)
+            this.title = articleDto.getTitle();
+        if (articleDto.getContent() != null)
+            this.content = articleDto.getContent();
+        if(articleDto.getCreateTime() != null)
+            this.createTime = articleDto.getCreateTime();
     }
 }

@@ -1,6 +1,7 @@
 package deu.manito.web.entity;
 
 
+import deu.manito.web.dto.Grade.GradeDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,4 +21,11 @@ public class Grade {
     @Column private String nickname;
     @Column private int    score;
     @Column private int    helpCnt;
+
+
+    public void patch(GradeDto gradeDto) {
+                this.score = gradeDto.getScore();
+                this.helpCnt = this.helpCnt+1;
+
+    }
 }
