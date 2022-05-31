@@ -361,7 +361,9 @@
 
 </div>
 <!-- board js -->
-<script src="resources/js/board/board.js"></script>
+<script src="/resources/js/board/board.js"></script>
+
+
 
 <script>
     var articles = document.querySelectorAll('.products-row');

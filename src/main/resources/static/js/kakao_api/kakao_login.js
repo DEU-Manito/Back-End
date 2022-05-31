@@ -73,7 +73,7 @@ function kakao_logout(){
         }).then(response => {
             if(response.ok){
                 alert("로그아웃 완료");
-                window.location.reload();
+                window.location.href = "/";
             }
             else{
                 alert("로그아웃 실패");

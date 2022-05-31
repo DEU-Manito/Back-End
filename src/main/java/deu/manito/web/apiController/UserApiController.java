@@ -59,6 +59,9 @@ public class UserApiController {
             session.removeAttribute("user");
             session.removeAttribute("userLocation");
 
+            // DB의 위치 정보도 같이 삭제
+            userLocationService.removeLocation(userDto.getNickname());
+
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
         }
 

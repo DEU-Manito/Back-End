@@ -7,6 +7,7 @@ import deu.manito.web.entity.UserLocation;
 import deu.manito.web.repository.UserLocationRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Objects;
 
 /**
@@ -42,5 +43,15 @@ public class UserLocationService {
         return !Objects.isNull(userLocation)
                 ? UserLocationAuthDto.createUserLocationAuthDto(userLocation)
                 : null;
+    }
+
+    @Transactional
+    public UserLocationAuthDto removeLocation(String nickname){
+        UserLocation result = userLocationRepository.findByNickname(nickname)
+                                                    .orElseThrow(() -> new IllegalArgumentException("유저 위치 정보 없음"));
+
+        userLocationRepository.deleteByNickname(nickname);
+
+        return UserLocationAuthDto.createUserLocationAuthDto(result);
     }
 }

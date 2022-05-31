@@ -5,7 +5,6 @@
 
 <!-- 기타 js -->
 <script type="text/javascript" src="/resources/js/base_js/classie.js"></script>
-<script type="text/javascript" src="/resources/js/location/location.js"></script>
 
 </head>
 

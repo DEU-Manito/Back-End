@@ -203,7 +203,7 @@ function write(msg, tp, pre) {
                 } else {
                     cc = $('<div>', { class: 'user' });
                     cc.append($('<div>')
-                        .append($('<ul>')
+                        .append($('<ul>', { class : 'user_img_field'})
                         .append($('<li>', { class: 'profile_img' }).append($('<img src="'+imgUrl+'" alt="user" width="100%">'))))
                         .append( $('<ul>', { class: 'user_talk' })
                         .append($('<li>', { class: 'user_name' }).html(msg.nickName))

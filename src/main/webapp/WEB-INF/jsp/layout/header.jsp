@@ -44,9 +44,7 @@
     <link href='http://fonts.googleapis.com/css?family=Dosis:400,500,700,800,600,300,200' rel='stylesheet'
           type='text/css'>
 
-<%--    <link rel="preconnect" href="https://fonts.googleapis.com">--%>
-<%--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>--%>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<%--    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">--%>
 
     <!---------------------------------->
     <!--JS (UI에 관련 Js는 Head에서 호출)-->
@@ -72,6 +70,10 @@
 
     <!-- 모바일 메뉴 탭 js -->
     <script src="/resources/js/response/header_declare_mobile.js"></script>
+
+    <!-- location js -->
+    <script src="/resources/js/location/location.js"></script>
+
 
     <script type="text/javascript">
         function resizeText() {

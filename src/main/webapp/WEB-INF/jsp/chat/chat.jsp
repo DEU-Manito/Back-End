@@ -311,9 +311,6 @@
     <!-- 카카오 맵 js -->
     <script src="/resources/js/kakao_api/kakao_map.js"></script>
 
-    <!-- location js -->
-    <script type="text/javascript" src="/resources/js/location/location.js"></script>
-
     <!-- vchat js -->
     <script src="/resources/js/chat/vchat/vchatcloud-1.2.0.min.js"></script>
     <script src="/resources/js/chat/vchat/login.js"></script>

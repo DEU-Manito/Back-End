@@ -574,6 +574,7 @@ div.kakao{
 }
 .talk_contents{ /*height: 524px;*/ height:85%; padding:15px; overflow-y: auto; }
 .talk_contents .notice{ font-size: 12px; text-align: center; color: #666; background: none; display: block; padding: 0; margin: 0 auto 25px;  }
+.user_img_field { padding-left: 0px; }
 .opponent{ margin-bottom: 25px; display: flex; justify-content: flex-start;} 
 .user{ margin-bottom: 25px; display: flex; justify-content: flex-end;}
 .opponent div{ display: inline-flex;}

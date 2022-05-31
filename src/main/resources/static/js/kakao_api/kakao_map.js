@@ -179,9 +179,10 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             // 주소의 좌표를 저장
             var latlng = mouseEvent.latLng.toString().replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '');
 
-            var lat = latlng.split(',')[0];
-            var lng = latlng.split(',')[1];
-            
+
+            document.querySelector('#article_lat').value = latlng.split(',')[0]; // lat
+            document.querySelector('#article_lng').value = latlng.split(',')[1]; // lng
+
             var content =
                 '<div class="bAddr">' +
                 '   <span class="title">법정동 주소정보</span>' +
