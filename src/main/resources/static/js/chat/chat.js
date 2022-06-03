@@ -35,12 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-var chatApi = {
-    test: function (){
-      alert('테스트');
-    },
+var vchatApi = {
     getX_AUTH_TOKEN:
-         async function () {
+        async function () {
             const url = 'https://vchatcloud.com/openapi/token';
 
             return await fetch(url, {
@@ -48,17 +45,15 @@ var chatApi = {
                 headers: {"API_KEY": API_KEY,}
             });
         },
-
-    createChatroom :
-        async function (lat, lng, title) {
-
+    
+    createChatApi :
+        async function (title){
             const url = 'https://vchatcloud.com/openapi/v1/rooms';
             const data = 'maxUser=10&roomName=' + title;
-            const response = await chatApi.getX_AUTH_TOKEN();
+            const response = await this.getX_AUTH_TOKEN();
 
-            response.json().then(response =>{
-                // alert(response.data["X-AUTH-TOKEN"]);
-                fetch(url, {
+            return response.json().then(response =>{
+                return fetch(url, {
                     method: "POST",
                     body: data,
                     headers: {
@@ -66,27 +61,53 @@ var chatApi = {
                         "API_KEY": API_KEY,
                         "X-AUTH-TOKEN": response.data["X-AUTH-TOKEN"],
                     }
-                }).then(response => {
-                    if (response.ok) return response.json();
-                    else return null;
-                }).then(json => {
-                    if (json == null) {
-                        alert('채팅방 개설에 실패했습니다.');
-                        return null;
-                    } else {
-                        const chatData = {
-                            title: title,
-                            roomId: json.data.roomId.toString(),
-                            lat: lat,
-                            lng: lng,
-                        };
+                })
+            });
+        },
 
-                        chatApi.saveChatInfo(chatData);     // DB에 채팅방 정보 저장
-                        kakaoMap.displayChatIcon(chatData); // 지도에 채팅방 표시
+    deleteChatApi :
+        async function (roomId){
+            const url = 'https://vchatcloud.com/openapi/v1/rooms/' + roomId;
+            const xAuthToken = await this.getX_AUTH_TOKEN();
 
-                        return chatData.roomId;
+            xAuthToken.json().then(token => {
+                fetch(url, {
+                    method: "DELETE",
+                    headers: {
+                        "API_KEY": API_KEY,
+                        "X-AUTH-TOKEN": token.data["X-AUTH-TOKEN"],
                     }
-                });
+                }).then(response =>{
+                    if(response.ok) console.log('chat.js : 채팅방 삭제 완료');
+                    else console.log('chat.js 채팅방 삭제 실패');
+                })
+            });
+        }
+}
+
+var chatApi = {
+    createChatroom :
+        async function (lat, lng, title) {
+            // 채팅방 생성 API 호출
+            const response = await vchatApi.createChatApi(title);
+
+            response.json().then(result =>{
+                // 채팅방 생성 성공 시
+                if(result.result_cd == 1){
+                    const chatData = {
+                        title: title,
+                        roomId: result.data.roomId.toString(),
+                        lat: lat,
+                        lng: lng,
+                    };
+
+                    chatApi.saveChatInfo(chatData);     // DB에 채팅방 정보 저장
+                    kakaoMap.displayChatIcon(chatData); // 지도에 채팅방 표시
+                }
+                else{
+                    alert('채팅방 개설에 실패했습니다.');
+                    return null;
+                }
             })
         },
 
@@ -138,5 +159,5 @@ var chatApi = {
                     }
                 }
             });
-        }
+        },
 }

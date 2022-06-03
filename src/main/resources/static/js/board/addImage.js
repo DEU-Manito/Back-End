@@ -1,16 +1,8 @@
 $(".imgAdd").click(function(){
-        // $(this).closest(".row").find('.imgAdd')
-        // .before(
-        //     '<div class="col-sm-2 img_section">' +
-        //     '   <div class="imagePreview"></div>' +
-        //     '       <input type="file" name = "img_input" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;">' +
-        //     '</div>'
-        // );
-
     $(this).closest(".row").find('.imgAdd')
         .before(
             '<div class="col-sm-2 img_section">' +
-            '   <div class="imagePreview"></div>' +
+            '   <img class="imagePreview"></img>' +
             '       <input type="file" name = "img_input" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;">' +
             '</div>'
         );
@@ -42,7 +34,7 @@ $(function() {
 
             reader.onloadend = function(){ // set image data as background of div
                 // this.result를 input 속성으로 넣어놔야할듯
-                uploadFile.closest(".img_section").find('.imagePreview').css("background-image", "url("+this.result+")");
+                uploadFile.closest(".img_section").find('.imagePreview').attr("src", this.result);
             }
         }
     });

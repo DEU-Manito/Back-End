@@ -33,6 +33,12 @@ var kakaoLocation = {
 
             // 원 표시
             kakaoMap.displayCircle(lat, lng);
+
+            let input_lat = document.querySelector('#article_lat'); // lat
+            let input_lng = document.querySelector('#article_lng'); // lng
+
+            if(input_lat != null) input_lat.value = lat;
+            if(input_lng != null) input_lng.value = lng;
         },
 
     getUserLocation :
@@ -85,7 +91,7 @@ var kakaoMap = {
     // chatApi.displayChatlist() 함수에서 호출하여 사용
     // 지도에 채팅 아이콘을 표시하는 함수
     displayChatIcon :
-        function (/* ChatDto 타입*/ chatData){
+        function (chatData /* ChatDto 타입*/ ){
 
             var customOverlay = new kakao.maps.CustomOverlay({
                 position: new kakao.maps.LatLng(chatData.lat, chatData.lng),

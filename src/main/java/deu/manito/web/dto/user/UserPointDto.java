@@ -1,6 +1,7 @@
 package deu.manito.web.dto.user;
 
 import deu.manito.web.dto.article.ArticleDto;
+import deu.manito.web.entity.User;
 import lombok.*;
 
 @Getter
@@ -17,6 +18,13 @@ public class UserPointDto {
                 .nickname(articleDto.getNickname())
                 .point(articleDto.getPoint())
                 .build();
+    }
+
+    public static UserPointDto createUserPointDto(String nickname, int point){
+        return UserPointDto.builder()
+                            .nickname(nickname)
+                            .point(point)
+                            .build();
     }
 }
 

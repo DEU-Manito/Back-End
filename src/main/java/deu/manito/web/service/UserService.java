@@ -93,15 +93,13 @@ public class UserService {
 
     @Transactional  // 포인트 출금
     public UserDto withdrawPoint(UserPointDto userPointDto) {
-
-
         //출금할 유저 정보 가져오기
-        User target = userRepository.findByNickname(userPointDto.getNickname()).orElse(null);
-
-        if(Objects.isNull(target))
-            return null;
+        User target = userRepository.findByNickname(userPointDto.getNickname())
+                                    .orElseThrow(()-> new IllegalArgumentException("유저 포인트 출금 오류"));
 
         //출금할 금액
+        if(target.getPoint() < userPointDto.getPoint()) throw new IllegalArgumentException("유저 포인트 출금 오류");
+
         userPointDto.setPoint(target.getPoint() - userPointDto.getPoint());
         target.patch(userPointDto);
 

@@ -43,7 +43,7 @@
 
     function authentication(href){
         // 유저 로그인 정보를 세션에서 가져옴
-        <%  user = (UserDto)session.getAttribute("user"); %>
+        <% user = (UserDto)session.getAttribute("user"); %>
         <% userLocation = (UserLocationDto) session.getAttribute("userLocation"); %>
 
         // 로그인이 된 경우에만 locationAuth(위치 인증) 진행
@@ -95,7 +95,7 @@
 
                 <ul class="toggle">
                     <li><a href="javascript:void(0)" onclick="authentication('/chat');">Chat</a></li>
-                    <li><a href="javascript:void(0)" onclick="authentication('/board');">Board</a></li>
+                    <li><a href="javascript:void(0)" onclick="authentication('/articles');">Board</a></li>
                     <li><a href="/">Home</a></li>
                     <% if(user == null){ %>
                     <li><a href="javascript:void(0)" onclick="kakao_login();">Login</a></li>
@@ -113,7 +113,7 @@
                 <ul class="">
                     <li><a href="/">Home</a></li>
                     <li><a href="javascript:void(0)"  onclick="authentication('/chat');">Chat</a></li>
-                    <li><a href="javascript:void(0)"  onclick="authentication('/board');">Board</a></li>
+                    <li><a href="javascript:void(0)"  onclick="authentication('/articles');">Board</a></li>
 
                     <% if(user == null){ %>
                             <li><a href="javascript:void(0)" onclick="kakao_login();">Login</a></li>

@@ -1,4 +1,6 @@
 <%@ page import="deu.manito.web.dto.user.UserDto" %>
+<%@ page import="deu.manito.web.dto.article.ArticleDto" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../layout/header.jsp" %>
 
@@ -7,6 +9,9 @@
 <link href="/resources/css/ui/board/board.css" rel="stylesheet" type="text/css">
 
 </head>
+
+<!-- 게시글 리스트 받아오기 -->
+<% List<ArticleDto> articles =  (List<ArticleDto>) request.getAttribute("articles"); %>
 
 <body>
 <!-- Navbar -->
@@ -161,198 +166,45 @@
 
             <!-- 테이블 헤더 끝 -->
             <!-- 게시글 -->
-            <div class="products-row">
-                <button class="cell-more-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-more-vertical">
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                    </svg>
-                </button>
-                <div class="product-cell author">
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-                         alt="product">
-                    <!-- <span></span> -->
+            <% if(articles != null) { %>
+
+            <% for (ArticleDto article : articles) { %>
+                <div class="products-row">
+                    <button class="cell-more-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-more-vertical">
+                            <circle cx="12" cy="12" r="1"/>
+                            <circle cx="12" cy="5" r="1"/>
+                            <circle cx="12" cy="19" r="1"/>
+                        </svg>
+                    </button>
+                    <div class="product-cell author">
+                        <img src="<%=article.getImage1()%>" alt="product">
+                        <!-- <span></span> -->
+                    </div>
+
+                    <div class="product-cell title" style="display: block;">
+                        <span class="cell-label">title:</span>
+                        <input type="text" id="article_id" value="<%=article.getId()%>" hidden>
+                        <h3 id = "article_title">  <%= article.getTitle()    %></h3>
+                        <p  id = "article_author"> <%= article.getNickname() %></p>
+                    </div>
+
+                    <!-- <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div> -->
+                    <div class="product-cell viewcount"><span class="cell-label">Viewcount:</span>36</div>
+                    <div class="product-cell price">
+                        <span class="cell-label">Point:</span>
+                        <span id = "article_point">$ <%= article.getPoint() %></span>
+                    </div>
+
+                    <div class="product-cell status-cell">
+                        <span class="cell-label">Status:</span>
+                        <span class="status <%=article.getStatus()%>" id = "article_status"> <%= article.getStatus()%></span>
+                    </div>
                 </div>
-                <div class="product-cell title" style="display: block;">
-                    <span class="cell-label">title:</span>
-
-                    <h3>도움 요청 게시글</h3>
-                    <p>Dong</p>
-                </div>
-
-                <!-- <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div> -->
-                <div class="product-cell viewcount"><span class="cell-label">Viewcount:</span>36</div>
-                <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-
-                <div class="product-cell status-cell">
-                    <span class="cell-label">Status:</span>
-                    <span class="status active">Active</span>
-                </div>
-            </div>
-
-            <div class="products-row">
-                <button class="cell-more-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-more-vertical">
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                    </svg>
-                </button>
-                <div class="product-cell author">
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-                         alt="product">
-                    <!-- <span></span> -->
-                </div>
-                <div class="product-cell title" style="display: block;">
-                    <span class="cell-label">title:</span>
-
-                    <h3>도움 요청 게시글</h3>
-                    <p>Dong</p>
-                </div>
-
-                <!-- <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div> -->
-                <div class="product-cell viewcount"><span class="cell-label">Viewcount:</span>36</div>
-                <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-
-                <div class="product-cell status-cell">
-                    <span class="cell-label">Status:</span>
-                    <span class="status active">Active</span>
-                </div>
-            </div>
-
-            <div class="products-row">
-                <button class="cell-more-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-more-vertical">
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                    </svg>
-                </button>
-                <div class="product-cell author">
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-                         alt="product">
-                    <!-- <span></span> -->
-                </div>
-                <div class="product-cell title" style="display: block;">
-                    <span class="cell-label">title:</span>
-
-                    <h3>도움 요청 게시글</h3>
-                    <p>Dong</p>
-                </div>
-
-                <!-- <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div> -->
-                <div class="product-cell viewcount"><span class="cell-label">Viewcount:</span>36</div>
-                <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-
-                <div class="product-cell status-cell">
-                    <span class="cell-label">Status:</span>
-                    <span class="status active">Active</span>
-                </div>
-            </div>
-
-            <div class="products-row">
-                <button class="cell-more-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-more-vertical">
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                    </svg>
-                </button>
-                <div class="product-cell author">
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-                         alt="product">
-                    <!-- <span></span> -->
-                </div>
-                <div class="product-cell title" style="display: block;">
-                    <span class="cell-label">title:</span>
-
-                    <h3>도움 요청 게시글</h3>
-                    <p>Dong</p>
-                </div>
-
-                <!-- <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div> -->
-                <div class="product-cell viewcount"><span class="cell-label">Viewcount:</span>36</div>
-                <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-
-                <div class="product-cell status-cell">
-                    <span class="cell-label">Status:</span>
-                    <span class="status active">Active</span>
-                </div>
-            </div>
-
-            <div class="products-row">
-                <button class="cell-more-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-more-vertical">
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                    </svg>
-                </button>
-                <div class="product-cell author">
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-                         alt="product">
-                    <!-- <span></span> -->
-                </div>
-                <div class="product-cell title" style="display: block;">
-                    <span class="cell-label">title:</span>
-
-                    <h3>도움 요청 게시글</h3>
-                    <p>Dong</p>
-                </div>
-
-                <!-- <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div> -->
-                <div class="product-cell viewcount"><span class="cell-label">Viewcount:</span>36</div>
-                <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-
-                <div class="product-cell status-cell">
-                    <span class="cell-label">Status:</span>
-                    <span class="status active">Active</span>
-                </div>
-            </div>
-
-            <div class="products-row">
-                <button class="cell-more-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-more-vertical">
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                    </svg>
-                </button>
-                <div class="product-cell author">
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-                         alt="product">
-                    <!-- <span></span> -->
-                </div>
-                <div class="product-cell title" style="display: block;">
-                    <span class="cell-label">title:</span>
-
-                    <h3>도움 요청 게시글</h3>
-                    <p>Dong</p>
-                </div>
-
-                <!-- <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div> -->
-                <div class="product-cell viewcount"><span class="cell-label">Viewcount:</span>36</div>
-                <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-
-                <div class="product-cell status-cell">
-                    <span class="cell-label">Status:</span>
-                    <span class="status active">Active</span>
-                </div>
-            </div>
-
+                <% } %>
+            <% } %>
 
             <!-- 게시글 div 끝-->
         </div>
@@ -369,7 +221,11 @@
     var articles = document.querySelectorAll('.products-row');
     // 나중엔 aritcle의 번호로 요청을 보내도록 수정해야함
     articles.forEach(article => {
-        article.addEventListener("click", (event) => window.location = "/articles");
+        let articleId = article.querySelector("#article_id");
+        article.addEventListener("click", (event) => {
+                window.location = "/articles/" + articleId.value;
+            }
+        );
     })
 </script>
 

@@ -8,11 +8,11 @@
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88a3b7ff3745fa1b7d0e7011ed06a10f&libraries=services"></script>
 
-<!-- chat css -->
+<!-- css -->
 <link href="/resources/css/ui/board/createArticle.css" rel="stylesheet" type="text/css">
-
-<!-- input css -->
+<link href="/resources/css/base_css/button.css" rel="stylesheet" type="text/css">
 <link href="/resources/css/base_css/input.css" rel="stylesheet" type="text/css">
+
 
 <!-- input js -->
 <script src="/resources/js/base_js/input.js" type="text/javascript"></script>
@@ -28,8 +28,11 @@
 
 </head>
 
+
+
 <script>
-    function displayKakaoMap() {
+    function init() {
+        <% user = (UserDto)session.getAttribute("user"); %>
         <% userLocation = (UserLocationDto) session.getAttribute("userLocation"); %>
         <% if(userLocation != null) { %>
         lat = <%= userLocation.getLat() %>;
@@ -39,11 +42,10 @@
         <% } %>
     }
 </script>
-<body onload="displayKakaoMap()">
+<body onload="init()">
 <!-- Navbar -->
 <%@ include file="../layout/navbar.jsp" %>
 <!-- Navbar End -->
-
 
 <div class="chat_container">
     <div class="app-header">
@@ -82,7 +84,7 @@
             <div class="projects-section-header">
                 <div class = "projects-content-section">
                     <div class="col-3 input-effect" style="width: 90%">
-                        <input class="effect-16" type="text" placeholder="">
+                        <input class="effect-16" id="input_title" type="text" placeholder="">
                         <label>Title</label>
                         <span class="focus-border"></span>
                     </div>
@@ -106,7 +108,7 @@
                         <!-- 게시판 영역 -->
 
                         <div class="col-3 input-effect" style="width: 100%; height: 300px; margin-top: 60px;">
-                            <textarea class="effect-20" type="text" placeholder=""></textarea>
+                            <textarea class="effect-20" id="input_content" type="text" placeholder=""></textarea>
                             <label>Content</label>
                             <span class="focus-border">
             	                <i></i>
@@ -118,13 +120,13 @@
 
                 <div class="projects-info-section">
                     <div class="col-3 input-effect" style="width: 60%; float: none;">
-                        <input class="effect-16" type="text" placeholder="">
+                        <input class="effect-16" id="input_point" type="text" placeholder="">
                         <label>Point</label>
                         <span class="focus-border"></span>
                     </div>
                     <h3 style="font-weight: 400; margin-top: 0.5rem;">
                         보유 중인 포인트 :
-                        <span>100,000</span>
+                        <span><%=user.getPoint()%></span>
                     </h3>
                 </div>
             </div>
@@ -162,7 +164,7 @@
                 </div>
             </div>
 
-            <button class="article_submit">
+            <button class="article_submit" onclick="articleSubmit()">
                         <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                         </span>
@@ -173,11 +175,36 @@
     </div>
 </div>
 
+<script>
+    async function articleSubmit(){
+        // img_add_section
+        let images = document.querySelectorAll(".imagePreview");
+        const noImage = '/resources/img/no_image.jpg';
+
+        const article = {
+            title: document.querySelector("#input_title").value,
+            content: document.querySelector("#input_content").value,
+            nickname: '<%=user.getNickname()%>',
+            point: document.querySelector("#input_point").value,
+            image1: images[0] == null ? noImage : images[0].src,
+            image2: images[1] == null ? noImage : images[1].src,
+            lat: document.querySelector("#article_lat").value,
+            lng: document.querySelector("#article_lng").value,
+            status: 'active',
+            roomId: '',
+            roomTitle: document.querySelector("#input_title").value,
+        };
+
+        await articleApi.createArticle(article);
+    }
+</script>
 
 <!-- 카카오 맵 js -->
-<script src="/resources/js/kakao_api/kakao_map.js"></script>
+<script type="text/javascript" src="/resources/js/kakao_api/kakao_map.js"></script>
 
-
+<!-- chat js -->
+<script type="text/javascript" src="/resources/js/chat/chat.js"></script>
+<script type="text/javascript" src="/resources/js/board/article.js"></script>
 <!-- 이미지 추가 js -->
 <script src="/resources/js/board/addImage.js"></script>
 

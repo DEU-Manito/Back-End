@@ -24,8 +24,8 @@ public class IndexController {
     @GetMapping("/chat")
     public String chat(Model model){ return "chat/chat"; }
 
-    @GetMapping("/board")
-    public String board(){ return "board/board";}
+//    @GetMapping("/board")
+//    public String board(){ return "board/board"; }
 
     @GetMapping("/locationAuth")
     public String locationAuth(){ return "location/locationAuth"; }

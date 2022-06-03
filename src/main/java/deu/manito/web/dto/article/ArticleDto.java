@@ -2,9 +2,11 @@ package deu.manito.web.dto.article;
 
 
 import deu.manito.web.entity.Article;
+import deu.manito.web.entity.ChatMember;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 
 @ToString
@@ -28,11 +30,12 @@ public class ArticleDto {
     private String roomId;
     private String roomTitle;
     private int point;
-
+    private List<ChatMember> chatMembers;
 
     // article 엔티티 클래스를 ArticleDto 클래스로 변환
     public static ArticleDto createArticleDto(Article article){
         return  ArticleDto.builder()
+                .id(article.getId())
                 .title(article.getTitle())
                 .nickname(article.getNickname())
                 .content(article.getContent())
@@ -45,6 +48,7 @@ public class ArticleDto {
                 .roomId(article.getRoomId())
                 .roomTitle(article.getRoomTitle())
                 .point(article.getPoint())
+                .chatMembers(article.getChatMembers())
                 .build();
     }
 

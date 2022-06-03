@@ -1,4 +1,6 @@
 <%@ page import="deu.manito.web.dto.user.UserDto" %>
+<%@ page import="deu.manito.web.dto.article.ArticleDto" %>
+<%@ page import="java.util.Objects" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
@@ -7,10 +9,11 @@
 <!-- 카카오 Map API 사용할 라이브러리의 이름을 링크 뒤에 명시해줘야 함 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88a3b7ff3745fa1b7d0e7011ed06a10f&libraries=services"></script>
 
-<!-- chat css -->
+<!-- css -->
 <link href="/resources/css/ui/board/viewArticle.css"    rel="stylesheet" type="text/css">
 <link href="/resources/css/ui/chat/vchat.css"           rel="stylesheet" type="text/css">
 <link href="/resources/css/base_css/select.css"         rel="stylesheet" type="text/css">
+<link href="/resources/css/base_css/button.css"      rel="stylesheet" type="text/css">
 
 <style>
     .map_wrap {position:relative;width:100%;height:350px;}
@@ -22,7 +25,11 @@
 
 </head>
 
-<body onload="joinChatting()">
+<!-- 게시글 받아오기 -->
+<% ArticleDto article = (ArticleDto) request.getAttribute("article"); %>
+<% user = (UserDto) session.getAttribute("user"); %>
+
+<body onload="init()">
 <!-- Navbar -->
 <%@ include file="../layout/navbar.jsp"%>
 <!-- Navbar End -->
@@ -55,17 +62,20 @@
     </div>
 
     <div class="app-content">
-        <%--        <div class="app-sidebar"></div>--%>
-
         <div class="projects-section">
-
+            <%-- 유저 세션이 존재하고, 유저가 작성자일 경우 --%>
+            <% if(!Objects.isNull(user) && article.getNickname().equals(user.getNickname())) { %>
+                <div id = "article_edit_btn">Edit</div>
+                <div id = "article_delete_btn" onclick="deleteArticle(<%=article.getId()%>)">Delete</div>
+            <% } %>
 
             <div class ="projects-content-section">
                 <div class="projects-section-header">
                 <p>Title</p>
 
+                <input id="article_id" type="text" value="<%=article.getId()%>" hidden>
                 <div class="title-wrapper">
-                    <input id = "article_title" class="title-input" type="text" placeholder="Title">
+                    <input id = "article_title" class="title-input" type="text" value=" <%=article.getTitle()%>" placeholder="Title" readonly>
                 </div>
             </div>
 
@@ -75,8 +85,14 @@
                 <div class="container">
                     <div class="row">
                         <div class = 'img_add_section'>
-<%--                            <i class='bx bx-image-add imgAdd'></i>--%>
+                            <div class="col-sm-2 img_section">
+                                <img src="<%=article.getImage1()%>" alt="No Image">
+                            </div>
+                            <div class="col-sm-2 img_section">
+                                <img src="<%=article.getImage2()%>" alt="No Image">
+                            </div>
                         </div>
+
 
                         <!-- col-2 -->
                     </div><!-- row -->
@@ -87,22 +103,22 @@
                 <!-- 게시판 영역 -->
                 <p>Content</p>
                 <div class="content-wrapper">
-                    <textarea id = "article_content" class="title-input" type="text" placeholder="Content"></textarea>
+                    <textarea id = "article_content" class="title-input" type="text" placeholder="Content" readonly><%=article.getContent()%></textarea>
                 </div>
 
                 <!-- 게시판 영역 끝 -->
             </div>
             </div>
 
-            <div class ="projects-info-section">
+            <div class ="projects-info-section" style="position: relative;">
                 <div class="article_info_section" style="display: block; align-items: center;">
 
-                    <input id="article_roomId" type="text" value="XjMMpSntRT-z6RO0a7fLn-20220530031733" hidden>
+                    <input id="article_roomId" type="text" value="<%=article.getRoomId()%>" hidden>
                     <!-- 작성자 닉네임, 프로필 표시 영역 -->
                     <div class="article_author">
                         <h3>Author</h3>
                         <div class="author_info">
-                            <p id = "article_author">DONGDONG0915_</p>
+                            <p id = "article_author"> <%=article.getNickname()%></p>
                             <img id = "article_profile_img" src="http://k.kakaocdn.net/dn/bkGKzB/btrmDYfU0ZP/6aiPBYn1KLaxeokaqelzrk/img_110x110.jpg"
                                  width="32px" height="32px" style="border-radius: 10px;">
                         </div>
@@ -111,39 +127,38 @@
                     <!-- 작성일 표시 영역 -->
                     <div class = "article_date">
                         <h3>Date</h3>
-                        <div id = "article_date">2022-05-30</div>
+                        <div id = "article_date"><%= article.getCreateTime() %></div>
                     </div>
 
                     <!-- 포인트 표시 영역 -->
                     <div class = "article_point">
                         <h3>Point</h3>
-                        <div id = "article_point">10,000</div>
+                        <input type="text" id="article_point" value="<%=article.getPoint()%>" readonly>
+                    </div>
+
+                    <!-- 게시글 상태 표시 영역 -->
+                    <div class = "article_status">
+                        <div>
+                            <h3>Status</h3>
+                            <span class="status <%=article.getStatus()%>"><%= article.getStatus() %></span>
+                        </div>
                     </div>
 
                 </div>
 
-                <!-- 채팅방 인원 리스트 출력 영역 -->
-                <div class="select animated zoomIn" id = "chat_memeber_list">
-                    <!-- You can toggle select (disabled) -->
-                    <input type="radio" name="option">
-                    <i class="toggle icon icon-arrow-down"></i>
-                    <i class="toggle icon icon-arrow-up"></i>
-                    <span class="placeholder">Choose...</span>
-
-                    <label class="option">
-                        <input type="radio" name="option">
-                        <span class="title animated fadeIn"><i class="icon icon-fire"></i>Fire</span>
-                    </label>
-
-                </div>
-                <!-- 채팅방 인원 리스트 출력 영역 -->
-
-                    <!-- 도움 요청 위치 영역 -->
-                <div id="staticMap" style="width:90%;height: 50%; margin: 109px auto 0; border-radius: 20px;"></div>
                 <div class="hAddr">
                     <span class="title">도움 요청 위치</span>
                     <span id="centerAddr"></span>
                 </div>
+                <!-- 도움 요청 위치 영역 -->
+                <div id="staticMap" style="width:90%;height: 50%; margin: 35px auto 0; border-radius: 20px;"></div>
+
+                <button class="article_submit <%=article.getStatus()%>" style="right: 23px">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                    <span class="button-text">Submit</span>
+                </button>
 
             </div>
         </div>
@@ -189,19 +204,19 @@
                                         <p>프로필 이미지</p>
                                         <ul>
                                             <li>
-                                                <a href="#!" class="active" profile="1"><img src="resources/img/vchat/profile/1.png" alt="man" width="100%"></a>
+                                                <a href="#!" class="active" profile="1"><img src="/resources/img/vchat/profile/1.png" alt="man" width="100%"></a>
                                             </li>
                                             <li>
-                                                <a href="#!" profile="2"><img src="resources/img/vchat/profile/2.png" alt="woman" width="100%"></a>
+                                                <a href="#!" profile="2"><img src="/resources/img/vchat/profile/2.png" alt="woman" width="100%"></a>
                                             </li>
                                             <li>
-                                                <a href="#!" profile="3"><img src="resources/img/vchat/profile/3.png" alt="flower1" width="100%"></a>
+                                                <a href="#!" profile="3"><img src="/resources/img/vchat/profile/3.png" alt="flower1" width="100%"></a>
                                             </li>
                                             <li>
-                                                <a href="#!" profile="4"><img src="resources/img/vchat/profile/4.png" alt="flower2" width="100%"></a>
+                                                <a href="#!" profile="4"><img src="/resources/img/vchat/profile/4.png" alt="flower2" width="100%"></a>
                                             </li>
                                             <li>
-                                                <a href="#!" profile="5"><img src="resources/img/vchat/profile/5.png" alt="flower3" width="100%"></a>
+                                                <a href="#!" profile="5"><img src="/resources/img/vchat/profile/5.png" alt="flower3" width="100%"></a>
                                             </li>
                                         </ul>
                                         <!-- 프로필 이미지 선택 -->
@@ -220,7 +235,7 @@
                                     <!-- 상단 대화상대 프로필 -->
                                     <div class="opponent_profile">
                                         <ul>
-                                            <li class="room_img"><img src="resources/img/vchat/chat.svg" alt="man" width="100%"></li>
+                                            <li class="room_img"><img src="/resources/img/vchat/chat.svg" alt="man" width="100%"></li>
                                             <!-- 채팅방 제목 표시 영역 -->
                                             <li id = "chat_room_title"></li>
                                         </ul>
@@ -256,44 +271,129 @@
     </div>
 </div>
 
+<!-- 모달 -->
+<div id="articleModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Submit</h4>
+            </div>
+
+            <!-- 채팅방 인원 리스트 출력 영역 -->
+            <div class="select animated zoomIn" id = "chat_memeber_list">
+                <!-- You can toggle select (disabled) -->
+                <input type="radio" name="option">
+                <i class="toggle icon icon-arrow-down"></i>
+                <i class="toggle icon icon-arrow-up"></i>
+                <span class="placeholder">Choose...</span>
+
+                <label class="option">
+                    <input type="radio" name="option">
+                    <span class="title animated fadeIn"><i class="icon icon-fire"></i>Fire</span>
+                </label>
+
+            </div>
+            <!-- 채팅방 인원 리스트 출력 영역 -->
+
+            <div class="modal-footer">
+                <h3>도움을 준 사람을 선택하고 완료 버튼을 눌러주세요</h3>
+                <%--                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 모달 끝 -->
 
 <script>
+
+    $(document).ready(function(){
+        $("#article_edit_btn").click(function(){
+            $("#article_point").each(function(){
+                if($(this).prop("readonly") == true){
+                    $('#article_edit_btn').text('Cancle');
+
+                    $(this).prop('readonly', false);
+                    $('#article_title').prop('readonly', false);
+                    $('#article_content').prop('readonly', false);
+                }else{
+                    $('#article_edit_btn').text('Edit');
+
+                    $(this).prop('readonly', true);
+                    $('#article_title').prop('readonly', true);
+                    $('#article_content').prop('readonly', true);
+                }
+            });
+        });
+    });
+
+    function deleteArticle(articleId){
+        articleApi.deleteArticle(articleId);
+    }
+
+    function editArticle(){
+        const input = document.querySelector('#article_point');
+    }
+
+    function modal(){
+        $('#articleModal').modal('show');
+
+        $("#articleModal").on("hidden.bs.modal", function () { });
+    }
+
     // 채팅방 접속 메소드
     function joinChatting(){
         // 로그인 한 경우(세션이 있는 경우)
         <% if(user != null) { %>
-        const client ={
-            clientKey: '<%= user.getClientKey() %>',
-            nickname:  '<%= user.getNickname() %>',
-            profile:   '<%= user.getProfile_image() %>'
-        };
+            const client ={
+                clientKey: '<%= user.getClientKey()     %>',
+                nickname : '<%= user.getNickname()      %>',
+                profile  : '<%= user.getProfile_image() %>'
+            };
 
-        $("#chat_memeber_list").append(
-            "<label class=\"option\">" +
-            "    <input type=\"radio\" name=\"option\">" +
-            "    <span class=\"title animated fadeIn\">" +
-            "       <i class=\"icon icon-fire\"></i>" +
-                    client.nickname +
-            "    </span>" +
-            "</label>"
-        );
-        const roomId = document.querySelector('#article_roomId').value;          // 채팅방 Key
-        const title = document.querySelector('#article_title').value;            // 채팅방 제목
-        const chatRoomTitle = document.querySelector('#chat_room_title');   // 채팅방 제목을 출력할 태그
+            $("#chat_memeber_list").append(
+                "<label class=\"option\">" +
+                "    <input type=\"radio\" name=\"option\">" +
+                "    <span class=\"title animated fadeIn\">" +
+                "       <i class=\"icon icon-fire\"></i>" +
+                "       <span style='font-size: 17px'>" + client.nickname  + "</span>" +
+                "    </span>" +
+                "</label>"
+            );
 
-        vChatCloud.disconnect();            // 여러 채팅방을 이동해야 하므로 접속시 먼저 이전 연결을 한 번 끊고 접속
-        enterChatting(client, roomId);      // 채팅방 입장
+            const roomId        = document.querySelector('#article_roomId').value;      // 채팅방 Key
+            const title         = document.querySelector('#article_title').value;       // 채팅방 제목
+            const chatRoomTitle = document.querySelector('#chat_room_title');           // 채팅방 제목을 출력할 태그
 
-        chatRoomTitle.innerHTML = title;
-     <% } %>
-    }
+            vChatCloud.disconnect();            // 여러 채팅방을 이동해야 하므로 접속시 먼저 이전 연결을 한 번 끊고 접속
+            enterChatting(client, roomId);      // 채팅방 입장
+
+            chatRoomTitle.innerHTML = title;
+        <% } %>
+        }
 </script>
 
 <!-- 카카오 맵 js -->
-<script src="/resources/js/kakao_api/kakao_img_map.js"></script>
+<script type="text/javascript" src="/resources/js/kakao_api/kakao_img_map.js"></script>
+
+<script>
+    function init(){
+        lat = <%=article.getLat()%>;
+        lng = <%=article.getLng()%>;
+
+        kakaoImgMap.displayImgMap(lat, lng);
+        joinChatting();
+    }
+</script>
+
+
 
 <!-- chat js -->
 <script type="text/javascript" src="/resources/js/chat/chat.js"></script>
+
+<!-- article js -->
+<script type="text/javascript" src="/resources/js/board/article.js"></script>
 
 <!-- vchat js -->
 <script src="/resources/js/chat/vchat/vchatcloud-1.2.0.min.js"></script>

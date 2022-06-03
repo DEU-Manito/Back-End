@@ -269,22 +269,22 @@
 
             // 로그인 한 경우(세션이 있는 경우)
             <% if(user != null) { %>
-            const client ={
-                clientKey: '<%= user.getClientKey() %>',
-                nickname:  '<%= user.getNickname() %>',
-                profile:   '<%= user.getProfile_image() %>'
-            };
+                const client ={
+                    clientKey: '<%= user.getClientKey() %>',
+                    nickname:  '<%= user.getNickname() %>',
+                    profile:   '<%= user.getProfile_image() %>'
+                };
 
-            const target = event.currentTarget;                                 // 이벤트 발생 객체
-            const roomId = target.querySelector('#chat_roomId').value;          // 채팅방 Key
-            const title = target.querySelector('#chat_title').value;            // 채팅방 제목
-            const chatRoomTitle = document.querySelector('#chat_room_title');   // 채팅방 제목을 출력할 태그
+                const target = event.currentTarget;                                 // 이벤트 발생 객체
+                const roomId = target.querySelector('#chat_roomId').value;          // 채팅방 Key
+                const title = target.querySelector('#chat_title').value;            // 채팅방 제목
+                const chatRoomTitle = document.querySelector('#chat_room_title');   // 채팅방 제목을 출력할 태그
 
-            vChatCloud.disconnect();            // 여러 채팅방을 이동해야 하므로 접속시 먼저 이전 연결을 한 번 끊고 접속
-            enterChatting(client, roomId);      // 채팅방 입장
+                vChatCloud.disconnect();            // 여러 채팅방을 이동해야 하므로 접속시 먼저 이전 연결을 한 번 끊고 접속
+                enterChatting(client, roomId);      // 채팅방 입장
 
-            chat.classList.remove('hidden');    // 채팅방 화면 보이게
-            chatRoomTitle.innerHTML = title;
+                chatRoomTitle.innerHTML = title;
+                chat.classList.remove('hidden');    // 채팅방 화면 보이게
             <% } %>
         }
 
@@ -317,9 +317,6 @@
     <script src="/resources/js/chat/vchat/draw.js"></script>
     <script src="/resources/js/chat/vchat/count.js"></script>
     <script src="/resources/js/chat/vchat/errMsg.js"></script>
-
-
-
 
     <!-- Footer -->
     <%@ include file="../layout/footer.jsp" %>

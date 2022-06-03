@@ -48,10 +48,12 @@ public class UserLocationService {
     @Transactional
     public UserLocationAuthDto removeLocation(String nickname){
         UserLocation result = userLocationRepository.findByNickname(nickname)
-                                                    .orElseThrow(() -> new IllegalArgumentException("유저 위치 정보 없음"));
+                                                    .orElse(null);
 
         userLocationRepository.deleteByNickname(nickname);
 
-        return UserLocationAuthDto.createUserLocationAuthDto(result);
+        return Objects.isNull(result)
+                ? null
+                : UserLocationAuthDto.createUserLocationAuthDto(result);
     }
 }
