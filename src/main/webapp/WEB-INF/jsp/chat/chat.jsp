@@ -297,6 +297,7 @@
                 // 채팅방 생성 함수 호출
                 chatApi.createChatroom(<%= userLocation.getLat()%>, <%= userLocation.getLng()%>, title);
 
+
             <% } else {%>
                 alert('위치 세션 정보가 존재하지 않습니다.');
             <% } %>

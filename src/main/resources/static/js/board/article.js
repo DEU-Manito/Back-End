@@ -63,6 +63,22 @@ var articleApi = {
                 }
                 else alert('article.js : 게시글 수정에 실패 했습니다.');
             })
+        },
+
+    addChatMember:
+        function (chatMember) {
+            const url = '/api/chatMember';
+
+            fetch(url, {
+                method: "POST",
+                body: JSON.stringify(chatMember),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if (response.ok) console.log('article.js : 채팅 멤버 등록 완료');
+                else console.log('article.js : 채팅 멤버 등록 실패');
+            })
         }
 }
 

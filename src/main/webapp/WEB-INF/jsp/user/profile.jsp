@@ -5,11 +5,13 @@
 <%@ page import="java.util.Objects" %>
 <%@ include file="../layout/header.jsp" %>
 
+
+<link rel="stylesheet" type="text/css" href="/resources/css/ui/user/profile.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/base_css/input.css">
 <!-- 기타 js -->
 <script type="text/javascript" src="/resources/js/base_js/classie.js"></script>
-
 <script type="text/javascript" src="/resources/js/user/profile.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/css/ui/user/profile.css">
+
 
 </head>
 
@@ -63,33 +65,12 @@
                     <div class="profile-card-inf__txt">Point</div>
                 </span>
                 <div>
-                    <button class="profile-card__button button--blue js-message-btn">Add</button>
-                    <button class="profile-card__button button--orange">Return</button>
+                    <button class="profile-card__button button--blue js-message-btn" onclick="$('#addPointModal').modal('show');">Add</button>
+                    <button class="profile-card__button button--orange" onclick="$('#returnPointModal').modal('show');">Return</button>
                 </div>
             </div>
             <% } %>
         </div>
-
-        <div class="profile-card-message js-message">
-            <form class="profile-card-form">
-                <div class="profile-card-form__container">
-                    <textarea placeholder="Say something..."></textarea>
-                </div>
-
-                <div class="profile-card-form__bottom">
-                    <button class="profile-card__button button--blue js-message-close">
-                        Send
-                    </button>
-
-                    <button class="profile-card__button button--gray js-message-close">
-                        Cancel
-                    </button>
-                </div>
-            </form>
-
-            <div class="profile-card__overlay js-message-close"></div>
-        </div>
-
     </div>
 
 </div>
@@ -151,6 +132,129 @@
     </defs>
 </svg>
 
+
+<!-- 포인트 충전 모달 -->
+<div id="addPointModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- 모달 제목 -->
+            <div class="modal-header">
+                <h4 class="modal-title" style="font-weight: 700">Add Point</h4>
+            </div>
+
+            <!-- 모달 내용 -->
+            <div class="modal-body" style="display: block">
+                <div class="col-3 input-effect" style="width: 60%; float: none; margin: 3rem auto">
+                    <input class="effect-16" id="input_add_point" type="text" placeholder="">
+                    <label>Point</label>
+                    <span class="focus-border"></span>
+                </div>
+                <h3 style="font-weight: 400; float: right; margin-top: 0.5rem;">
+                    보유 중인 포인트 :
+                    <span><%=user.getPoint()%></span>
+                </h3>
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button class="point_submit" onclick="addPointModal()">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                    <span class="button-text">Add</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 포인트 반환 모달 -->
+<div id="returnPointModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- 모달 제목 -->
+            <div class="modal-header">
+                <h4 class="modal-title" style="font-weight: 700">Return Point</h4>
+            </div>
+
+            <!-- 모달 내용 -->
+            <div class="modal-body" style="display: block">
+                <div class="col-3 input-effect" style="width: 60%; float: none; margin: 3rem auto;">
+                    <input class="effect-16" id="input_return_point" type="text" placeholder="">
+                    <label>Point</label>
+                    <span class="focus-border"></span>
+                </div>
+                <h3 style="font-weight: 400; float: right; margin-top: 0.5rem;">
+                    보유 중인 포인트 :
+                    <span><%=user.getPoint()%></span>
+                </h3>
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button class="point_submit" onclick="returnPointModal()">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                    <span class="button-text">Return</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function addPointModal(){
+        const url = '/api/user/deposit';
+
+        const data = {
+            nickname: '<%=user.getNickname()%>',
+            point: document.querySelector('#input_add_point').value
+        }
+
+        fetch(url,{
+            method: "PATCH",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(response=>{
+            if(response.ok){
+                alert('profile.js : 포인트 충전이 완료 되었습니다.');
+                window.location.reload();
+            }
+            else alert('profile.js : 포인트 충전에 실패 했습니다.');
+        });
+    }
+
+    function returnPointModal(){
+        const url = '/api/user/withdraw'
+
+        const data = {
+            nickname: '<%=user.getNickname()%>',
+            point: document.querySelector('#input_return_point').value
+        }
+
+        fetch(url,{
+            method: "PATCH",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(response=>{
+            if(response.ok){
+                alert('profile.js : 포인트 반환이 완료 되었습니다.');
+                window.location.reload();
+            }
+            else alert('profile.js : 포인트 반환에 실패 했습니다.');
+        });
+    }
+
+</script>
 <script>
     // 프로필 카운트 이벤트
     $('.counter').each(function() {

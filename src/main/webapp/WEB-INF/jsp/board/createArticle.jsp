@@ -201,6 +201,7 @@
 
 <!-- 카카오 맵 js -->
 <script type="text/javascript" src="/resources/js/kakao_api/kakao_map.js"></script>
+<script type="text/javascript" src="/resources/js/kakao_api/kakao_map_coords.js"></script>
 
 <!-- chat js -->
 <script type="text/javascript" src="/resources/js/chat/chat.js"></script>

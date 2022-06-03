@@ -88,7 +88,7 @@
     color: rgba(146, 168, 209, 1);
 }
 .select label.option span.title:hover {
-    color: #fff;
+    color: rgba(146, 168, 209, 1);
     background: rgba(255, 255, 255, .3);
     box-shadow: inset 0px 1px 0px rgba(0, 0, 0, .1);
 }

@@ -168,45 +168,7 @@ var kakaoMap = {
 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시
 //searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 
-// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    kakaoCoords.searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-        
-        if (status === kakao.maps.services.Status.OK) {
-            // 도로명 주소 표시
-            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + (result[0].road_address.address_name) + '</div>' : '';
-            // 지번 주소 표시
-            detailAddr += '<div>지번 주소 : ' + (result[0].address.address_name) + '</div>';
-            
-            // 내 위치 표시
-            var myAddress = document.querySelector("#centerAddr");
-            myAddress.innerHTML = result[0].address.address_name;
-            
-            // 주소의 좌표를 저장
-            var latlng = mouseEvent.latLng.toString().replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '');
 
-
-            document.querySelector('#article_lat').value = latlng.split(',')[0]; // lat
-            document.querySelector('#article_lng').value = latlng.split(',')[1]; // lng
-
-            var content =
-                '<div class="bAddr">' +
-                '   <span class="title">법정동 주소정보</span>' +
-                    detailAddr +
-                '</div>';
-
-            // 마커를 클릭한 위치에 표시합니다
-
-            marker.setPosition(mouseEvent.latLng);
-            marker.setMap(map);
-
-            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
-
-        }
-    });
-});
 
 // 주소 관련 함수
 var kakaoCoords = {
@@ -241,5 +203,42 @@ var kakaoCoords = {
 }
 
 
+// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    kakaoCoords.searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
 
+        if (status === kakao.maps.services.Status.OK) {
+            // 도로명 주소 표시
+            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + (result[0].road_address.address_name) + '</div>' : '';
+            // 지번 주소 표시
+            detailAddr += '<div>지번 주소 : ' + (result[0].address.address_name) + '</div>';
+
+            // 내 위치 표시
+            var myAddress = document.querySelector("#centerAddr");
+            myAddress.innerHTML = result[0].address.address_name;
+
+            // 주소의 좌표를 저장
+            var latlng = mouseEvent.latLng.toString().replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '');
+
+
+            document.querySelector('#article_lat').value = latlng.split(',')[0]; // lat
+            document.querySelector('#article_lng').value = latlng.split(',')[1]; // lng
+
+            var content =
+                '<div class="bAddr">' +
+                '   <span class="title">법정동 주소정보</span>' +
+                detailAddr +
+                '</div>';
+
+            // 마커를 클릭한 위치에 표시합니다
+
+            marker.setPosition(mouseEvent.latLng);
+            marker.setMap(map);
+
+            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        }
+    });
+});
 
