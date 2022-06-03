@@ -5,6 +5,7 @@ import deu.manito.web.dto.user.UserPointDto;
 import deu.manito.web.entity.Article;
 import deu.manito.web.entity.User;
 import deu.manito.web.repository.ArticleRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ArticleService {
 
@@ -53,8 +55,9 @@ public class ArticleService {
 
     @Transactional
     public ArticleDto updateArticle(Long articleId, ArticleDto articleDto){
+        log.info(articleDto.toString());
 
-        // 2. 대상 Entity 찾기
+        // 수정할 게시글 찾기
         Article target = articleRepository.findById(articleId)
                                           .orElseThrow(() -> new IllegalArgumentException("게시글 수정 오류"));
 

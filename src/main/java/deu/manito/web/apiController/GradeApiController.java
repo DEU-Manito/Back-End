@@ -1,7 +1,6 @@
 package deu.manito.web.apiController;
 
-import deu.manito.web.dto.Grade.GradeDto;
-import deu.manito.web.dto.user.UserDto;
+import deu.manito.web.dto.grade.GradeDto;
 import deu.manito.web.service.GradeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

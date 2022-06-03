@@ -25,10 +25,13 @@ public class UserLocationService {
         this.userLocationRepository = userLocationRepository;
     }
 
+    @Transactional
     public UserLocationAuthDto authMobileLocation(UserLocationAuthDto dto){
-        UserLocation userLocation = UserLocation.toEntity(dto);
+        UserLocation target = userLocationRepository.findByNickname(dto.getNickname()).orElse(null);
+        UserLocation result = null;
 
-        UserLocation result = userLocationRepository.save(userLocation);
+        if(Objects.isNull(target)) result = userLocationRepository.save(UserLocation.toEntity(dto));
+        else result = target.patch(dto);
 
         if(Objects.isNull(result)) throw new IllegalArgumentException("유저 위치 인증 오류");
 

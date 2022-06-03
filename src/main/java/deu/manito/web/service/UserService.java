@@ -2,8 +2,10 @@ package deu.manito.web.service;
 
 
 import deu.manito.web.dto.user.*;
+import deu.manito.web.entity.Grade;
 import deu.manito.web.entity.User;
 import deu.manito.web.entity.UserLocation;
+import deu.manito.web.repository.GradeRepository;
 import deu.manito.web.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,9 +25,11 @@ import java.util.UUID;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final GradeRepository gradeRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, GradeRepository gradeRepository) {
         this.userRepository = userRepository;
+        this.gradeRepository = gradeRepository;
     }
 
     @Transactional
@@ -37,9 +41,14 @@ public class UserService {
         // 신규 유저면 DB에 등록
         if(Objects.isNull(user)) {
             // 최초 회원가입 시 clientKey 생성
-            log.info("UserService : New User");
             userLoginDto.setClientKey(UUID.randomUUID().toString().substring(0, 8));
             user = userRepository.save(User.toEntity(userLoginDto));
+
+            Grade grade = gradeRepository.save(Grade.builder()
+                                        .nickname(user.getNickname())
+                                        .helpCnt(0)
+                                        .score(0)
+                                        .build());
         }
 
         // 유저 정보 리턴
@@ -47,8 +56,9 @@ public class UserService {
     }
 
     // 프로필(내 정보) 가져오기
-    public UserDto getProfile(UserDto userDto) {
-        User user = userRepository.findById(userDto.getNickname()).orElse(null);
+    public UserDto getProfile(String nickname) {
+        User user = userRepository.findByNickname(nickname)
+                                  .orElseThrow(()-> new IllegalArgumentException("유저 정보 조회 오류"));
 
         return UserDto.createUserDto(user);
     }

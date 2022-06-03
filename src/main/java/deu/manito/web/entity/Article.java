@@ -56,10 +56,10 @@ public class Article {
     // 게시글 수정
     public void patch(ArticleDto articleDto) {
 
-        if ("".equals(articleDto.getTitle()))
+        if (!"".equals(articleDto.getTitle()))
             this.title = articleDto.getTitle();
 
-        if ("".equals(articleDto.getContent()))
+        if (!"".equals(articleDto.getContent()))
             this.content = articleDto.getContent();
 
         this.point = articleDto.getPoint();

@@ -1,11 +1,15 @@
 package deu.manito.web.controller;
 
 
+import deu.manito.web.dto.grade.GradeDto;
 import deu.manito.web.dto.user.UserDto;
+import deu.manito.web.service.GradeService;
 import deu.manito.web.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -20,18 +24,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserController {
 
     private UserService userService;
-    public UserController(UserService userService) {
+    private GradeService gradeService;
+
+    public UserController(UserService userService, GradeService gradeService) {
         this.userService = userService;
+        this.gradeService = gradeService;
     }
 
-    @PostMapping("/profile") // 프로필 조회
-    public String profile(@RequestBody UserDto dto, Model model){
-
+    @GetMapping("/profile/{nickname}") // 프로필 조회
+    public String profile(@PathVariable String nickname, Model model){
         // 데이터  가져오기
-        UserDto userDto = userService.getProfile(dto);
-        log.info(userDto.getEmail());
+        UserDto userDto = userService.getProfile(nickname);
+        GradeDto gradeDto = gradeService.getUserGrade(nickname);
+
         //모델에 데이터 등록
         model.addAttribute("profile", userDto);
+        model.addAttribute("grade", gradeDto);
 
         return "user/profile";
     }

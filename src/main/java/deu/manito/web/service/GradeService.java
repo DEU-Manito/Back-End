@@ -1,8 +1,7 @@
 package deu.manito.web.service;
 
-import deu.manito.web.dto.Grade.GradeDto;
+import deu.manito.web.dto.grade.GradeDto;
 import deu.manito.web.entity.Grade;
-import deu.manito.web.entity.User;
 import deu.manito.web.repository.GradeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,4 +30,10 @@ public class GradeService {
         return GradeDto.createGradeDto(target);
     }
 
+    public GradeDto getUserGrade(String nickname){
+        Grade grade = gradeRepository.findByNickname(nickname)
+                                     .orElseThrow(()-> new IllegalArgumentException("유저 평점 조회 오류"));
+
+        return GradeDto.createGradeDto(grade);
+    }
 }

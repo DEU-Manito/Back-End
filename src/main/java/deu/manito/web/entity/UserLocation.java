@@ -23,7 +23,7 @@ public class UserLocation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column private String nickname;
+    @Column private String nickname;        // Nickname 유니크로 설정
     @Column private Double lat;
     @Column private Double lng;
 
@@ -37,5 +37,12 @@ public class UserLocation {
                 .lat(dto.getLat())
                 .lng(dto.getLng())
                 .build();
+    }
+
+    public UserLocation patch(UserLocationAuthDto dto){
+        this.lat = dto.getLat();
+        this.lng = dto.getLng();
+
+        return this;
     }
 }
