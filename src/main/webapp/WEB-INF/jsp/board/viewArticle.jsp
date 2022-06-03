@@ -73,7 +73,10 @@
                 <div class="projects-section-header">
                 <p>Title</p>
 
-                <input id="article_id" type="text" value="<%=article.getId()%>" hidden>
+                <input id="article_id"  type="text" value="<%=article.getId()%>"  hidden>
+                <input id="article_lat" type="text" value="<%=article.getLat()%>" hidden>
+                <input id="article_lng" type="text" value="<%=article.getLng()%>" hidden>
+
                 <div class="title-wrapper">
                     <input id = "article_title" class="title-input" type="text" value=" <%=article.getTitle()%>" placeholder="Title" readonly>
                 </div>
@@ -86,10 +89,10 @@
                     <div class="row">
                         <div class = 'img_add_section'>
                             <div class="col-sm-2 img_section">
-                                <img src="<%=article.getImage1()%>" alt="No Image">
+                                <img class="imagePreview" src="<%=article.getImage1()%>" alt="No Image">
                             </div>
                             <div class="col-sm-2 img_section">
-                                <img src="<%=article.getImage2()%>" alt="No Image">
+                                <img class="imagePreview" src="<%=article.getImage2()%>" alt="No Image">
                             </div>
                         </div>
 
@@ -118,7 +121,7 @@
                     <div class="article_author">
                         <h3>Author</h3>
                         <div class="author_info">
-                            <p id = "article_author"> <%=article.getNickname()%></p>
+                            <p id = "article_author"><%=article.getNickname()%></p>
                             <img id = "article_profile_img" src="http://k.kakaocdn.net/dn/bkGKzB/btrmDYfU0ZP/6aiPBYn1KLaxeokaqelzrk/img_110x110.jpg"
                                  width="32px" height="32px" style="border-radius: 10px;">
                         </div>
@@ -140,7 +143,7 @@
                     <div class = "article_status">
                         <div>
                             <h3>Status</h3>
-                            <span class="status <%=article.getStatus()%>"><%= article.getStatus() %></span>
+                            <span id="article_status" class="status <%=article.getStatus()%>"><%= article.getStatus() %></span>
                         </div>
                     </div>
 
@@ -153,13 +156,13 @@
                 <!-- 도움 요청 위치 영역 -->
                 <div id="staticMap" style="width:90%;height: 50%; margin: 35px auto 0; border-radius: 20px;"></div>
 
-                <button class="article_submit <%=article.getStatus()%>" style="right: 23px">
+                <!-- 수정 버튼 -->
+                <button class="article_submit disabled" id="edit_btn" style="right: 23px" onclick="updateArticle()">
                         <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                         </span>
-                    <span class="button-text">Submit</span>
+                    <span class="button-text">Edit</span>
                 </button>
-
             </div>
         </div>
 
@@ -308,25 +311,55 @@
 
 <script>
 
+    // 수정 버튼 이벤트 등록
     $(document).ready(function(){
+        // edit를 누른 경우
         $("#article_edit_btn").click(function(){
             $("#article_point").each(function(){
+                // point에 readonly 속성이 있는 경우
                 if($(this).prop("readonly") == true){
+                    // edit를 cancle로 변경
                     $('#article_edit_btn').text('Cancle');
 
+                    // title, content, point의 readonly를 제거
                     $(this).prop('readonly', false);
                     $('#article_title').prop('readonly', false);
                     $('#article_content').prop('readonly', false);
+                    $('.article_submit').removeClass('disabled');
                 }else{
                     $('#article_edit_btn').text('Edit');
 
                     $(this).prop('readonly', true);
                     $('#article_title').prop('readonly', true);
                     $('#article_content').prop('readonly', true);
+                    $('.article_submit').addClass('disabled');
                 }
             });
         });
     });
+
+    function updateArticle(){
+        let images = document.querySelectorAll(".imagePreview");
+
+        let articleId = document.querySelector('#article_id').value;
+
+        const article = {
+            title: document.querySelector("#article_title").value,
+            content: document.querySelector("#article_content").value,
+            nickname: document.querySelector('#article_author').innerHTML,
+            point: document.querySelector("#article_point").value,
+            image1: images[0].src,
+            image2: images[1].src,
+            lat: document.querySelector("#article_lat").value,
+            lng: document.querySelector("#article_lng").value,
+            status: document.querySelector('#article_status').innerHTML,
+            roomId: document.querySelector('#article_roomId').value,
+            roomTitle: document.querySelector("#article_title").value,
+        };
+
+        console.log(article);
+        articleApi.updateArticle(articleId, article);
+    }
 
     function deleteArticle(articleId){
         articleApi.deleteArticle(articleId);

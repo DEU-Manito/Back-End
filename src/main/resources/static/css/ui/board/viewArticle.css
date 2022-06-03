@@ -653,7 +653,7 @@ button, a {
     width: 120px;
     height: 120px;
     background-position : center center;
-    background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+    /*background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);*/
     background-color : #fff;
     background-size : cover;
     background-repeat : no-repeat;
@@ -740,7 +740,7 @@ button, a {
     width: 120px;
     height: 120px;
     background-size : cover;
-    background: #fff url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg) no-repeat center center;
+    /*background: #fff url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg) no-repeat center center;*/
     display: inline-block;
     border-radius: 20px;
     box-shadow:0 2px 6px 0 rgb(136 148 171 / 20%), 0 24px 20px -24px rgb(71 82 107 / 10%)

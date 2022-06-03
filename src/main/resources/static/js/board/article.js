@@ -46,5 +46,47 @@ var articleApi = {
                     window.location.href = '/articles';
                 }
             });
+        },
+
+    updateArticle :
+        function (articleId, article){
+            const url = '/api/articles/' + articleId;
+
+            fetch(url,{
+                method: "PATCH",
+                body: JSON.stringify(article),
+                headers: { "Content-Type": "application/json" }
+            }).then(response =>{
+                if(response.ok) {
+                    alert('article.js : 게시글이 수정 되었습니다.');
+                    window.location.reload();
+                }
+                else alert('article.js : 게시글 수정에 실패 했습니다.');
+            })
         }
 }
+
+document.querySelector(".jsFilter").addEventListener("click", function () {
+    document.querySelector(".filter-menu").classList.toggle("active");
+});
+
+document.querySelector(".grid").addEventListener("click", function () {
+    document.querySelector(".list").classList.remove("active");
+    document.querySelector(".grid").classList.add("active");
+    document.querySelector(".products-area-wrapper").classList.add("gridView");
+    document
+        .querySelector(".products-area-wrapper")
+        .classList.remove("tableView");
+});
+
+document.querySelector(".list").addEventListener("click", function () {
+    document.querySelector(".list").classList.add("active");
+    document.querySelector(".grid").classList.remove("active");
+    document.querySelector(".products-area-wrapper").classList.remove("gridView");
+    document.querySelector(".products-area-wrapper").classList.add("tableView");
+});
+
+var modeSwitch = document.querySelector('.mode-switch');
+modeSwitch.addEventListener('click', function () {                      document.documentElement.classList.toggle('dark');
+    modeSwitch.classList.toggle('active');
+});

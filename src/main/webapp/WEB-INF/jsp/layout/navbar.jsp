@@ -103,7 +103,7 @@
                     else { %>
                     <li><a href="javascript:void(0)" onclick="kakao_logout();">Logout</a></li>
                     <li>
-                        <a href="javascript:void(0)">
+                        <a href="/profile/${user.nickname}">
                             ${user.nickname} &nbsp;
                             <img src="${user.profile_image}" width="32px" height="32px">
                         </a>
@@ -121,7 +121,7 @@
                         else { %>
                             <li><a href="javascript:void(0)" onclick="kakao_logout();">Logout</a></li>
                             <li>
-                                <a href="javascript:void(0)">
+                                <a href="/profile/${user.nickname}">
                                     ${user.nickname} &nbsp;
                                     <img src="${user.profile_image}" width="32px" height="32px">
                                 </a>

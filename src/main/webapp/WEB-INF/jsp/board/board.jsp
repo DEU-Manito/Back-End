@@ -26,7 +26,7 @@
             <p class="app-name">Manito Board</p>
 
             <div class="title-wrapper">
-                <input class="title-input" type="text" placeholder="Search">
+                <input class="title-input" id="article_search" type="text" placeholder="Search">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
                      stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search"
                      viewBox="0 0 24 24">
@@ -213,9 +213,22 @@
 
 </div>
 <!-- board js -->
-<script src="/resources/js/board/board.js"></script>
+<script src="/resources/js/board/article.js"></script>
 
 
+<script>
+    // 검색 기능 이벤트
+    $("#article_search").keyup(function(){
+        var searchText = $(this).val();
+
+        if(searchText == '') $(".products-row").show();
+        else $(".products-row").hide();
+
+        var temp = $(".products-row .product-cell h3:contains('" + searchText + "')");
+
+        $(temp).parent().parent().show();
+    });
+</script>
 
 <script>
     var articles = document.querySelectorAll('.products-row');
