@@ -58,5 +58,8 @@ public class User {
     public void patch(UserPointDto userPointDto){
             this.point = userPointDto.getPoint();
     }
+    public void patch(int point){
+        this.point = point;
+    }
 
 }

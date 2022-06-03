@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @ToString
 @Builder
@@ -18,34 +19,25 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String nickname;
-    @Column
-    private String title;
-    @Column
-    private String content;
-    @Column
-    private Date createTime;
-    @Column
-    private Double lat; //위도
-    @Column
-    private Double lng; //경도
-    @Column
-    private String status;
-    @Column
-    private String roomId;
-    @Column
-    private String roomTitle;
-    @Column
-    private int point;
-    @Column(columnDefinition = "TEXT")
-    private String image1;
-    @Column(columnDefinition = "TEXT")
-    private String image2;
+    @Column private String nickname;
+    @Column private String title;
+    @Column private String content;
+    @Column private Date createTime;
+    @Column private Double lat; //위도
+    @Column private Double lng; //경도
+    @Column private String status;
+    @Column private String roomId;
+    @Column private String roomTitle;
+    @Column private int point;
+    @Column(columnDefinition = "MEDIUMTEXT") private String image1;
+    @Column(columnDefinition = "MEDIUMTEXT") private String image2;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "article_id")
+    private List<ChatMember> chatMembers;
 
     public static Article toEntity(ArticleDto articleDto) {
         return Article.builder()
-                .id(articleDto.getId())
                 .title(articleDto.getTitle())
                 .nickname(articleDto.getNickname())
                 .content(articleDto.getContent())
@@ -63,11 +55,14 @@ public class Article {
 
     // 게시글 수정
     public void patch(ArticleDto articleDto) {
-        if (articleDto.getTitle() != null)
+
+        if ("".equals(articleDto.getTitle()))
             this.title = articleDto.getTitle();
-        if (articleDto.getContent() != null)
+
+        if ("".equals(articleDto.getContent()))
             this.content = articleDto.getContent();
-        if(articleDto.getCreateTime() != null)
-            this.createTime = articleDto.getCreateTime();
+
+        this.point = articleDto.getPoint();
+        this.createTime = articleDto.getCreateTime();
     }
 }
