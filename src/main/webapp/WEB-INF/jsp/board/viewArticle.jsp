@@ -123,8 +123,8 @@
                         <h3>Author</h3>
                         <div class="author_info">
                             <p id = "article_author"><%=article.getNickname()%></p>
-                            <img id = "article_profile_img" src="http://k.kakaocdn.net/dn/bkGKzB/btrmDYfU0ZP/6aiPBYn1KLaxeokaqelzrk/img_110x110.jpg"
-                                 width="32px" height="32px" style="border-radius: 10px;">
+<%--                            <img id = "article_profile_img" src="http://k.kakaocdn.net/dn/bkGKzB/btrmDYfU0ZP/6aiPBYn1KLaxeokaqelzrk/img_110x110.jpg"--%>
+<%--                                 width="32px" height="32px" style="border-radius: 10px;">--%>
                         </div>
                     </div>
 
@@ -528,6 +528,12 @@
 
         <!-- 채팅 멤버에 유저를 등록 -->
         function addChatMember(){
+            let author = '<%= article.getNickname() %>';
+            let user = '<%= user.getNickname() %>';
+
+            // 본인이 작성한 게시물인 경우 채팅 멤버 추가 x
+            if(author == user) return;
+
             const chatMember = {
                 article_id : document.querySelector('#article_id').value,
                 nickname : '<%= user.getNickname() %>'

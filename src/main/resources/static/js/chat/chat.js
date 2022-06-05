@@ -1,4 +1,4 @@
-var API_KEY = 'oTtkIO-lx1t9b-Me6Qw5-Z8OfSB-20220323224155';
+var API_KEY = 'HOAzag-8QoCtY-rELyjQ-Bl52oD-20220605025055'; //'oTtkIO-lx1t9b-Me6Qw5-Z8OfSB-20220323224155';
 
 document.addEventListener('DOMContentLoaded', function () {
     var modeSwitch = document.querySelector('.mode-switch');

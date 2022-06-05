@@ -1,42 +1,58 @@
 
 //카카오로그인
 function kakao_login() {
-    Kakao.Auth.login({
+    Kakao.Auth.loginForm({
         // scope: 'account_email,gender',
         // throughTalk: false,
 
-        success: function (response) {
-            console.log(response)
-            Kakao.API.request({
-                url: '/v2/user/me',
-                success: function (response) {
+        success:
+            function (response) {
 
-                    var account = JSON.parse(JSON.stringify(response.kakao_account));
-                    var profile = JSON.parse(JSON.stringify(response.kakao_account.profile));
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                        console.log(response)
+                        var account = JSON.parse(JSON.stringify(response.kakao_account));
+                        var profile = JSON.parse(JSON.stringify(response.kakao_account.profile));
+                        
+                        // 사용자가 이메일 동의를 하지 않았을 경우
+                        if(!account.hasOwnProperty("email")){
+                            Kakao.API.request({
+                                url: '/v1/user/unlink',
+                                success: function(response) {
+                                    console.log(response);
+                                    alert('동의 항목을 전부 동의해주셔야 서비스 이용이 가능합니다.')
+                                },
+                                fail: function(error) {
+                                    console.log(error);
+                                },
+                            });
+                            return;
+                        }
 
+                        const kakao_user = {
+                            nickname: account.has_email == true ? account.email.split('@')[0] : "",
+                            email: account.has_email == true ? account.email : "",
+                            profile_image: profile.thumbnail_image_url,
+                            //gender: account.gender == null ? null : account.gender,
+                        }
 
-                    const kakao_user = {
-                        nickname: account.email.split('@')[0],
-                        email: account.has_email == true ? account.email : "",
-                        profile_image: profile.thumbnail_image_url,
-                        //gender: account.gender == null ? null : account.gender,
-                    }
+                        alert(kakao_user.nickname + " " + kakao_user.email + " " + kakao_user.profile_image + " " + kakao_user.clientKey);
 
-                    alert(kakao_user.nickname + " " + kakao_user.email + " " + kakao_user.profile_image + " " + kakao_user.clientKey);
-
-                    login(kakao_user);
-                },
-                fail: function (error) {
-                    console.log(error)
-                    alert(error);
-                },
-            })
-        },
-        fail: function (error) {
-            console.log(error)
-            alert(error);
-        },
-    })
+                        login(kakao_user);
+                    },
+                    fail: function (error) {
+                        console.log(error)
+                        alert(error);
+                    },
+                })
+            },
+        fail:
+            function (error) {
+                console.log(error)
+                alert(error);
+            },
+        })
 }
 
 function login(kakao_user){
