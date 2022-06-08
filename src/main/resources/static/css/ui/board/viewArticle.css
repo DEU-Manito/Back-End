@@ -1356,3 +1356,8 @@ button:hover .button-text {
 button.disabled{
     display: none;
 }
+
+#report_btn{
+    cursor: pointer;
+    color: black;
+}

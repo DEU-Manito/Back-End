@@ -180,6 +180,8 @@
             </button>
             <div class="projects-section-header">
                 <p style="margin-bottom: 0px">Help Chat</p>
+                <h3 id="report_btn" style="float: right; font-weight: 400;" onclick="reportModal()">신고</h3>
+
             </div>
 
             <div class="messages">
@@ -395,7 +397,7 @@
             </div>
             <!-- 평점 끝 -->
             <!-- 채팅방 인원 리스트 출력 영역 -->
-            <div class="select animated zoomIn" id ="chat_member_list">
+            <div class="select animated zoomIn chat_member_list">
                 <!-- You can toggle select (disabled) -->
                 <input type="radio" name="option">
                 <i class="toggle icon icon-arrow-down"></i>
@@ -411,6 +413,40 @@
                             <span class="icon arrow"></span>
                         </span>
                     <span class="button-text" onclick="rating()">Done !</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 모달 끝 -->
+
+<!-- 사용자 신고 모달 -->
+<div id="reportModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="display: block">
+                <h3 class="modal-title" style="font-weight: 700;font-size: 25px;">비매너 사용자 신고</h3>
+            </div>
+
+            <!-- 채팅방 인원 리스트 출력 영역 -->
+            <div class="select animated zoomIn chat_member_list">
+                <!-- You can toggle select (disabled) -->
+                <input type="radio" name="option">
+                <i class="toggle icon icon-arrow-down"></i>
+                <i class="toggle icon icon-arrow-up"></i>
+                <span class="placeholder">Choose...</span>
+
+            </div>
+            <!-- 채팅방 인원 리스트 출력 영역 -->
+
+            <div class="modal-footer">
+                <button class="rating_submit">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                    <span class="button-text" onclick="report()">Report</span>
                 </button>
             </div>
         </div>
@@ -447,6 +483,21 @@
         });
     }
 
+    function report(){
+        let user = document.querySelector('input[name="option"]:checked').value;
+        let roomId = document.querySelector('#article_roomId').value;
+
+        const url = '/api/user/' + user;
+
+        fetch(url, {
+            method: "GET"
+        }).then(response => {
+           if(response.ok) return response.json();
+           else return null;
+        }).then(json => {
+            vchatApi.reportUser(roomId, json["clientKey"]);
+        });
+    }
 </script>
 <script>
     // 수정 버튼 이벤트 등록
@@ -531,6 +582,14 @@
         $("#clearModal").on("hidden.bs.modal", function () { });
     }
 
+    // 사용자 신고 모달 창
+    function reportModal(){
+        $('#reportModal').modal('show');
+        getChatMembers();
+
+        $("#reportModal").on("hidden.bs.modal", function () { });
+    }
+
     // 채팅방 접속 메소드
     function joinChatting(){
         // 로그인 한 경우(세션이 있는 경우)
@@ -576,7 +635,7 @@
                 method: "GET"
             }).then(response => {return response.json();})
             .then(json => {
-                let parent = document.querySelector('#chat_member_list');
+                let parent = document.querySelector('.chat_member_list');
                 let child = document.querySelectorAll(".chat_member_label");
 
                 child.forEach(c => {
@@ -585,7 +644,7 @@
                 })
 
                 json.forEach(data => {
-                    $("#chat_member_list").append(
+                    $(".chat_member_list").append(
                         "<label class=\"option chat_member_label\">" +
                         "    <input type=\"radio\" name=\"option\" value= '" + data["nickname"] + "'>" +
                         "    <span class=\"title animated fadeIn\">" +

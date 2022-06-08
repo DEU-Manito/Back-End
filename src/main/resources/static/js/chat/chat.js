@@ -82,6 +82,31 @@ var vchatApi = {
                     else console.log('chat.js 채팅방 삭제 실패');
                 })
             });
+        },
+
+    reportUser :
+        async function(roomId, clientKey){
+            const url = 'https://vchatcloud.com/openapi/v1/mute/' + roomId + '/' + clientKey;
+            const xAuthToken = await this.getX_AUTH_TOKEN();
+
+            const data = {
+                roomId : roomId,
+                clientKey: clientKey,
+            }
+
+            xAuthToken.json().then(token =>{
+                fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        "API_KEY": API_KEY,
+                        "X-AUTH-TOKEN": token.data["X-AUTH-TOKEN"],
+                    }
+                }).then(response =>{
+                    if(response.ok) alert('유저 신고가 완료 되었습니다.');
+                    else alert('유저 신고에 실패했습니다.');
+                })
+            })
         }
 }
 
