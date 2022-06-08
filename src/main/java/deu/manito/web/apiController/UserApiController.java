@@ -68,16 +68,6 @@ public class UserApiController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-//    @PatchMapping("/api/user/update")
-//    @ApiOperation(value = "사용자 정보 수정", notes = "사용자의 정보를 수정합니다.")
-//    public ResponseEntity<UserDto> updateUser(@RequestBody UserUpdateDto userDto, HttpServletRequest request){
-//        UserDto user = userService.updateUser(userDto);
-//
-//        return Objects.isNull(user)
-//                    ? ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
-//                    : ResponseEntity.status(HttpStatus.OK).body(user);
-//    }
-
     @PatchMapping("/api/user/rename")
     @ApiOperation(value = "사용자 닉네임 변경", notes = "사용자 닉네임을 변경합니다.")
     public ResponseEntity<UserDto> renameProfile(@RequestBody UserUpdateDto dto,  HttpServletRequest request){
@@ -124,6 +114,15 @@ public class UserApiController {
         session.setAttribute("user", userDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
+    }
+
+    @GetMapping("/api/user/{nickname}")
+    public ResponseEntity<UserDto> getUser(@PathVariable String nickname){
+        UserDto user = userService.getProfile(nickname);
+
+        return Objects.isNull(user)
+                ? null
+                : ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
 }
