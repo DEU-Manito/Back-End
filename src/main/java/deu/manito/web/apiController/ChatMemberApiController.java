@@ -4,6 +4,7 @@ package deu.manito.web.apiController;
 import deu.manito.web.dto.chatMember.ChatMemberDto;
 import deu.manito.web.entity.ChatMember;
 import deu.manito.web.service.ChatMemberService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class ChatMemberApiController {
     }
 
     @PostMapping("/api/chatMember")
+    @ApiOperation(value = "게시글 채팅방 멤버 추가", notes = "도움 게시글 채팅에 참여한 유저를 등록합니다.")
     public ResponseEntity<ChatMemberDto> addChatMember(@RequestBody ChatMemberDto dto){
         ChatMemberDto result = chatMemberService.addMember(dto);
 
@@ -30,6 +32,7 @@ public class ChatMemberApiController {
     }
 
     @GetMapping("/api/chatMember/{articleId}")
+    @ApiOperation(value = "게시글 채팅방 멤버 조회", notes = "도움 게시글 채팅에 참여한 유저를 조회합니다.")
     public ResponseEntity<List<ChatMemberDto>> getChatMembers(@PathVariable Long articleId){
         List<ChatMemberDto> chatMembers = chatMemberService.getMembers(articleId);
 

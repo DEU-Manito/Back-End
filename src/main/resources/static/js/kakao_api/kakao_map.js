@@ -112,6 +112,27 @@ var kakaoMap = {
             $('.chat_room_marker').last().click(event => joinChatting(event));
         },
 
+    displayArticleIcon :
+        function (articleData /* articleDto */){
+            let articleUrl = '/articles/' + articleData.id;
+
+            var customOverlay = new kakao.maps.CustomOverlay({
+                position: new kakao.maps.LatLng(articleData.lat, articleData.lng),
+                content:
+                    '<div class="article-bubble article_marker">' +
+                    '   <div class="tool-tip" data-tooltip-title="' + articleData.title + '" data-tooltip-position="top">' +
+                    '       <i class="bx bx-error article_icon_marker style = "z-index: 10000"></i>' +
+                    '   </div>' +
+                    '</div>',
+                xAnchor: 0.3,
+                yAnchor: 0.91
+            });
+
+            // 커스텀 오버레이를 지도에 표시합니다
+            customOverlay.setMap(map);
+            $('.article_marker').last().click(() => { window.location.href=articleUrl });
+        },
+
     // 지도에 마커와 인포윈도우를 표시하는 함수
     displayMarker :
         function (locPosition, message) {

@@ -65,9 +65,13 @@
         <div class="projects-section">
             <%-- 유저 세션이 존재하고, 유저가 작성자일 경우 --%>
             <% if(!Objects.isNull(user) && article.getNickname().equals(user.getNickname())) { %>
-                <div id = "article_clear_btn" onclick="clearModal()">Clear</div>
-                <div id = "article_edit_btn">Edit</div>
+
                 <div id = "article_delete_btn" onclick="deleteArticle(<%=article.getId()%>)">Delete</div>
+
+                <% if("active".equals(article.getStatus())) { %>
+                    <div id = "article_edit_btn">Edit</div>
+                    <div id = "article_clear_btn" onclick="clearModal()">Clear</div>
+                <% } %>
             <% } %>
 
             <div class ="projects-content-section">
@@ -122,7 +126,7 @@
                     <div class="article_author">
                         <h3>Author</h3>
                         <div class="author_info">
-                            <p id = "article_author"><%=article.getNickname()%></p>
+                            <p id = "article_author" onclick="window.location.href = '/profile/' + '<%=article.getNickname()%>' "><%=article.getNickname()%></p>
 <%--                            <img id = "article_profile_img" src="http://k.kakaocdn.net/dn/bkGKzB/btrmDYfU0ZP/6aiPBYn1KLaxeokaqelzrk/img_110x110.jpg"--%>
 <%--                                 width="32px" height="32px" style="border-radius: 10px;">--%>
                         </div>
@@ -391,7 +395,7 @@
             </div>
             <!-- 평점 끝 -->
             <!-- 채팅방 인원 리스트 출력 영역 -->
-            <div class="select animated zoomIn" id = "chat_memeber_list">
+            <div class="select animated zoomIn" id ="chat_member_list">
                 <!-- You can toggle select (disabled) -->
                 <input type="radio" name="option">
                 <i class="toggle icon icon-arrow-down"></i>
@@ -416,11 +420,31 @@
 <!-- 모달 끝 -->
 
 <script>
+    // 사용자 평점 평가 함수
     function rating(){
-        let score = document.querySelector('input[name="rating"]:checked').value;
+        let helpScore = document.querySelector('input[name="rating"]:checked').value;
         let helper = document.querySelector('input[name="option"]:checked').value;
 
-        alert(score + " " + helper);
+        const data = {
+            articleId : <%=article.getId()%>,
+            nickname : helper,
+            score : helpScore,
+        }
+
+        const url = '/api/grade/rate';
+        fetch(url, {
+            method : "PATCH",
+            body : JSON.stringify(data),
+            headers : {
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            if(response.ok) {
+                alert('사용자 평가가 완료 되었습니다.');
+                window.location.reload();
+            }
+            else alert('사용자 평가에 실패 했습니다.');
+        });
     }
 
 </script>
@@ -494,7 +518,9 @@
     }
 
     function deleteArticle(articleId){
-        articleApi.deleteArticle(articleId);
+        let confirm = window.confirm("게시글을 삭제하시겠습니까 ?");
+
+        if(confirm) articleApi.deleteArticle(articleId);
     }
 
     // 완료 모달 창
@@ -550,9 +576,17 @@
                 method: "GET"
             }).then(response => {return response.json();})
             .then(json => {
+                let parent = document.querySelector('#chat_member_list');
+                let child = document.querySelectorAll(".chat_member_label");
+
+                child.forEach(c => {
+                    console.log(c);
+                    parent.removeChild(c);
+                })
+
                 json.forEach(data => {
-                    $("#chat_memeber_list").append(
-                        "<label class=\"option\">" +
+                    $("#chat_member_list").append(
+                        "<label class=\"option chat_member_label\">" +
                         "    <input type=\"radio\" name=\"option\" value= '" + data["nickname"] + "'>" +
                         "    <span class=\"title animated fadeIn\">" +
                         "       <i class=\"icon icon-fire\"></i>" +

@@ -63,25 +63,34 @@ public class UserService {
         return UserDto.createUserDto(user);
     }
 
+//    @Transactional
+//    public UserDto updateUser(UserUpdateDto updateDto){
+//        // 닉네임은 변경 될 수 있으므로 변경 전 닉네임으로 검색
+//        User user = userRepository.findByNickname(updateDto.getPrevNickname())
+//                                                           .orElseThrow(()-> new IllegalArgumentException("유저 정보 조회 오류"));
+//
+//        user.patch(updateDto);
+//
+//        return UserDto.createUserDto(user);
+//    }
 
     @Transactional  //이름 변경
-    public UserDto renameProfile(UserDto userDto) {
+    public UserDto renameProfile(UserUpdateDto userDto) {
 
         // 변경할 닉네임 중복 체크
-        Boolean check = userRepository.existsById(userDto.getNickname());
+        Boolean check = userRepository.existsById(userDto.getNextNickname());
+        
+        // 중복된 유저가 존재하면 null 리턴
+        if(check) return null;
 
-        if(check==false) {  // 중복된 닉네임이 없다면
+        // 수정할 유저 정보 가져오기 (이전 정보를
+        User target = userRepository.findByNickname(userDto.getPrevNickname()).orElse(null);
 
-            // 수정할 유저 정보 가져오기
-            User target = userRepository.findByNickname(userDto.getEmail()).orElse(null);
+        if(Objects.isNull(target)) return null;
 
-            target.patch(userDto);
+        target.patch(userDto);
 
-            return UserDto.createUserDto(target);
-        }
-
-        else    // 중복된 닉네임이 있다면
-            return null;
+        return UserDto.createUserDto(target);
     }
 
 

@@ -342,7 +342,7 @@ body {
 }
 
 .tableView .product-cell {
-    /* flex: 1; */
+    flex: 1;
     padding: 8px 16px;
     color: var(--app-content-main-color);
     font-size: 14px;
@@ -364,14 +364,14 @@ body {
 }
 
 .tableView .title{
-    flex: 4;
+    flex: 10;
 }
 
 .tableView .title h3{
     text-overflow: ellipsis;
     overflow: hidden;
     -webkit-line-clamp : 2;
-    font-size: 23px;
+    font-size: 20px;
 }
 
 .tableView .viewcount .price .status{

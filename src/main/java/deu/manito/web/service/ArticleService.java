@@ -1,6 +1,7 @@
 package deu.manito.web.service;
 
 import deu.manito.web.dto.article.ArticleDto;
+import deu.manito.web.dto.article.ArticleLocationDto;
 import deu.manito.web.dto.user.UserPointDto;
 import deu.manito.web.entity.Article;
 import deu.manito.web.entity.User;
@@ -32,7 +33,10 @@ public class ArticleService {
 
         // 금액 처리위한 UserPointDto 생성
         UserPointDto userPointDto = UserPointDto.createUserPointDto(articleDto);
-
+        
+        // 포인트가 음수로 들어온 경우 바로 리턴
+        if(articleDto.getPoint() < 0) return null;
+        
         userService.withdrawPoint(userPointDto);
 
         Article target = articleRepository.save(Article.toEntity(articleDto));
@@ -90,6 +94,14 @@ public class ArticleService {
 
     public List<ArticleDto> getAllArticles(){
         List<ArticleDto> articles = articleRepository.findAll()
+                .stream().map(article -> ArticleDto.createArticleDto(article))
+                .collect(Collectors.toList());
+
+        return articles;
+    }
+
+    public List<ArticleDto> getNearByArticles(ArticleLocationDto dto){
+        List<ArticleDto> articles = articleRepository.findAllNearByArticle(dto.getLat(), dto.getLng())
                                         .stream().map(article -> ArticleDto.createArticleDto(article))
                                         .collect(Collectors.toList());
 

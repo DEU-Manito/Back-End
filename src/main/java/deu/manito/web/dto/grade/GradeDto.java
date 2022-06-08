@@ -14,7 +14,7 @@ public class GradeDto {
     private long   id;
     private String nickname;
     private int    helpCnt;
-    private double    score;
+    private double score;
 
     public static GradeDto createGradeDto(Grade grade) {
         return GradeDto.builder()

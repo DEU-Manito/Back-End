@@ -5,6 +5,8 @@ import deu.manito.web.dto.user.*;
 import deu.manito.web.entity.UserLocation;
 import deu.manito.web.service.UserLocationService;
 import deu.manito.web.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,7 @@ public class UserApiController {
     }
 
     @PostMapping("/api/user/login")
+    @ApiOperation(value = "로그인")
     public ResponseEntity<UserDto> userlogin(@RequestBody UserLoginDto userLoginDto, HttpServletRequest request){
 
         UserDto userDto = userService.login(userLoginDto);
@@ -45,6 +48,7 @@ public class UserApiController {
     }
 
     @GetMapping("/api/user/logout")
+    @ApiOperation(value = "로그아웃")
     public ResponseEntity<UserDto> userlogout(HttpServletRequest request){
         HttpSession session = request.getSession();
         UserDto userDto = (UserDto) session.getAttribute("user");
@@ -64,45 +68,19 @@ public class UserApiController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @PostMapping("/api/user/location") // 유저 위치 정보를 세션에 등록하는 메소드
-    public ResponseEntity<UserLocationDto> addUserLocation(@RequestBody UserLocationDto userLocationDto, HttpServletRequest request){
-        // 사용자의 위치 정보가 제대로 들어오지 않았을 경우
-        if(Objects.isNull(userLocationDto)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-
-        HttpSession session = request.getSession();
-        session.setAttribute("userLocation", userLocationDto);
-
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
-    @PostMapping("/api/user/location/auth") // 모바일의 위치 정보를 DB에 등록하는 메소드
-    public ResponseEntity<UserLocationAuthDto> authMobileLocation(@RequestBody UserLocationAuthDto dto, HttpServletRequest request){
-        UserLocationAuthDto result = userLocationService.authMobileLocation(dto);
-        
-        return ResponseEntity.status(HttpStatus.OK).body(result);
-    }
-
-    @GetMapping("/api/user/location/auth/{nickname}") // PC 위치 인증 메소드
-    public ResponseEntity<UserLocationAuthDto> authPcLocation(@PathVariable String nickname, HttpServletRequest request){
-        log.info(nickname);
-        UserLocationAuthDto result = userLocationService.authPcLocation(nickname);
-
-        // DB에 유저 위치 정보가 있는 경우
-        if(!Objects.isNull(result)) {
-            UserLocationDto userLocation = new UserLocationDto(result.getLat(), result.getLng());
-            // 세션에 유저의 위치 정보를 등록
-            HttpSession session = request.getSession();
-            session.setAttribute("userLocation", userLocation);
-        }
-
-        return Objects.isNull(result)
-                ? ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
-                : ResponseEntity.status(HttpStatus.OK).body(result);
-    }
+//    @PatchMapping("/api/user/update")
+//    @ApiOperation(value = "사용자 정보 수정", notes = "사용자의 정보를 수정합니다.")
+//    public ResponseEntity<UserDto> updateUser(@RequestBody UserUpdateDto userDto, HttpServletRequest request){
+//        UserDto user = userService.updateUser(userDto);
+//
+//        return Objects.isNull(user)
+//                    ? ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
+//                    : ResponseEntity.status(HttpStatus.OK).body(user);
+//    }
 
     @PatchMapping("/api/user/rename")
-    public ResponseEntity<UserDto> renameProfile(@RequestBody UserDto dto,  HttpServletRequest request){
-
+    @ApiOperation(value = "사용자 닉네임 변경", notes = "사용자 닉네임을 변경합니다.")
+    public ResponseEntity<UserDto> renameProfile(@RequestBody UserUpdateDto dto,  HttpServletRequest request){
 
         UserDto userDto = userService.renameProfile(dto);
 
@@ -110,8 +88,6 @@ public class UserApiController {
         if(Objects.isNull(userDto))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
-        //정상 등록
-        // 세션 등록?????
         HttpSession session = request.getSession();
         session.setAttribute("user", userDto);
 
@@ -119,25 +95,33 @@ public class UserApiController {
     }
 
     @PatchMapping("/api/user/deposit") // 포인트 입금
-    public ResponseEntity<UserDto> depositPoint(@RequestBody UserPointDto userPointDto){
+    @ApiOperation(value = "사용자 포인트 충전", notes = "사용자 포인트를 충전합니다.")
+    public ResponseEntity<UserDto> depositPoint(@RequestBody UserPointDto userPointDto, HttpServletRequest request){
 
         UserDto userDto = userService.depositPoint(userPointDto);
 
         if(Objects.isNull(userDto))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
-
+        // 유저 세션 갱신 (포인트 갱신)
+        HttpSession session = request.getSession();
+        session.setAttribute("user", userDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
     @PatchMapping("/api/user/withdraw") // 포인트 출금
-    public ResponseEntity<UserDto> withdrawPoint(@RequestBody UserPointDto userPointDto){
+    @ApiOperation(value = "사용자 포인트 반환", notes = "사용자 포인트를 반환합니다.")
+    public ResponseEntity<UserDto> withdrawPoint(@RequestBody UserPointDto userPointDto, HttpServletRequest request){
 
         UserDto userDto = userService.withdrawPoint(userPointDto);
 
         if(Objects.isNull(userDto))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        // 유저 세션 갱신 (포인트 갱신)
+        HttpSession session = request.getSession();
+        session.setAttribute("user", userDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }

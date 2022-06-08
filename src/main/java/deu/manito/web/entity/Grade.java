@@ -2,6 +2,7 @@ package deu.manito.web.entity;
 
 
 import deu.manito.web.dto.grade.GradeDto;
+import deu.manito.web.dto.grade.GradeRateDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,8 +24,8 @@ public class Grade {
     @Column private int    helpCnt;
 
 
-    public void patch(GradeDto gradeDto) {
-                this.score = gradeDto.getScore();
-                this.helpCnt = this.helpCnt+1;
+    public void patch(GradeRateDto rateDto) {
+        this.score = rateDto.getScore();
+        this.helpCnt = this.helpCnt+1;
     }
 }

@@ -750,3 +750,75 @@ button, a {
 .tool-tip[data-tooltip-position="top"]:hover::after{
     transform: translate3d(-50%, 0px, 0);
 }
+
+/* 지도 게시글 아이콘 CSS */
+.article-bubble {
+    background: #ffeafc;
+    color: #ff25a3;
+    display: inline-block;
+    font-size: 10px;
+
+    /* line-height: 3.5em; */
+    padding: 0 0.5em;
+    margin-bottom: 1em;
+    position: relative;
+
+    /* text-align: center;
+    vertical-align: top; */
+
+    /*min-width: 2em;*/
+    border-radius: .9em;
+    border : 3px solid #ffffff ;
+
+    box-shadow: 0 2.1px 1.3px rgba(0, 0, 0, 0.044),
+    0 5.9px 4.2px rgba(0, 0, 0, 0.054), 0 12.6px 9.5px rgba(0, 0, 0, 0.061),
+    0 25px 20px rgba(0, 0, 0, 0.1);
+    /* margin: 30px 10px; */
+}
+
+.article-bubble:after {
+    border: 0.7em solid transparent;
+    border-top-color: #eafdff;
+    content: '';
+    margin-left: -1em;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+}
+
+.article-bubble:hover{
+    color: #FFFFFF;
+    background: linear-gradient(120deg, #e218ff 0%, #f9d7ff 100%);
+    cursor: pointer;
+}
+
+.article_icon_marker {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+#showArticleBtn{
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+    color: #afafaf;
+}
+
+#showArticleBtn:hover{
+    color: #f9d7ff;
+    cursor: pointer;
+}
+
+#showChattingBtn{
+    position: absolute;
+    right: 130px;
+    bottom: 20px;
+    color: #afafaf;
+}
+
+#showChattingBtn:hover{
+    color: #84cfff;
+    cursor: pointer;
+}

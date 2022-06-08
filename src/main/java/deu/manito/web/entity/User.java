@@ -4,6 +4,7 @@ package deu.manito.web.entity;
 import deu.manito.web.dto.user.UserDto;
 import deu.manito.web.dto.user.UserLoginDto;
 import deu.manito.web.dto.user.UserPointDto;
+import deu.manito.web.dto.user.UserUpdateDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,23 +19,13 @@ import javax.persistence.*;
 @Entity
 public class User {
 
-    @Id
-    private String email;
+    @Id private String email;
 
-    @Column // Email은 UNIQUE
-    private String nickname;
-
-    @Column
-    private String profile_image;
-
-    @Column
-    private String clientKey;
-
-    @Column
-    private int reportCnt;
-
-    @Column
-    private int point;
+    @Column private String nickname; // Email은 UNIQUE
+    @Column private String profile_image;
+    @Column private String clientKey;
+    @Column private int reportCnt;
+    @Column private int point;
 
     public static User toEntity(UserLoginDto userLoginDto){
         return User.builder()
@@ -48,18 +39,19 @@ public class User {
     }
 
 
-
     public void patch(UserDto userDto){
         if(userDto.getNickname() != null)
             this.nickname = userDto.getNickname();
 
+        this.point = userDto.getPoint();
     }
 
     public void patch(UserPointDto userPointDto){
             this.point = userPointDto.getPoint();
     }
-    public void patch(int point){
-        this.point = point;
-    }
 
+    public void patch(UserUpdateDto userUpdateDto) {
+        if(!"".equals(userUpdateDto.getNextNickname()))
+            this.nickname = userUpdateDto.getNextNickname();
+    }
 }

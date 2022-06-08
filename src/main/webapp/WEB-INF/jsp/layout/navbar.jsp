@@ -28,15 +28,9 @@
             } else {
                 // PC는 모달 창으로 QR 코드 띄우기 -> 모바일로 접속 후 인증
                 // DB에 모바일 위치 값이 들어올 때까지 요청
-                alert('pc 접속');
-                if(location != null) {
-                    alert('세션 있으니 들어가셈');
-                    window.location.href = href;
-                }
-                else {
-                    alert('세션 없으니 나가셈');
-                    locationApi.authPcLocation(nickname, href);
-                }
+                if(location != null) window.location.href = href;
+                else locationApi.authPcLocation(nickname, href);
+
             }
         }
     }
@@ -73,13 +67,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">MANITO QR</h4>
+                <p>모바일로 위치를 인증해주세요.</p>
             </div>
             <div class="modal-body qrcode_section">
                 <img src="/resources/img/qrcode/qrcode.png" width="200px">
             </div>
             <div class="modal-footer">
-                <h3>모바일로 위치를 인증해주세요.</h3>
-<%--                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
+                <p>* 아이폰 사용자의 경우 크롬 브라우저를 이용해주세요.</p>
+                <p>사파리 브라우저 자체 이슈로 인해 카카오 로그인 팝업이 뜨지 않습니다.</p>
             </div>
         </div>
     </div>

@@ -37,7 +37,7 @@ function kakao_login() {
                             //gender: account.gender == null ? null : account.gender,
                         }
 
-                        alert(kakao_user.nickname + " " + kakao_user.email + " " + kakao_user.profile_image + " " + kakao_user.clientKey);
+                        // alert(kakao_user.nickname + " " + kakao_user.email + " " + kakao_user.profile_image + " " + kakao_user.clientKey);
 
                         login(kakao_user);
                     },
@@ -66,7 +66,7 @@ function login(kakao_user){
         }
     }).then(response => {
         if(response.ok){
-            alert("로그인 성공");
+            // alert("로그인이 완료 되었습니다.");
             window.location.reload();
         }
     });

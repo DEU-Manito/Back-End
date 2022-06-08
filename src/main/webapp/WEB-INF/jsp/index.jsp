@@ -73,7 +73,7 @@
                             </span>
                         </div>
                         <h3 class="animated fadeInUp wow">위치 기반 서비스</h3>
-                        <p class="animated fadeInDown wow">마니또는 내 주변의 익명의 사람들과 소통합니다.</p>
+                        <p class="animated fadeInDown wow">마니또에서 내 주변의 사람들과 소통할 수 있습니다.</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -82,7 +82,7 @@
                                 class="fa-solid fa-comments"></i></span></div>
                         <h3 class="animated fadeInUp wow">실시간 단체 채팅 서비스</h3>
                         <p class="animated fadeInDown wow">
-                            주변의 사람들과 익명으로 채팅이 가능합니다.
+                            실제 내 주변의 사람들과 채팅이 가능합니다.
                             <br>
                             여러 사람과 주변 상황을 공유하며 재미있는 이야기를 해보세요.
                         </p>
@@ -115,36 +115,34 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-6 wow fadeInLeft delay-05s">
                         <div class="service-list">
-                            <div class="service-list-col1"><i class="icon-doc"></i></div>
+                            <div class="service-list-col1"><i class='bx bxl-java'></i></div>
                             <div class="service-list-col2">
-                                <h3>Process Walkthrough</h3>
-                                <p>Proin iaculis purus digni consequat sem digni ssim. Donec entum digni ssim.</p>
+                                <h3>JSP (Front-End)</h3>
+                                <p>Java Server Page(JSP)를 활용하여 프론트 엔드 구성</p>
                             </div>
                         </div>
                         <div class="service-list">
                             <div class="service-list-col1"><i class='bx bxl-spring-boot' ></i></div>
                             <div class="service-list-col2">
-                                <h3>24/7 support</h3>
-                                <p>Proin iaculis purus consequat sem digni ssim. Digni ssim porttitora .</p>
+                                <h3>Spring Boot (Back-End)</h3>
+                                <p>Spring Boot를 활용하여 백엔드 구성</p>
                             </div>
                         </div>
                         <div class="service-list">
-                            <div class="service-list-col1"><i class="icon-database"></i></div>
+                            <div class="service-list-col1"><i class='bx bxl-docker'></i></div>
                             <div class="service-list-col2">
-                                <h3>Hosting & Storage</h3>
-                                <p>Proin iaculis purus consequat digni sem digni ssim. Purus donec porttitora entum.</p>
+                                <h3>Docker(MySQL)</h3>
+                                <p>Docker를 이용하여 MySQL 구동</p>
                             </div>
                         </div>
                         <div class="service-list">
-                            <div class="service-list-col1"><i class="icon-cog"></i></div>
+                            <div class="service-list-col1"><i class='bx bxl-git'></i></div>
                             <div class="service-list-col2">
-                                <h3>Customization options</h3>
-                                <p>Proin iaculis purus consequat sem digni ssim. Sem porttitora entum.</p>
+                                <h3>GitHub</h3>
+                                <p>Git & GitHub를 이용한 프로그램 형상 관리 및 협업</p>
                             </div>
                         </div>
-                        <div class="work_bottom"><span>Ready to take the plunge?</span> <a href="#contact"
-                                                                                           class="contact_btn">Contact
-                            Us</a></div>
+                        <div class="work_bottom"><span>Manito Github</span> <a href="https://github.com/DEU-Manito" class="contact_btn">Github</a></div>
                     </div>
                     <figure class="col-lg-6 col-sm-6  text-right wow fadeInUp delay-02s"></figure>
                 </div>
@@ -156,213 +154,10 @@
 
 <!--main-section-end-->
 
-<!--new_portfolio-->
-
-<!-- Portfolio -->
-<section id="Portfolio" class="content">
-
-    <!-- Container -->
-    <div class="container portfolio-title">
-
-        <!-- Section Title -->
-        <div class="section-title">
-            <h2>Portfolio</h2>
-        </div>
-        <!--/Section Title -->
-
-    </div>
-    <!-- Container -->
-
-    <div class="portfolio-top"></div>
-
-    <!-- Portfolio Plus Filters -->
-    <div class="portfolio">
-
-        <!-- Portfolio Filters -->
-        <div id="filters" class="sixteen columns">
-            <ul class="clearfix">
-                <li><a id="all" href="#" data-filter="*" class="active">
-                    <h5>All</h5>
-                </a></li>
-                <li><a class="" href="#" data-filter=".branding">
-                    <h5>Branding</h5>
-                </a></li>
-                <li><a class="" href="#" data-filter=".design">
-                    <h5>Design</h5>
-                </a></li>
-                <li><a class="" href="#" data-filter=".photography">
-                    <h5>Photography</h5>
-                </a></li>
-                <li><a class="" href="#" data-filter=".videography">
-                    <h5>Videography</h5>
-                </a></li>
-                <li><a class="" href="#" data-filter=".web">
-                    <h5>Web</h5>
-                </a></li>
-            </ul>
-        </div>
-        <!--/Portfolio Filters -->
-
-
-        <!-- Portfolio Wrap -->
-        <div class="isotope" style="position: relative; overflow: hidden; height: 480px;" id="portfolio-wrap">
-
-            <!-- Portfolio Item With PrettyPhoto  -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                 class="portfolio-item one-four   videography isotope-item">
-                <div class="portfolio-image"><img src="resources/img/portfolio_pic1.jpg" alt="Portfolio 1"></div>
-                <a title="Starbucks Coffee" rel="prettyPhoto[galname]"
-                   href="http://clapat.ro/themes/newave/images/portfolio/portfolio2.jpg">
-                    <div class="project-overlay">
-                        <div class="project-info">
-                            <div class="zoom-icon"></div>
-                            <h4 class="project-name">Leica Camera</h4>
-                            <p class="project-categories">Videography</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <!--/Portfolio Item With PrettyPhoto  -->
-
-            <!-- Portfolio Item Video Expander  -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                 class="portfolio-item one-four  design isotope-item">
-                <div class="portfolio-image"><img src="resources/img/portfolio_pic2.jpg" alt="Portfolio 1"></div>
-                <div class="project-overlay">
-                    <div class="open-project-link"><a class="open-project"
-                                                      href="http://clapat.ro/themes/newave/project-video-expander.html"
-                                                      title="Open Project"></a></div>
-                    <div class="project-info">
-                        <div class="zoom-icon"></div>
-                        <h4 class="project-name">Foto Template</h4>
-                        <p class="project-categories">Design</p>
-                    </div>
-                </div>
-            </div>
-            <!--/Portfolio Item Video Expander  -->
-
-            <!-- Portfolio Item Normal Expander -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                 class="portfolio-item one-four  design  isotope-item">
-                <div class="portfolio-image"><img src="resources/img/portfolio_pic3.jpg" alt="Portfolio 1"></div>
-                <div class="project-overlay">
-                    <div class="open-project-link"><a class="open-project"
-                                                      href="http://clapat.ro/themes/newave/project-normal-expander-1.html"
-                                                      title="Open Project"></a></div>
-                    <div class="project-info">
-                        <div class="zoom-icon"></div>
-                        <h4 class="project-name">Sony Phone</h4>
-                        <p class="project-categories">Design</p>
-                    </div>
-                </div>
-            </div>
-            <!--/Portfolio Item Normal Expander -->
-
-            <!-- Portfolio Item FullScreen Expander -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                 class="portfolio-item one-four  photography  branding web isotope-item">
-                <div class="portfolio-image"><img src="resources/img/portfolio_pic4.jpg" alt="Portfolio 1"></div>
-                <div class="project-overlay">
-                    <div class="open-project-link"><a class="open-project"
-                                                      href="http://clapat.ro/themes/newave/project-fullscreen-expander-1.html"
-                                                      title="Open Project"></a></div>
-                    <div class="project-info">
-                        <div class="zoom-icon"></div>
-                        <h4 class="project-name">Nike Shoes</h4>
-                        <p class="project-categories">Photography, Web, Branding</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Portfolio Item FullScreen Expander -->
-
-            <!-- Portfolio Item FullScreen Expander -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                 class="portfolio-item one-four  design isotope-item">
-                <div class="portfolio-image"><img src="resources/img/portfolio_pic5.jpg" alt="Portfolio 1"></div>
-                <div class="project-overlay">
-                    <div class="open-project-link"><a class="open-project"
-                                                      href="http://clapat.ro/themes/newave/project-fullscreen-expander-2.html"
-                                                      title="Open Project"></a></div>
-                    <div class="project-info">
-                        <div class="zoom-icon"></div>
-                        <h4 class="project-name">Vinyl Record</h4>
-                        <p class="project-categories">Design</p>
-                    </div>
-                </div>
-            </div>
-            <!--/Portfolio Item FullScreen Expander -->
-
-            <!-- Portfolio Item Normal Expander -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                 class="portfolio-item one-four  web isotope-item">
-                <div class="portfolio-image"><img src="resources/img/portfolio_pic6.jpg" alt="Portfolio 1"></div>
-                <div class="project-overlay">
-                    <div class="open-project-link"><a class="open-project"
-                                                      href="http://clapat.ro/themes/newave/project-normal-expander-2.html"
-                                                      title="Open Project"></a></div>
-                    <div class="project-info">
-                        <div class="zoom-icon"></div>
-                        <h4 class="project-name">iPhone</h4>
-                        <p class="project-categories">Web</p>
-                    </div>
-                </div>
-            </div>
-            <!--/Portfolio Item Normal Expander -->
-
-            <!-- Portfolio Item External Project  -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                 class="portfolio-item one-four  design web isotope-item">
-                <div class="portfolio-image"><img src="resources/img/portfolio_pic7.jpg" alt="Portfolio 1"></div>
-                <a href="http://clapat.ro/themes/newave/project-external-1.html" class="external">
-                    <div class="project-overlay">
-                        <div class="project-info">
-                            <div class="zoom-icon"></div>
-                            <h4 class="project-name">Nexus Phone</h4>
-                            <p class="project-categories">Design, Web</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <!--/Portfolio Item External Project  -->
-
-            <!-- Portfolio Item With PrettyPhoto  -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                 class="portfolio-item one-four   photography isotope-item">
-                <div class="portfolio-image"><img src="resources/img/portfolio_pic8.jpg" alt="Portfolio 1"></div>
-                <a title="Stereo Headphones" rel="prettyPhoto[galname]"
-                   href="http://clapat.ro/themes/newave/images/portfolio/portfolio8.jpg">
-                    <div class="project-overlay">
-                        <div class="project-info">
-                            <div class="zoom-icon"></div>
-                            <h4 class="project-name">Art Frame</h4>
-                            <p class="project-categories">Photography</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <!--/Portfolio Item With PrettyPhoto  -->
-
-        </div>
-        <!--/Portfolio Wrap -->
-
-    </div>
-    <!--/Portfolio Plus Filters -->
-
-    <div class="portfolio-bottom"></div>
-
-    <!-- Project Page Holder-->
-    <div id="project-page-holder">
-        <div class="clear"></div>
-        <div id="project-page-data"></div>
-    </div>
-    <!--/Project Page Holder-->
-
-</section>
-<!--/Portfolio -->
 
 <section class="main-section" id="client_outer">
     <!--main-section client-part-start-->
-    <h2>HAPPY CLIENTS</h2>
+    <h2>MANITO CLIENTS</h2>
     <div class="client_area ">
         <div class="client_section animated  fadeInUp wow">
             <div class="client_profile">
@@ -372,9 +167,8 @@
             </div>
             <div class="quote_section">
                 <div class="quote_arrow"></div>
-                <p><b><img src="resources/img/quote_sign_left.png" alt=""></b> Proin iaculis purus consequat sem cure
-                    digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam
-                    eget nibh et. Maecen aliquam, risus at sempre. <small><img src="resources/img/quote_sign_right.png"
+                <p><b><img src="resources/img/quote_sign_left.png" alt=""></b> 배가 너무 고팠는데 주변 사람들이
+                    과자를 사줬어요 !<small><img src="resources/img/quote_sign_right.png"
                                                                                alt=""></small></p>
             </div>
             <div class="clear"></div>
@@ -402,10 +196,10 @@
     <!--c-logo-part-start-->
     <div class="container">
         <ul class="delay-06s animated  bounce wow">
-            <li><a href="javascript:void(0)"><img src="resources/img/c-liogo1.png" alt=""></a></li>
-            <li><a href="javascript:void(0)"><img src="resources/img/c-liogo2.png" alt=""></a></li>
-            <li><a href="javascript:void(0)"><img src="resources/img/c-liogo3.png" alt=""></a></li>
-            <li><a href="javascript:void(0)"><img src="resources/img/c-liogo5.png" alt=""></a></li>
+            <li><a href="javascript:void(0)"><img src="" alt=""></a></li>
+            <li><a href="javascript:void(0)"><img src="" alt=""></a></li>
+            <li><a href="javascript:void(0)"><img src="" alt=""></a></li>
+            <li><a href="javascript:void(0)"><img src="" alt=""></a></li>
         </ul>
     </div>
 </div>
@@ -425,8 +219,7 @@
                     <div class="row" style="text-align: center">
                         <div class="col-md-12">
                             <!-- https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t1.jpg -->
-                            <img src="resources/img/team_profile/kim_zoon.jpg" alt="wrapkit"
-                                 class="img-fluid rounded-circle"/>
+                            <img src="resources/img/team_profile/kim_zoon.png" alt="wrapkit" width="150px"/>
                         </div>
                         <div class="col-md-12 text-center">
                             <div class="pt-2">
@@ -460,8 +253,7 @@
                     <div class="row" style="text-align: center">
                         <div class="col-md-12">
                             <!-- https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t2.jpg -->
-                            <img src="resources/img/team_profile/kim_dong_hyeon.jpg" alt="wrapkit"
-                                 class="img-fluid rounded-circle"/>
+                            <img src="resources/img/team_profile/kim_dong_hyeon.jpg" alt="wrapkit" width="140px"/>
                         </div>
                         <div class="col-md-12 text-center">
                             <div class="pt-2">
@@ -495,8 +287,7 @@
                     <div class="row" style="text-align: center">
                         <div class="col-md-12">
                             <!-- https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t3.jpg -->
-                            <img src="resources/img/team_profile/kim_kyung_hyeon.jpg" alt="wrapkit"
-                                 class="img-fluid rounded-circle"/>
+                            <img src="resources/img/team_profile/kim_kyung_hyeon.png" alt="wrapkit" width="150px"/>
                         </div>
                         <div class="col-md-12 text-center">
                             <div class="pt-2">
@@ -568,10 +359,9 @@
 <!--twitter-feed-->
 <section class="twitter-feed">
     <div class="container  animated fadeInDown delay-07s wow">
-        <div class="twitter_bird"><span><i class="fa fa-twitter"></i></span></div>
-        <p> When you're the underdog, your only option is to make #waves if you want to succeed. How much <br>
-            and how often should you be drinking coffee?</p>
-        <span>About 28 mins ago</span>
+        <div class="twitter_bird"><span><i class='bx bxl-dev-to'></i></span></div>
+        <p> Dong-Eui University 915 Lab.</p>
+        <span>2022-03-03 ~ 2022-06-10</span>
     </div>
 </section>
 <!--twitter-feed-end-->
@@ -607,12 +397,10 @@
             <div class="row">
                 <div class="col-lg-6 wow fadeInLeft">
                     <div class="contact-info-box address clearfix">
-                        <h3>Don’t be shy. Say hello!</h3>
-                        <p>Accusantium quam, aliquam ultricies eget tempor id, aliquam eget nibh et. Maecen aliquam,
-                            risus at semper. Accusantium quam, aliquam ultricies eget tempor id, aliquam eget nibh et.
-                            Maecen aliquam, risus at semper.</p>
-                        <p>Accusantium quam, aliquam ultricies eget tempor id, aliquam eget nibh et. Maecen aliquampor
-                            id.</p>
+                        <h3>마니또 팀입니다.</h3>
+                        <p>마니또는 주변 사람들과 소통하고 도움을 주고 받을 수 있는 서비스입니다. 실제 내 주변의 사람들과 주변에 대해서 이야기하고
+                        도움을 줄 마니또를 찾아보세요.</p>
+                        <p>문의사항은 동의대학교 정보공학관 915호를 방문해주세요.</p>
                     </div>
                     <ul class="social-link">
                         <li class="twitter animated bounceIn wow delay-02s"><a href="javascript:void(0)"><i
@@ -645,7 +433,7 @@
         </section>
     </div>
     <div class="container">
-        <div class="footer_bottom"><span>Computer Software Engineering | <a href="https://github.com/DEU-Manito">deu-manito.github.io</a> by DEU-Manito </span>
+        <div class="footer_bottom"><span>Computer Software Engineering | <a href="https://github.com/DEU-Manito">https://github.com/DEU-Manito</a> by DEU-Manito </span>
         </div>
         <!--
         All links in the footer should remain intact.
@@ -740,4 +528,4 @@
 
 <!-- Footer -->
 <%@ include file="layout/footer.jsp"%>
-<!-- Footer End -->k
+<!-- Footer End -->

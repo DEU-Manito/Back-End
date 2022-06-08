@@ -79,6 +79,41 @@ var articleApi = {
                 if (response.ok) console.log('article.js : 채팅 멤버 등록 완료');
                 else console.log('article.js : 채팅 멤버 등록 실패');
             })
+        },
+
+    displayArticleList :
+        function (lat, lng){
+            const url = '/api/articles/markers';
+            const data = {
+                lat : lat,
+                lng : lng,
+            }
+
+            fetch(url, {
+                method : "POST",
+                body : JSON.stringify(data),
+                headers : {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if(response.ok) return response.json();
+                else return null;
+            }).then(article => {
+                if(article == null) alert('article.js : 게시글 조회에 실패했습니다.');
+                else{
+                    for (idx in article){
+                        const articleData = {
+                            id: article[idx].id,
+                            title: article[idx].title,
+                            lat: article[idx].lat,
+                            lng: article[idx].lng,
+                        }
+
+                        console.log(articleData);
+                        kakaoMap.displayArticleIcon(articleData);
+                    }
+                }
+            });
         }
 }
 

@@ -288,6 +288,10 @@ button, a {
     flex: 3;
 }
 
+.article_author:hover{
+    cursor:pointer;
+}
+
 
 
 .article_date {
@@ -762,15 +766,15 @@ button, a {
 }
 
 #article_edit_btn{
-    right: 60px;
+    right: 100px;
 }
 
 #article_delete_btn{
-    right: 10px;
+    right: 50px;
 }
 
 #article_clear_btn{
-    right: 95px;
+    right: 10px;
 }
 
 #article_edit_btn:hover, #article_delete_btn:hover, #article_clear_btn:hover{

@@ -177,7 +177,6 @@
 
 <script>
     async function articleSubmit(){
-        // img_add_section
         let images = document.querySelectorAll(".imagePreview");
         const noImage = '/resources/img/no_image.jpg';
 

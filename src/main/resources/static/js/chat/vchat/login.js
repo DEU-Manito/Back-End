@@ -49,7 +49,7 @@ function getClientInfo(clientKey, nickname, profileImage){
 
 /* client : 사용자의 프로필 loginFlag : 로그인 플래그 */
 function enterChatting(client, roomId /* = channelKey */) {
-    alert('loginFunc : ' + client.clientKey);
+    // alert('loginFunc : ' + client.clientKey);
 
     // clientKey가 없는 경우 비로그인 유저
     var loginFlag = client.clientKey != '' ? true : false;
@@ -147,7 +147,7 @@ function joinRoom(/* chanelKey */ roomId, client, callback) {
         nickName: client.nickname
     }, function(error, history) {
 
-        alert("joinroom : " + channel.clientKey + " " + channel.nickName + " 입장");
+        // alert("joinroom : " + channel.clientKey + " " + channel.nickName + " 입장");
 
         $('div.talk_contents div.content1 div').remove();
 

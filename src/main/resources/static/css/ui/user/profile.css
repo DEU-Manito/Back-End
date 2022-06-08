@@ -452,3 +452,12 @@ button:hover .button-text {
 button.disabled{
     display: none;
 }
+
+#edit_nickname_btn{
+    color: #979797;
+}
+
+#edit_nickname_btn:hover{
+    color: #3399FF;
+    cursor: pointer;
+}

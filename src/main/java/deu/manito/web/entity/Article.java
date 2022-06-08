@@ -64,5 +64,6 @@ public class Article {
 
         this.point = articleDto.getPoint();
         this.createTime = articleDto.getCreateTime();
+        this.status = articleDto.getStatus();
     }
 }
