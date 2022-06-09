@@ -644,15 +644,19 @@
                 })
 
                 json.forEach(data => {
-                    $(".chat_member_list").append(
-                        "<label class=\"option chat_member_label\">" +
-                        "    <input type=\"radio\" name=\"option\" value= '" + data["nickname"] + "'>" +
-                        "    <span class=\"title animated fadeIn\">" +
-                        "       <i class=\"icon icon-fire\"></i>" +
-                        "       <span style='font-size: 17px'>" + data["nickname"] + "</span>" +
-                        "    </span>" +
-                        "</label>"
-                    );
+                    let user = '<%=user.getNickname()%>';
+
+                    if(user != data["nickname"]) {
+                        $(".chat_member_list").append(
+                            "<label class=\"option chat_member_label\">" +
+                            "    <input type=\"radio\" name=\"option\" value= '" + data["nickname"] + "'>" +
+                            "    <span class=\"title animated fadeIn\">" +
+                            "       <i class=\"icon icon-fire\"></i>" +
+                            "       <span style='font-size: 17px'>" + data["nickname"] + "</span>" +
+                            "    </span>" +
+                            "</label>"
+                        );
+                    }
                 })
             });
         }

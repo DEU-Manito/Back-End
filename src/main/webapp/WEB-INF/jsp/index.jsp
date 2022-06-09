@@ -132,7 +132,7 @@
                             <div class="service-list-col1"><i class='bx bxl-docker'></i></div>
                             <div class="service-list-col2">
                                 <h3>Docker(MySQL)</h3>
-                                <p>Docker를 이용하여 MySQL 구동</p>
+                                <p>Docker를 이용하여 MySQL 서버 구축</p>
                             </div>
                         </div>
                         <div class="service-list">
@@ -176,15 +176,19 @@
         <div class="client_section animated  fadeInDown wow">
             <div class="client_profile flt">
                 <div class="client_profile_pic"><img src="resources/img/client-pic2.jpg" alt=""></div>
-                <h3>Marie Schrader</h3>
-                <span>DEA Foundation</span>
+                <h3>이모씨</h3>
+                <span>자취 30년차</span>
             </div>
             <div class="quote_section flt">
                 <div class="quote_arrow2"></div>
-                <p><b><img src="resources/img/quote_sign_left.png" alt=""></b> Proin iaculis purus consequat sem cure
-                    digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam
-                    eget nibh et. Maecen aliquam, risus at semper. <small><img src="resources/img/quote_sign_right.png"
-                                                                               alt=""></small></p>
+                <p>
+                    <b><img src="resources/img/quote_sign_left.png" alt=""></b>
+
+                    혼자 살면서 크고 작은 도움이 필요할 때가 많은데 마니또에서 정말 많은 도움을 받았어요.
+                    자취하는 사람들에게 도움이 많이 될 것 같네요.
+
+                    <small><img src="resources/img/quote_sign_right.png"alt=""></small>
+                </p>
             </div>
             <div class="clear"></div>
         </div>
@@ -210,7 +214,7 @@
         <div class="container">
 
             <h2>Development Team</h2>
-            <h6>Take a closer look into our amazing team. We won’t bite.</h6>
+            <h6>Computer Software Engineering 'Manito' Team</h6>
 
             <div class="row">
                 <!-- column  -->
@@ -219,14 +223,13 @@
                     <div class="row" style="text-align: center">
                         <div class="col-md-12">
                             <!-- https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t1.jpg -->
-                            <img src="resources/img/team_profile/kim_zoon.png" alt="wrapkit" width="150px"/>
+                            <img src="resources/img/team_profile/kim_zoon.png" alt="wrapkit" width="150px" height="190px"/>
                         </div>
                         <div class="col-md-12 text-center">
                             <div class="pt-2">
                                 <h5 class="mt-4 font-weight-medium mb-0">김 준</h5>
                                 <h6 class="subtitle mb-3">20183140</h6>
-                                <p>You can relay on our amazing features list and also our customer services will be
-                                    great experience.</p>
+                                <p>동의대학교 컴퓨터소프트웨어공학과</p>
                                 <ul class="list-inline">
                                     <li class="list-inline-item"><a href="#"
                                                                     class="text-decoration-none d-block px-1"><i
@@ -253,14 +256,13 @@
                     <div class="row" style="text-align: center">
                         <div class="col-md-12">
                             <!-- https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t2.jpg -->
-                            <img src="resources/img/team_profile/kim_dong_hyeon.jpg" alt="wrapkit" width="140px"/>
+                            <img src="resources/img/team_profile/kim_dong_hyeon.jpg" alt="wrapkit" width="140px" height="190px"/>
                         </div>
                         <div class="col-md-12 text-center">
                             <div class="pt-2">
                                 <h5 class="mt-4 font-weight-medium mb-0">김동현</h5>
                                 <h6 class="subtitle mb-3">20183188</h6>
-                                <p>You can relay on our amazing features list and also our customer services will be
-                                    great experience.</p>
+                                <p>동의대학교 컴퓨터소프트웨어공학과</p>
                                 <ul class="list-inline">
                                     <li class="list-inline-item"><a href="#"
                                                                     class="text-decoration-none d-block px-1"><i
@@ -287,18 +289,19 @@
                     <div class="row" style="text-align: center">
                         <div class="col-md-12">
                             <!-- https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t3.jpg -->
-                            <img src="resources/img/team_profile/kim_kyung_hyeon.png" alt="wrapkit" width="150px"/>
+                            <img src="resources/img/team_profile/kim_kyung_hyeon.png" alt="wrapkit" width="150px" height="190px"/>
                         </div>
                         <div class="col-md-12 text-center">
                             <div class="pt-2">
                                 <h5 class="mt-4 font-weight-medium mb-0">김경현</h5>
                                 <h6 class="subtitle mb-3">20183151</h6>
-                                <p>You can relay on our amazing features list and also our customer services will be
-                                    great experience.</p>
+                                <p>동의대학교 컴퓨터소프트웨어공학과</p>
                                 <ul class="list-inline">
-                                    <li class="list-inline-item"><a href="#"
-                                                                    class="text-decoration-none d-block px-1"><i
-                                            class="icon-social-facebook"></i></a></li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="text-decoration-none d-block px-1">
+                                            <i class="icon-social-facebook"></i>
+                                        </a>
+                                    </li>
                                     <li class="list-inline-item"><a href="#"
                                                                     class="text-decoration-none d-block px-1"><i
                                             class="icon-social-twitter"></i></a></li>
@@ -320,16 +323,13 @@
                     <!-- Row -->
                     <div class="row" style="text-align: center">
                         <div class="col-md-12">
-                            <!-- https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t4.jpg -->
-                            <img src="resources/img/team_profile/o_jae_il.jpg" alt="wrapkit"
-                                 class="img-fluid rounded-circle"/>
+                            <img src="resources/img/team_profile/o_jae_il.jpg" alt="wrapkit" width="150px" height="190px"/>
                         </div>
                         <div class="col-md-12 text-center">
                             <div class="pt-2">
                                 <h5 class="mt-4 font-weight-medium mb-0">오재일</h5>
                                 <h6 class="subtitle mb-3">20164048</h6>
-                                <p>You can relay on our amazing features list and also our customer services will be
-                                    great experience.</p>
+                                <p>동의대학교 컴퓨터소프트웨어공학과</p>
                                 <ul class="list-inline">
                                     <li class="list-inline-item"><a href="#"
                                                                     class="text-decoration-none d-block px-1"><i
@@ -349,6 +349,7 @@
                     </div>
                     <!-- Row -->
                 </div>
+                <!-- column  -->
             </div>
         </div>
     </div>
