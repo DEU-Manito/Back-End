@@ -1361,3 +1361,7 @@ button.disabled{
     cursor: pointer;
     color: black;
 }
+
+#article_content{
+    padding: 15px;
+}

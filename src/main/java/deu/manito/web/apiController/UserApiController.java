@@ -116,7 +116,8 @@ public class UserApiController {
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
-    @GetMapping("/api/user/{nickname}")
+    @GetMapping("/api/user/{nickname}") // 유저 정보 조회
+    @ApiOperation(value = "사용자 정보 조회", notes = "사용자의 정보를 조회합니다.")
     public ResponseEntity<UserDto> getUser(@PathVariable String nickname){
         UserDto user = userService.getProfile(nickname);
 
