@@ -13,7 +13,7 @@ public class DeuManitoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DeuManitoApplication.class, args);
     }
-
+/*
     @Bean
     public ServletWebServerFactory serverFactory() {
         TomcatServletWebServerFactory tomcatServletWebServerFactory
@@ -29,4 +29,5 @@ public class DeuManitoApplication {
 
         return connector;
     }
+    */
 }

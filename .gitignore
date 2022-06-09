@@ -42,4 +42,6 @@ out/
 .idea
 application-oauth.properties
 application.properties
+.application.properties.swp
 manito-keystore.p12
+keystore.p12
