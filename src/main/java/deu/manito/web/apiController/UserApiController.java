@@ -117,7 +117,6 @@ public class UserApiController {
     }
 
     @GetMapping("/api/user/{nickname}")
-    @ApiOpertaion(value = "사용자 정보 조회", notes = "사용자 정보를 조회합니다.")
     public ResponseEntity<UserDto> getUser(@PathVariable String nickname){
         UserDto user = userService.getProfile(nickname);
 
