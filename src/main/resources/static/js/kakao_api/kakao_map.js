@@ -3,7 +3,7 @@
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 5 // 지도의 확대 레벨
     };
 
 // 지도 생성
@@ -263,3 +263,8 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     });
 });
 
+// 지도가 이동, 확대, 축소로 인해 지도영역이 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'bounds_changed', function() {
+    $('.chat_room_marker').click(event => joinChatting(event));
+    $('.article_marker').click(() => { window.location.href=articleUrl });
+});
