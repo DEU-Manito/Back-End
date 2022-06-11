@@ -107,7 +107,6 @@ var kakaoMap = {
                 yAnchor: 0.91
             });
 
-            // 커스텀 오버레이를 지도에 표시합니다
             customOverlay.setMap(map);
             $('.chat_room_marker').last().click(event => joinChatting(event));
         },
@@ -241,7 +240,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             // 주소의 좌표를 저장
             var latlng = mouseEvent.latLng.toString().replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '');
 
-
             document.querySelector('#article_lat').value = latlng.split(',')[0]; // lat
             document.querySelector('#article_lng').value = latlng.split(',')[1]; // lng
 
@@ -249,9 +247,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                 '<div class="bAddr">' +
                 '   <span class="title">법정동 주소정보</span>' +
                 detailAddr +
-                '</div>';
-
-            // 마커를 클릭한 위치에 표시합니다
+                '</div>'
 
             marker.setPosition(mouseEvent.latLng);
             marker.setMap(map);

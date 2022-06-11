@@ -112,7 +112,7 @@
                 </p>
             </div>
 
-            <div class="project-boxes kakao_map_container">
+            <div class="project-boxes kakao_map_container" style="display: block">
                 <!-- 지도를 표시할 div 영역 -->
                 <div id="map" style="width:100%;height: 90%; position: relative;">
                     <div class = "btn_container">
@@ -122,7 +122,7 @@
                         </div>
                     </div>
                 </div>
-                <p id = "user_location">해당 위치로 인증이 되었습니다.</p>
+                <p id="user_location" style="color: red;"> !! 로그인 세션이 없다고 뜨는 경우 해당 페이지를 새로 고침 후 다시 시도해주세요. </p>
             </div>
 
         </div>

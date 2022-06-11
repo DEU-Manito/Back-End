@@ -9,7 +9,6 @@
         if ( navigator.platform ) {
             // 모바일은 바로 위치 받아서 세션 등록
             if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
-                alert('mobile 접속');
                 // 모바일인 경우에만 geolocation 사용
                 // HTML5의 geolocation으로 사용할 수 있는지 확인
                 if (navigator.geolocation) {
@@ -17,8 +16,6 @@
                     navigator.geolocation.getCurrentPosition(function(position) {
                         lat = position.coords.latitude;
                         lng = position.coords.longitude;
-
-                        alert('navbar.jsp : ' + lat + " " + lng);
 
                         // 세션에 위치 정보 등록 후 페이지 이동
                         locationApi.setLocationSession(lat, lng, href);
@@ -30,9 +27,9 @@
                 // DB에 모바일 위치 값이 들어올 때까지 요청
                 if(location != null) window.location.href = href;
                 else locationApi.authPcLocation(nickname, href);
-
             }
         }
+
     }
 
     function authentication(href){
@@ -41,8 +38,7 @@
         <% userLocation = (UserLocationDto) session.getAttribute("userLocation"); %>
 
         // 로그인이 된 경우에만 locationAuth(위치 인증) 진행
-        <% if(user == null) { %>
-                alert('해당 기능은 로그인 후 사용 가능합니다.');
+        <% if(user == null) { %> alert('해당 기능은 로그인 후 사용 가능합니다.');
         <% } else { %>
 
             let location = null;
@@ -55,6 +51,7 @@
                 };
             <% } %>
 
+            // 위치 인증 함수 호출
             locationAuth('<%= user.getNickname() %>', location, href);
         <% } %>
     }
